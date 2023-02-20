@@ -6,7 +6,7 @@ const mysql = require('mysql');
         host: 'localhost',
         user: 'root',
         database: 'gigdb',
-        charset: 'utf8mb4'
+        charset: 'utf8mb4...'
     })
 
     connection.getConnection(function(error, pool){
