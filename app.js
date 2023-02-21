@@ -3,9 +3,12 @@
 const express = require('express');
 const cors = require('cors')
 const bodyParser = require('body-parser');
-const bcrypt = require('bcrypt'); 
 require('dotenv/config');
 const path = require('path');
+
+const main = require('./controllers/main');
+const chats = require('./controllers/chats');
+const resources = require('./controllers/resources');
 
 const app = express();
 
@@ -19,22 +22,23 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(cors({
     origin: '*'
 }));
-var PORT = process.env.PORT || 1000;
-app.get('/', (req, res) => {
-    res.send('hello world')
+
+
+app.use('/', main);
+app.use('/', chats);
+app.use('/', resources);
+
+
+var PORT = process.env.PORT || 4040;
+
+
+
+app.get('/test', (req, res)=>{
+  res.status(200).json({
+      status: true,
+      message:'works here'
+    })
 })
 
 
-  app.get('/test', (req, res)=>{
-    res.status(200).json({
-        status: true,
-        message:'workshere'
-      })
-      res.status(200).json({
-        status: true,
-        message:'workshere'
-      })
-  })
-  
-
-app.listen(PORT, console.log('server on 1000'))
+app.listen(PORT, console.log('server on 4040'))

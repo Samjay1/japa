@@ -6,24 +6,24 @@ const router = express.Router();
 
 
 // resources-main
-router.get('/', (req,res)=>{
-    
+router.get('/resources', (req,res)=>{
+    res.render('main/resource_center')
 })
 
 // blog
-router.get('/', (req,res)=>{
-    
+router.get('/blogs', (req,res)=>{
+    res.render('main/blogs')
 })
 
 
 // documents
-router.get('/', (req,res)=>{
-    
+router.get('/documents', (req,res)=>{
+    res.render('main/documents')
 })
 
 // videos
-router.get('/', (req,res)=>{
-    
+router.get('/videos', (req,res)=>{
+    res.render('main/videos')
 })
 
 

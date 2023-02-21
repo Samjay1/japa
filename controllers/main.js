@@ -5,42 +5,41 @@ const router = express.Router();
 // home
 router.get('/', (req,res)=>{
 
+    res.render('main/index')
+
 })
 
 // about
-router.get('/', (req,res)=>{
-    
+router.get('/about', (req,res)=>{
+    res.render('main/about')
 })
 
 // news feed
-router.get('/', (req,res)=>{
-    
+router.get('/news', (req,res)=>{
+    res.render('main/news_feed')
 })
 
 // faqs
-router.get('/', (req,res)=>{
-    
+router.get('/faqs', (req,res)=>{
+    res.render('main/faqs')
 })
 
 // contact us
-router.get('/', (req,res)=>{
-    
+router.get('/contact', (req,res)=>{
+    res.render('main/contact')
 })
 
 // sign up
-router.get('/', (req,res)=>{
-    
+router.get('/register', (req,res)=>{
+    res.render('main/register')
 })
 
 // sign in
-router.get('/', (req,res)=>{
-    
+router.get('/login', (req,res)=>{
+    res.render('main/login')
 })
 
 
-router.get('/', (req,res)=>{
-    
-})
 
 
 module.exports = router;
