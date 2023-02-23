@@ -47,6 +47,14 @@ model Post {
   comments Comment[]
 }
 
+model Video {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  image String
+  title String @unique
+  description String
+  url String
+}
+
 model Member {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   group Group @relation(fields: [groupId], references: [id])
@@ -67,6 +75,11 @@ model Comment {
   childComments Comment[] @relation("ChildComments")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Subscriber {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  email String @unique
 }
 
 enum Status {
