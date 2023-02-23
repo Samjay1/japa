@@ -29,7 +29,7 @@ app.use('/', chats);
 app.use('/', resources);
 
 
-var PORT = process.env.PORT || 4040;
+var PORT = process.env.PORT || 8040;
 
 
 
@@ -41,4 +41,4 @@ app.get('/test', (req, res)=>{
 })
 
 
-app.listen(PORT, console.log('server on 4040'))
+app.listen(PORT, console.log('server on 8040'))
