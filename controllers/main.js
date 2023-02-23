@@ -2,10 +2,28 @@ const express = require('express');
 
 const router = express.Router();
 
-// home
-router.get('/', (req,res)=>{
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
-    res.render('main/index')
+// home
+router.get('/', async (req,res)=>{
+    const groups = await prisma.group.findMany({
+        include: {
+            _count: {
+                select: {
+                    members: true
+                }
+            }
+        }
+    });
+    const posts = await prisma.post.findMany();
+
+    console.log(posts)
+
+    res.render('main/index', {
+        groups,
+        posts
+    })
 
 })
 

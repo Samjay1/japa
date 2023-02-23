@@ -2,12 +2,19 @@ const express = require('express');
 
 const router = express.Router();
 
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
+
 
 
 
 // resources-main
-router.get('/resources', (req,res)=>{
-    res.render('main/resource_center')
+router.get('/resources', async (req,res)=>{
+    const posts = await prisma.post.findMany();
+
+    res.render('main/resource_center', {
+        posts
+    });
 })
 
 // blog
