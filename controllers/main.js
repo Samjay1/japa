@@ -18,8 +18,6 @@ router.get('/', async (req,res)=>{
     });
     const posts = await prisma.post.findMany();
 
-    console.log(posts)
-
     res.render('main/index', {
         groups,
         posts
