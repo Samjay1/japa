@@ -3,6 +3,10 @@ const express = require('express');
 const router = express.Router();
 
 // chats - all groups
+router.get('/', (req,res)=>{
+    res.render('main/chat_group')
+})
+
 router.get('/chats', (req,res)=>{
     res.render('main/chat_group')
 })

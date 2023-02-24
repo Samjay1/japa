@@ -6,7 +6,7 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 // home
-router.get('/', async (req,res)=>{
+router.get('/home', async (req,res)=>{
     const groups = await prisma.group.findMany({
         include: {
             _count: {

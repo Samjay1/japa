@@ -21,7 +21,7 @@
         <!-- Mobile menu -->
         <div class="flex justify-between w-11/12 m-auto py-5">
             <div class="flex px-2 pt-2">
-                <a class="lg:mr-5" href="/">
+                <a class="lg:mr-5" href="/home">
                     <img class="h-10 object-fill w-44 p-2 mt-2" src="/public/images/japa.png" alt="">
                 </a>
             </div>
@@ -114,10 +114,10 @@
                 <% groups.forEach(element => { %>
                     <div class="col-span-1">
                         <div class="flex justify-center">
-                            <div class="rounded-lg shadow-lg bg-white w-full">
-                                <a href="/home/preview/14">
+                            <div class="rounded-lg shadow-lg bg-white w-full border border-black">
+                                <!-- <a href="/home/preview/14">
                                     <img class="rounded-t-lg object-cover  h-60 w-full" src="/public/images/about.jpeg" alt="">
-                                </a>
+                                </a> -->
                                 <div class="p-2 px-3 text-sm font-normal lg:space-y-5">
                                     <h5 class="text-gray-900 text-xl font-medium mt-5">
                                         <a href="/home/preview/14" class="hover:text-yellow-500"><%= element.groupName %></a>
@@ -129,7 +129,7 @@
                                             </p>
                                     </div>
                                     <p class="py-2">
-                                        <a href="#" class="p-2 px-4 bg-yellow-500 rounded hover:bg-gray-800 hover:text-white duration-100">Join Group</a>
+                                        <a href="#" class="p-2 px-4 bg-yellow-500 rounded hover:bg-gray-800 hover:text-white duration-100">Add Comment</a>
                                     </p>
                                 </div>
                             </div>
@@ -154,7 +154,7 @@
                                 </p>
                                 </div>
                                 <p class="py-2">
-                                    <a href="#" class="p-2 px-4 bg-yellow-500 rounded hover:bg-gray-800 hover:text-white duration-100">Join Group</a>
+                                    <a href="#" class="p-2 px-4 bg-yellow-500 rounded hover:bg-gray-800 hover:text-white duration-100">Add Comment</a>
                                 </p>
                             </div>
                         </div>
