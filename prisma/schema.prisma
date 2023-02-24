@@ -54,7 +54,7 @@ model Post {
 model Video {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   image String
-  title String @unique
+  title String 
   description String
   url String
   comments VideoComment[]
@@ -63,7 +63,7 @@ model Video {
 model Document {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   image String
-  title String @unique
+  title String 
   description String
   comments DocumentComment[]
 }

@@ -18,19 +18,27 @@ router.get('/resources', async (req,res)=>{
 })
 
 // blog
-router.get('/blogs', (req,res)=>{
+router.get('/blogs', async (req,res)=>{
     res.render('main/blogs')
 })
 
 
 // documents
-router.get('/documents', (req,res)=>{
-    res.render('main/documents')
+router.get('/documents', async (req,res)=>{
+    const docs = await prisma.document.findMany();
+    
+    res.render('main/documents', {
+        docs
+    })
 })
 
 // videos
-router.get('/videos', (req,res)=>{
-    res.render('main/videos')
+router.get('/videos', async (req,res)=>{
+    const videos = await prisma.video.findMany();
+
+    res.render('main/videos', {
+        videos
+    })
 })
 
 
