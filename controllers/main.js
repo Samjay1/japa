@@ -2,6 +2,8 @@ const express = require('express');
 
 const router = express.Router();
 
+const bcrypt = require('bcrypt');
+
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
@@ -46,12 +48,57 @@ router.get('/contact', (req,res)=>{
 })
 
 // sign up
-router.get('/register', (req,res)=>{
+router.all('/register', async (req,res)=>{
+    if (req.method === 'POST') {
+        const { username, email, password } = req.body;
+
+        try {
+            const user = await prisma.user.create({
+                data: {
+                    username,
+                    email,
+                    password: await bcrypt.hash(password, 12),
+                }
+            });
+
+            return res.redirect('/login');
+        } catch (error) {
+            console.log(error);
+        }
+    }
     res.render('main/register')
 })
 
 // sign in
-router.get('/login', (req,res)=>{
+router.all('/login', async (req,res)=>{
+    if (req.method === 'POST') {
+        const { email, password } = req.body;
+
+        try {
+            const user = await prisma.user.findUnique({
+                where: {
+                    email
+                }
+            });
+
+            if(!user){
+                res.render('main/login',{
+                    error: 'No such user'
+                });
+            }
+
+            if(user && !await bcrypt.compare(password, user.password)){
+                res.render('main/login',{
+                    error: 'Password is incorrect'
+                })
+            } else{
+                return res.redirect('/');
+            }
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
     res.render('main/login')
 })
 
