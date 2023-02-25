@@ -27,29 +27,28 @@ router.get('/home', async (req,res)=>{
     res.render('main/index', {
         groups,
         posts
-    })
-
-})
+    });
+});
 
 // about
 router.get('/about', (req,res)=>{
-    res.render('main/about')
-})
+    res.render('main/about');
+});
 
 // news feed
 router.get('/news', (req,res)=>{
-    res.render('main/news_feed')
-})
+    res.render('main/news_feed');
+});
 
 // faqs
 router.get('/faqs', (req,res)=>{
-    res.render('main/faqs')
-})
+    res.render('main/faqs');
+});
 
 // contact us
 router.get('/contact', (req,res)=>{
-    res.render('main/contact')
-})
+    res.render('main/contact');
+});
 
 // sign up
 router.all('/register', async (req,res)=>{
@@ -70,8 +69,8 @@ router.all('/register', async (req,res)=>{
             console.log(error);
         }
     }
-    res.render('main/register')
-})
+    res.render('main/register');
+});
 
 // sign in
 router.all('/login', async (req,res)=>{
@@ -86,28 +85,26 @@ router.all('/login', async (req,res)=>{
             });
 
             if(!user){
-                console.log('No such user')
-                return res.render('main/login',{
-                    error: 'No such user'
-                });
+                req.flash('error', 'No such user');
+                return res.redirect('/login#error');
             }
 
             if(user && !await bcrypt.compare(password, user.password)){
-                console.log('Password is incorrect');
-                return res.render('main/login',{
-                    error: 'Password is incorrect'
-                })
+                req.flash('error', 'Password is incorrect');
+                return res.redirect('/login#error');
             } else{
                 req.session.email = user.email;
                 return res.redirect('/');
             }
 
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     }
-    res.render('main/login')
-})
+    res.render('main/login', {
+        error: req.flash('error'),
+    });
+});
 
 
 

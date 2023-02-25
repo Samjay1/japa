@@ -1,12 +1,14 @@
 'use strict';
 
+require('dotenv/config');
+const path = require('path');
 const express = require('express');
 const cors = require('cors')
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-require('dotenv/config');
-const path = require('path');
+const flash = require('connect-flash');
+const cookieParser = require('cookie-parser');
 
 const main = require('./controllers/main');
 const chats = require('./controllers/chats');
@@ -23,6 +25,9 @@ app.use(session({
       autoRemove: 'native',
       touchAfter: 24 * 3600,
   }),
+  cookie: {
+    maxAge:  2 * 24 * 60 * 60,
+  },
   resave: false,
   saveUninitialized: false
 }));
@@ -33,11 +38,12 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 
-
 app.use(cors({
     origin: '*'
 }));
 
+app.use(flash());
+app.use(cookieParser());
 
 app.use('/', main);
 app.use('/', chats);
