@@ -64,7 +64,8 @@ router.all('/register', async (req,res)=>{
                 }
             });
 
-            return res.redirect('/login');
+            req.flash('success', 'Account successfully created. Proceed to log in.');
+            return res.redirect('/login#success');
         } catch (error) {
             console.log(error);
         }
@@ -103,6 +104,7 @@ router.all('/login', async (req,res)=>{
     }
     res.render('main/login', {
         error: req.flash('error'),
+        success: req.flash('success')
     });
 });
 
