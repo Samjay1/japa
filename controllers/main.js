@@ -1,11 +1,15 @@
+require('dotenv').config();
 const express = require('express');
-
-const router = express.Router();
-
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const bcrypt = require('bcrypt');
+
+const app = express();
+const router = express.Router();
 
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
+
 
 // home
 router.get('/home', async (req,res)=>{
@@ -82,16 +86,19 @@ router.all('/login', async (req,res)=>{
             });
 
             if(!user){
-                res.render('main/login',{
+                console.log('No such user')
+                return res.render('main/login',{
                     error: 'No such user'
                 });
             }
 
             if(user && !await bcrypt.compare(password, user.password)){
-                res.render('main/login',{
+                console.log('Password is incorrect');
+                return res.render('main/login',{
                     error: 'Password is incorrect'
                 })
             } else{
+                req.session.email = user.email;
                 return res.redirect('/');
             }
 
