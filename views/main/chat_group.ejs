@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400,700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <title>Japa.RUN</title>
@@ -46,7 +46,7 @@
     </nav>
     <!-- PROFILE DROPDOWN -->
     <div class="relative">
-        <div id="menulist" class="absolute z-10 hidden block space-y-1 right-0 border w-56 bg-white  mx-1 my-1 rounded-lg" style="display: none;">
+        <div id="menulist" class="absolute z-10 hidden block space-y-1 right-0 border w-56 bg-white  mx-1 my-1 rounded-lg animate__animated animate__pulse" style="display: none;">
         <p class="border-b w-full rounded-t-lg hover:bg-yellow-500 hover:text-white"><a class="px-2 pr-6 py-2 block" href="/about"> About</a></p>
         <p class="border-b w-full hover:bg-yellow-500 hover:text-white"><a class="px-2 pr-6 py-2 block" href="/chats"> Chat Groups</a></p>
         <p class="border-b w-full hover:bg-yellow-500 hover:text-white"><a class="px-2 pr-6 py-2 block" href="/resources"> Resource Center</a></p>
@@ -61,20 +61,14 @@
 
 
     <main class="mx-1">
-       
-        <div class="lg:flex justify-between lg:w-5/6 m-auto mt-10 border-bl border-black">
-            <div class="lg:flex lg:space-y-0 space-y-3 lg:space-x-2">
-                <p><a href="/chats" class="px-5 p-1 rounded-t-lg bg-black text-white text-2xl duration-200">All Groups <span class="text-black bg-gray-300 rounded-3xl p-1 text-sm m-1">30</span></a></p>
-                <p><a href="/my_groups" class="px-5 p-1 rounded-t-lg hover:bg-black hover:text-white hover:text-2xl duration-200">My Groups <span class="text-black bg-gray-300  rounded-3xl p-1 text-sm m-1">1</span></a></p>
-                <p><a href="/create_group" class="px-5 p-1 rounded-t-lg hover:bg-black hover:text-white hover:text-2xl duration-200">Create a Group</a></p>
-            </div>
-            <div class="lg:my-0 my-3">
-                <a href="/settings" class="px-5 p-1 rounded-t-lg hover:bg-black hover:text-white hover:text-2xl duration-200">Settings</a>
-            </div>
-        </div>
-        <hr class="lg:w-5/6 m-auto my-1 borde-1 border-black">
 
-        <div class="my-10  animate__animated animate__pulse">
+        <div class="lg:w-5/6 m-auto mt-10  py-3 h-16 flex space-x-8">
+            <a class="lg:block  px-3 py-2  border-b border-gray-100 text-yellow-500 border-yellow-500 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/chats">Chat Groups</a>
+            <a class="lg:block  px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/my_groups">My Groups</a>
+            <a class="lg:block px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/profile">My Profile</a>
+        </div>
+
+        <div class="mb-10  animate__animated animate__pulse">
             <!-- <p class="text-[50px] font-bold text-center">All Groups</p> -->
 
             <div class="grid lg:grid-cols-2 gap-4 lg:w-5/6 m-auto">
@@ -84,7 +78,7 @@
                            
                             <div class="p-2 px-3 text-sm font-normal lg:space-y-5">
                                 <h5 class="text-gray-900 text-xl font-medium mt-5">
-                                    <a href="/home/preview/14" class="hover:text-yellow-500">Identifying Opportunities on Path to US Citizenship</a>
+                                    <a href="/preview_chat/14" class="hover:text-yellow-500">Identifying Opportunities on Path to US Citizenship</a>
                                 </h5>
                                 <div>
                                     <p class="text-gray-400">Looking to further your education at a college/university?
@@ -94,7 +88,7 @@
                                    </p>
                                 </div>
                                 <p class="py-2">
-                                    <a href="#" class="p-2 px-4 bg-yellow-500 rounded hover:bg-gray-800 hover:text-white duration-100">Add Comment</a>
+                                    <a  href="/preview_chat/14" class="p-2 px-4 bg-yellow-500 rounded hover:bg-gray-800 hover:text-white duration-100">Add Comment</a>
                                 </p>
                             </div>
                         </div>
@@ -108,7 +102,7 @@
                             </a> -->
                             <div class="p-2 px-3 text-sm font-normal lg:space-y-5">
                                 <h5 class="text-gray-900 text-xl font-medium mt-5">
-                                    <a href="/home/preview/14" class="hover:text-yellow-500">Financial Literacy for young Africans</a>
+                                    <a href="/preview_chat/14" class="hover:text-yellow-500">Financial Literacy for young Africans</a>
                                 </h5>
                                 <div>
                                     <p class="text-gray-400">Looking to further your education at a college/university?
@@ -118,7 +112,7 @@
                                    </p>
                                 </div>
                                 <p class="py-2">
-                                    <a href="#" class="p-2 px-4 bg-yellow-500 rounded hover:bg-gray-800 hover:text-white duration-100">Add Comment</a>
+                                    <a href="/preview_chat/14" class="p-2 px-4 bg-yellow-500 rounded hover:bg-gray-800 hover:text-white duration-100">Add Comment</a>
                                 </p>
                             </div>
                         </div>
@@ -130,7 +124,7 @@
                         <div class="rounded-lg shadow-lg bg-white w-full border border-black">
                             <div class="p-2 px-3 text-sm font-normal lg:space-y-5">
                                 <h5 class="text-gray-900 text-xl font-medium mt-5">
-                                    <a href="/home/preview/14" class="hover:text-yellow-500">Japa … ? US or Europe ???</a>
+                                    <a href="/preview_chat/14" class="hover:text-yellow-500">Japa … ? US or Europe ???</a>
                                 </h5>
                                 <div>
                                     <p class="text-gray-400">Looking to further your education at a college/university?
@@ -140,7 +134,7 @@
                                    </p>
                                 </div>
                                 <p class="py-2">
-                                    <a href="#" class="p-2 px-4 bg-yellow-500 rounded hover:bg-gray-800 hover:text-white duration-100">Add Comment</a>
+                                    <a href="/preview_chat/14" class="p-2 px-4 bg-yellow-500 rounded hover:bg-gray-800 hover:text-white duration-100">Add Comment</a>
                                 </p>
                             </div>
                         </div>
@@ -153,7 +147,7 @@
                             <div class="p-2 px-3 text-sm font-normal lg:space-y-5">
                                 
                                 <h5 class="text-gray-900 text-xl font-medium mt-5">
-                                    <a href="/home/preview/14" class="hover:text-yellow-500">Help!!! I am New to America and I have been advised not to relate with People from my country. What</a>
+                                    <a href="/preview_chat/14" class="hover:text-yellow-500">Help!!! I am New to America and I have been advised not to relate with People from my country. What</a>
                                 </h5>
                                 <div>
                                     <p class="text-gray-400">Looking to further your education at a college/university?
@@ -163,7 +157,7 @@
                                    </p>
                                 </div>
                                 <p class="py-2">
-                                    <a href="#" class="p-2 px-4 bg-yellow-500 rounded hover:bg-gray-800 hover:text-white duration-100">Add Comment</a>
+                                    <a href="/preview_chat/14" class="p-2 px-4 bg-yellow-500 rounded hover:bg-gray-800 hover:text-white duration-100">Add Comment</a>
                                 </p>
                             </div>
                         </div>

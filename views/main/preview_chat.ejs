@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../public/images/japa.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../public/css.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400,700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <title>Japa.RUN</title>
+</head>
+<body style="font-family: 'Roboto', sans-serif;" class=" font-normal relative">
+    
+    <!-- MAIN HEADER -->
+      <nav class="bg-white shadow-lg text-gray-900 shadow-lg animate__animated animate__fadeInDown">
+        <!-- Mobile menu -->
+        <div class="flex justify-between w-11/12 m-auto py-5">
+            <div class="flex px-2 pt-2">
+                <a class="lg:mr-5" href="/home">
+                    <img class="h-10 object-fill w-44 p-2 mt-2" src="/public/images/japa.png" alt="">
+                </a>
+            </div>
+            <div class="mt-2 py-3 h-16 flex space-x-8">
+                <a class="lg:block hidden px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/about">About</a>
+                <a class="lg:block hidden px-3 py-2  border-b border-gray-100 text-yellow-500 border-yellow-500 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/chats">Chat Groups</a>
+                <a class="lg:block hidden px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/resources">Resource center</a> 
+                <a class="lg:block hidden px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/news">News Feed</a>
+                <a class="lg:block hidden px-3 py-2  border-b  border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/faqs"> FAQs</a>
+                <a class="lg:block hidden px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/contact">Contact Us</a>
+                <a class="lg:block hidden px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/register">Sign Up</a>  
+                
+                <!-- <a id="profilebtn" class="bg-gray-300 rounded-3xl shadow-lg  block" href="#"><img id="profileimg" class="h-9 w-9 object-cover object-top rounded-3xl" src="/public/images/d1.jpeg" alt=""></a> -->
+                <a id="profilebtn" class="text-yellow-500 block lg:hidden mt-3" href="#">
+                    <svg id="profileimg" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path id="profileimg" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </nav>
+     <!-- PROFILE DROPDOWN --> 
+    <div class="relative">
+        <div id="menulist" class="absolute z-10 hidden block space-y-1 right-0 border w-56 bg-white  mx-1 my-1 rounded-lg animate__animated animate__pulse" style="display: none;">
+        <p class="border-b w-full rounded-t-lg hover:bg-yellow-500 hover:text-white"><a class="px-2 pr-6 py-2 block" href="/about"> About</a></p>
+        <p class="border-b w-full hover:bg-yellow-500 hover:text-white"><a class="px-2 pr-6 py-2 block" href="/chats"> Chat Groups</a></p>
+        <p class="border-b w-full hover:bg-yellow-500 hover:text-white"><a class="px-2 pr-6 py-2 block" href="/resources"> Resource Center</a></p>
+        <p class="border-b w-full hover:bg-yellow-500 hover:text-white"><a class="px-2 pr-6 py-2 block" href="/news"> News Feed</a></p>
+        <p class="border-b w-full rounded-b-lg hover:bg-yellow-500 hover:text-white"><a class="px-2 pr-6 py-2 block" href="/faqs"> FAQs</a></p>
+        <p class="border-b w-full hover:bg-yellow-500 hover:text-white"><a class="px-2 pr-6 py-2 block" href="/contact"> Contact Us</a></p>
+        <p class="border-b w-full hover:bg-yellow-500 hover:text-white"><a class="px-2 pr-6 py-2 block" href="/register"> Sign up</a></p>
+        
+        </div>
+    </div>
+
+
+
+    <main class="mx-1">
+       
+        <div class="lg:w-5/6 m-auto mt-10  py-3 h-16 flex space-x-8">
+            <a class="lg:block  px-3 py-2  border-b border-gray-100 text-yellow-500 border-yellow-500 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/chats">Chat Groups</a>
+            <a class="lg:block  px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/my_groups">My Groups</a>
+            <a class="lg:block px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/profile">My Profile</a>
+        </div>
+
+        <div class="mb-10  animate__animated animate__pulse">
+          
+           <div class="lg:w-4/6 m-auto">
+            <div class="flex justify-center">
+                <div class="rounded-lg shadow-lg bg-white w-full border">
+                   <a href="/home/preview/14">
+                        <img class="rounded-t-lg object-cover  h-80 w-full" src="/public/images/video.jpeg" alt="">
+                    </a>
+                    <div class="p-2 px-3 text-sm font-normal lg:space-y-5">
+                        <h5 class="text-gray-900 text-xl font-medium mt-5">
+                            <a href="/home/preview/14" class="hover:text-yellow-500">Identifying Opportunities on Path to US Citizenship</a>
+                        </h5>
+                        <p class="text-yellow-500">
+                            Public Group / 1,288 member
+                        </p>
+                        <div class="space-y-3 text-gray-700">
+                            
+                            <p class="">Looking to further your education at a college/university?
+                                A personal statement is often an important part of the university application</p>
+                            <p>
+                                To have thrived for centuries and decades means that successful brands and market 
+                                leaders have seen enough to know what works for the markets. Yet they stay as 
+                                committed to continually improving upon their value proposition as though they 
+                                were now starting as amateurs.
+                            </p>
+                            <p>
+                                It is easy to downplay the degree of deliberate commitment exhibited by such brands.
+                                 At the very basic level, their association and accreditations with some
+                                 statutory organizations give a strong indication of their goodwill.
+                            </p>
+                            <p>
+                                Like we have seen in the past, most of these successful brands are constantly 
+                                striving to “DO IT RIGHT THE FIRST TIME”. They understand the degree of damage
+                                 the brand can be met with and are constantly striving to avoid that.  
+                                 They also understand the magic in doing it right and are doubling down that path.
+                            </p>
+
+                            <!-- USER COMMENTS -->
+                           <div class="py-5 space-y-3">
+                                <p class="font-bold text-lg">5 COMMENT</p>
+                                <!-- COMMENT ITEM -->
+                               <div class="border rounded p-1 space-y-1">
+                                    <div class="flex space-x-1">
+                                        <div class="flex-none w-12 h-12  border border-yellow-500  rounded">
+                                            <img class=" rounded" src="/public/images/person.jpeg" alt="">
+                                        </div>
+                                        <div class="w-full">
+                                            <p>
+                                                <span class="font-extrabold text-base text-yellow-500">Annie</span> on March 18, 2022 at 9:54 am  
+                                                <a href="#"  class="inline-block pt-1 text-gray-500 hover:text-gray-900 duration-200"  data-modal-toggle="defaultModal">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                                        <path fill-rule="evenodd" d="M2 10c0-3.967 3.69-7 8-7 4.31 0 8 3.033 8 7s-3.69 7-8 7a9.165 9.165 0 01-1.504-.123 5.976 5.976 0 01-3.935 1.107.75.75 0 01-.584-1.143 3.478 3.478 0 00.522-1.756C2.979 13.825 2 12.025 2 10z" clip-rule="evenodd" />
+                                                    </svg>
+                                                </a> 
+                                            </p>
+                                            <p>  
+                                                <a href="#"  class="inline-block pt-1 text-green-400 hover:text-green-600 duration-200">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                                    <path d="M1 8.25a1.25 1.25 0 112.5 0v7.5a1.25 1.25 0 11-2.5 0v-7.5zM11 3V1.7c0-.268.14-.526.395-.607A2 2 0 0114 3c0 .995-.182 1.948-.514 2.826-.204.54.166 1.174.744 1.174h2.52c1.243 0 2.261 1.01 2.146 2.247a23.864 23.864 0 01-1.341 5.974C17.153 16.323 16.072 17 14.9 17h-3.192a3 3 0 01-1.341-.317l-2.734-1.366A3 3 0 006.292 15H5V8h.963c.685 0 1.258-.483 1.612-1.068a4.011 4.011 0 012.166-1.73c.432-.143.853-.386 1.011-.814.16-.432.248-.9.248-1.388z" />
+                                                  </svg>
+                                                </a>
+                                                 
+                                                <a href="#" class="inline-block pt-1 text-red-400 hover:text-red-600 duration-200">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                                        <path d="M18.905 12.75a1.25 1.25 0 01-2.5 0v-7.5a1.25 1.25 0 112.5 0v7.5zM8.905 17v1.3c0 .268-.14.526-.395.607A2 2 0 015.905 17c0-.995.182-1.948.514-2.826.204-.54-.166-1.174-.744-1.174h-2.52c-1.242 0-2.26-1.01-2.146-2.247.193-2.08.652-4.082 1.341-5.974C2.752 3.678 3.833 3 5.005 3h3.192a3 3 0 011.342.317l2.733 1.366A3 3 0 0013.613 5h1.292v7h-.963c-.684 0-1.258.482-1.612 1.068a4.012 4.012 0 01-2.165 1.73c-.433.143-.854.386-1.012.814-.16.432-.248.9-.248 1.388z" />
+                                                    </svg>
+                                                </a>
+                                            </p>
+                                            <p> 
+                                                Like we have seen in the past, most of these successful brands are constantly
+                                                Like we have seen in the past, most of these successful brands are constantly
+                                                Like we have seen in the past, most of these successful brands are constantly
+
+                                            </p>
+                                            <!-- ADD NEW COMMENT -->
+                                            <div class="lg:flex">
+                                                <div class="flex-initial lg:w-5/12 mt-2 lg:pr-4 pr-3">
+                                                    <input class="border border-slate-300 w-full rounded py-3 pl-3   shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="email" id="Email" name="email" placeholder="Email" required>
+                                                </div>
+                                                <div class=" mt-2 w-full lg:pr-4 pr-3">
+                                                    <textarea class="border  h-12 border-slate-300 w-full rounded py-3 pl-3  shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="text"  name="Comment" placeholder="Comment" required></textarea>
+                                                </div>
+                                                <div class="flex-initial lg:w-32 mt-2 lg:pr-4 pr-3">
+                                                    <button type="submit" class="font-bold p-3 rounded bg-yellow-500 hover:bg-black hover:text-white duration-200">Comment</button>
+                                                </div>
+                                          </div>
+
+                                        </div>
+                                    </div>
+                                    <!--1st CHILD-COMMENT ITEM -->
+                                    <div class="border-t pt-1" style="margin-left:5%">
+                                        <div class="flex space-x-1">
+                                            <div class="flex-none w-12 h-12 border border-yellow-500 rounded">
+                                                <img class="rounded" src="/public/images/person.jpeg" alt="">
+                                            </div>
+                                            <div class="w-full">
+                                                <p><span class="font-extrabold text-base text-yellow-500">Johnny</span> on March 18, 2022 at 10:04 am 
+                                                    <a href="#"  class="inline-block pt-1 text-gray-500 hover:text-gray-900 duration-200">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                                            <path fill-rule="evenodd" d="M2 10c0-3.967 3.69-7 8-7 4.31 0 8 3.033 8 7s-3.69 7-8 7a9.165 9.165 0 01-1.504-.123 5.976 5.976 0 01-3.935 1.107.75.75 0 01-.584-1.143 3.478 3.478 0 00.522-1.756C2.979 13.825 2 12.025 2 10z" clip-rule="evenodd" />
+                                                        </svg>
+                                                    </a>
+                                                </p>
+                                                <p>  
+                                                    <a href="#"  class="inline-block pt-1 text-green-400 hover:text-green-600 duration-200">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                                        <path d="M1 8.25a1.25 1.25 0 112.5 0v7.5a1.25 1.25 0 11-2.5 0v-7.5zM11 3V1.7c0-.268.14-.526.395-.607A2 2 0 0114 3c0 .995-.182 1.948-.514 2.826-.204.54.166 1.174.744 1.174h2.52c1.243 0 2.261 1.01 2.146 2.247a23.864 23.864 0 01-1.341 5.974C17.153 16.323 16.072 17 14.9 17h-3.192a3 3 0 01-1.341-.317l-2.734-1.366A3 3 0 006.292 15H5V8h.963c.685 0 1.258-.483 1.612-1.068a4.011 4.011 0 012.166-1.73c.432-.143.853-.386 1.011-.814.16-.432.248-.9.248-1.388z" />
+                                                      </svg>
+                                                    </a>
+                                                     
+                                                    <a href="#" class="inline-block pt-1 text-red-400 hover:text-red-600 duration-200">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                                            <path d="M18.905 12.75a1.25 1.25 0 01-2.5 0v-7.5a1.25 1.25 0 112.5 0v7.5zM8.905 17v1.3c0 .268-.14.526-.395.607A2 2 0 015.905 17c0-.995.182-1.948.514-2.826.204-.54-.166-1.174-.744-1.174h-2.52c-1.242 0-2.26-1.01-2.146-2.247.193-2.08.652-4.082 1.341-5.974C2.752 3.678 3.833 3 5.005 3h3.192a3 3 0 011.342.317l2.733 1.366A3 3 0 0013.613 5h1.292v7h-.963c-.684 0-1.258.482-1.612 1.068a4.012 4.012 0 01-2.165 1.73c-.433.143-.854.386-1.012.814-.16.432-.248.9-.248 1.388z" />
+                                                        </svg>
+                                                    </a>
+                                                </p>
+                                                <p> 
+                                                    At the very basic level, their association and accreditations with some
+                                                    statutory organizations give a strong indication of their goodwill.
+                                                </p>
+                                                 <!-- ADD NEW COMMENT -->
+                                                <div class="lg:flex">
+                                                    <div class="flex-initial lg:w-5/12 mt-2 lg:pr-4 pr-3">
+                                                        <input class="border border-slate-300 w-full rounded py-3 pl-3   shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="email" id="Email" name="email" placeholder="Email" required>
+                                                    </div>
+                                                    <div class=" mt-2 w-full lg:pr-4 pr-3">
+                                                        <textarea class="border  h-12 border-slate-300 w-full rounded py-3 pl-3  shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="text"  name="Comment" placeholder="Comment" required></textarea>
+                                                    </div>
+                                                    <div class="flex-initial lg:w-32 mt-2 lg:pr-4 pr-3">
+                                                        <button type="submit" class="font-bold p-3 rounded bg-yellow-500 hover:bg-black hover:text-white duration-200">Comment</button>
+                                                    </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                     <!--2nd CHILD-COMMENT ITEM -->
+                                     <div class="border-t pt-1" style="margin-left:10%">
+                                        <div class="flex space-x-1">
+                                            <div class="flex-none w-12 h-12 border border-yellow-500 rounded">
+                                                <img class="rounded" src="/public/images/person.jpeg" alt="">
+                                            </div>
+                                            <div class="w-full">
+                                                <p><span class="font-extrabold text-base text-yellow-500">Annie</span> on March 18, 2022 at 11:23 am
+                                                    <a href="#"  class="inline-block pt-1 text-gray-500 hover:text-gray-900 duration-200">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                                            <path fill-rule="evenodd" d="M2 10c0-3.967 3.69-7 8-7 4.31 0 8 3.033 8 7s-3.69 7-8 7a9.165 9.165 0 01-1.504-.123 5.976 5.976 0 01-3.935 1.107.75.75 0 01-.584-1.143 3.478 3.478 0 00.522-1.756C2.979 13.825 2 12.025 2 10z" clip-rule="evenodd" />
+                                                        </svg>
+                                                    </a>
+                                                </p>
+                                                <p>  
+                                                    <a href="#"  class="inline-block pt-1 text-green-400 hover:text-green-600 duration-200">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                                        <path d="M1 8.25a1.25 1.25 0 112.5 0v7.5a1.25 1.25 0 11-2.5 0v-7.5zM11 3V1.7c0-.268.14-.526.395-.607A2 2 0 0114 3c0 .995-.182 1.948-.514 2.826-.204.54.166 1.174.744 1.174h2.52c1.243 0 2.261 1.01 2.146 2.247a23.864 23.864 0 01-1.341 5.974C17.153 16.323 16.072 17 14.9 17h-3.192a3 3 0 01-1.341-.317l-2.734-1.366A3 3 0 006.292 15H5V8h.963c.685 0 1.258-.483 1.612-1.068a4.011 4.011 0 012.166-1.73c.432-.143.853-.386 1.011-.814.16-.432.248-.9.248-1.388z" />
+                                                      </svg>
+                                                    </a>
+                                                     
+                                                    <a href="#" class="inline-block pt-1 text-red-400 hover:text-red-600 duration-200">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                                            <path d="M18.905 12.75a1.25 1.25 0 01-2.5 0v-7.5a1.25 1.25 0 112.5 0v7.5zM8.905 17v1.3c0 .268-.14.526-.395.607A2 2 0 015.905 17c0-.995.182-1.948.514-2.826.204-.54-.166-1.174-.744-1.174h-2.52c-1.242 0-2.26-1.01-2.146-2.247.193-2.08.652-4.082 1.341-5.974C2.752 3.678 3.833 3 5.005 3h3.192a3 3 0 011.342.317l2.733 1.366A3 3 0 0013.613 5h1.292v7h-.963c-.684 0-1.258.482-1.612 1.068a4.012 4.012 0 01-2.165 1.73c-.433.143-.854.386-1.012.814-.16.432-.248.9-.248 1.388z" />
+                                                        </svg>
+                                                    </a>
+                                                </p>
+                                                <p> 
+                                                    It is organizations give a strong indication 
+                                                </p>
+                                                 <!-- ADD NEW COMMENT -->
+                                                <div class="lg:flex w-full">
+                                                    <div class="flex-initial lg:w-5/12 mt-2 lg:pr-4 pr-3">
+                                                        <input class="border border-slate-300 w-full rounded py-3 pl-3   shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="email" id="Email" name="email" placeholder="Email" required>
+                                                    </div>
+                                                    <div class=" mt-2 w-full lg:pr-4 pr-3">
+                                                        <textarea class="border  h-12 border-slate-300 w-full rounded py-3 pl-3  shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="text"  name="Comment" placeholder="Comment" required></textarea>
+                                                    </div>
+                                                    <div class="flex-initial lg:w-32 mt-2 lg:pr-4 pr-3">
+                                                        <button type="submit" class="font-bold p-3 rounded bg-yellow-500 hover:bg-black hover:text-white duration-200">Comment</button>
+                                                    </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                               </div>
+                              
+
+                                <!-- COMMENT ITEM -->
+                                <div class="border rounded p-1 space-y-1">
+                                    <div class="flex space-x-1">
+                                        <div class="flex-none w-12 h-12 border border-yellow-500 rounded">
+                                            <img class="rounded" src="/public/images/person.jpeg" alt="">
+                                        </div>
+                                        <div class="w-full">
+                                            <p><span class="font-extrabold text-base text-yellow-500">Mikey</span> on March 18, 2022 at 9:54 am 
+                                                <a href="#"  class="inline-block pt-1 text-gray-500 hover:text-gray-900 duration-200">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                                        <path fill-rule="evenodd" d="M2 10c0-3.967 3.69-7 8-7 4.31 0 8 3.033 8 7s-3.69 7-8 7a9.165 9.165 0 01-1.504-.123 5.976 5.976 0 01-3.935 1.107.75.75 0 01-.584-1.143 3.478 3.478 0 00.522-1.756C2.979 13.825 2 12.025 2 10z" clip-rule="evenodd" />
+                                                    </svg>
+                                                </a>
+                                            </p>
+                                            <p>  
+                                                <a href="#"  class="inline-block pt-1 text-green-400 hover:text-green-600 duration-200">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                                    <path d="M1 8.25a1.25 1.25 0 112.5 0v7.5a1.25 1.25 0 11-2.5 0v-7.5zM11 3V1.7c0-.268.14-.526.395-.607A2 2 0 0114 3c0 .995-.182 1.948-.514 2.826-.204.54.166 1.174.744 1.174h2.52c1.243 0 2.261 1.01 2.146 2.247a23.864 23.864 0 01-1.341 5.974C17.153 16.323 16.072 17 14.9 17h-3.192a3 3 0 01-1.341-.317l-2.734-1.366A3 3 0 006.292 15H5V8h.963c.685 0 1.258-.483 1.612-1.068a4.011 4.011 0 012.166-1.73c.432-.143.853-.386 1.011-.814.16-.432.248-.9.248-1.388z" />
+                                                  </svg>
+                                                </a>
+                                                 
+                                                <a href="#" class="inline-block pt-1 text-red-400 hover:text-red-600 duration-200">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                                        <path d="M18.905 12.75a1.25 1.25 0 01-2.5 0v-7.5a1.25 1.25 0 112.5 0v7.5zM8.905 17v1.3c0 .268-.14.526-.395.607A2 2 0 015.905 17c0-.995.182-1.948.514-2.826.204-.54-.166-1.174-.744-1.174h-2.52c-1.242 0-2.26-1.01-2.146-2.247.193-2.08.652-4.082 1.341-5.974C2.752 3.678 3.833 3 5.005 3h3.192a3 3 0 011.342.317l2.733 1.366A3 3 0 0013.613 5h1.292v7h-.963c-.684 0-1.258.482-1.612 1.068a4.012 4.012 0 01-2.165 1.73c-.433.143-.854.386-1.012.814-.16.432-.248.9-.248 1.388z" />
+                                                    </svg>
+                                                </a>
+                                            </p>
+                                            <p> 
+                                                Like we have seen in the past, most of these successful brands are constantly
+                                            
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                 <!-- COMMENT ITEM -->
+                                 <div class="border rounded p-1 space-y-1">
+                                    <div class="flex space-x-1">
+                                        <div class="flex-none w-12 h-12 border border-yellow-500 rounded">
+                                            <img class="rounded" src="/public/images/person.jpeg" alt="">
+                                        </div>
+                                        <div class="w-full">
+                                            <p><span class="font-extrabold text-base text-yellow-500">Johnny</span> on March 19, 2022 at 02:54 pm 
+                                                <a href="#"  class="inline-block pt-1 text-gray-500 hover:text-gray-900 duration-200"  data-modal-toggle="defaultModal">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                                        <path fill-rule="evenodd" d="M2 10c0-3.967 3.69-7 8-7 4.31 0 8 3.033 8 7s-3.69 7-8 7a9.165 9.165 0 01-1.504-.123 5.976 5.976 0 01-3.935 1.107.75.75 0 01-.584-1.143 3.478 3.478 0 00.522-1.756C2.979 13.825 2 12.025 2 10z" clip-rule="evenodd" />
+                                                    </svg>
+                                                </a>
+                                            </p>
+                                            <p>  
+                                                <a href="#" class="inline-block pt-1 text-green-400 hover:text-green-600 duration-200">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                                    <path d="M1 8.25a1.25 1.25 0 112.5 0v7.5a1.25 1.25 0 11-2.5 0v-7.5zM11 3V1.7c0-.268.14-.526.395-.607A2 2 0 0114 3c0 .995-.182 1.948-.514 2.826-.204.54.166 1.174.744 1.174h2.52c1.243 0 2.261 1.01 2.146 2.247a23.864 23.864 0 01-1.341 5.974C17.153 16.323 16.072 17 14.9 17h-3.192a3 3 0 01-1.341-.317l-2.734-1.366A3 3 0 006.292 15H5V8h.963c.685 0 1.258-.483 1.612-1.068a4.011 4.011 0 012.166-1.73c.432-.143.853-.386 1.011-.814.16-.432.248-.9.248-1.388z" />
+                                                  </svg>
+                                                </a>
+                                                 
+                                                <a href="#" class="inline-block pt-1 text-red-400 hover:text-red-600 duration-200">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                                        <path d="M18.905 12.75a1.25 1.25 0 01-2.5 0v-7.5a1.25 1.25 0 112.5 0v7.5zM8.905 17v1.3c0 .268-.14.526-.395.607A2 2 0 015.905 17c0-.995.182-1.948.514-2.826.204-.54-.166-1.174-.744-1.174h-2.52c-1.242 0-2.26-1.01-2.146-2.247.193-2.08.652-4.082 1.341-5.974C2.752 3.678 3.833 3 5.005 3h3.192a3 3 0 011.342.317l2.733 1.366A3 3 0 0013.613 5h1.292v7h-.963c-.684 0-1.258.482-1.612 1.068a4.012 4.012 0 01-2.165 1.73c-.433.143-.854.386-1.012.814-.16.432-.248.9-.248 1.388z" />
+                                                    </svg>
+                                                </a>
+                                            </p>
+                                            <p> 
+                                                They also understand the magic in doing it right and are doubling down that path.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                           </div>
+
+
+                            <!-- POST COMMENT -->
+                            <form action="/comment" method="post" class="space-y-1 font-bold pt-10">
+                                <div class="pt-4">
+                                    <label  for="login_name" class="font-extrabold text-lg">LEAVE A COMMENT</label>
+                                    <textarea class="border border-slate-300 w-full rounded py-3 pl-3  shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="text"  name="Comment" placeholder="Comment" required></textarea>
+                                </div>
+                                <p class="text-center p-2">
+                                    <button type="submit" class="font-bold p-3 rounded bg-yellow-500 hover:bg-black hover:text-white duration-200">Comment</button>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+           
+        </div>
+    </main>
+
+
+
+
+    <!-- Newsletter -->
+    <div class="text-center py-14 bg-black text-white">
+        <p class="text-[44px] font-bold">Connect with us today</p>
+        <p class="text-base">Enter your email address to subscribe to our newsletter delivered on regular basis.</p>
+        <div>
+            <form action="/home/subscriber" method="post" class="flex justify-between h-14 mt-6 lg:rounded-xl rounded-3xl shadow-lg bg-white md:px-0 border-2 hover:border-yellow-500 duration-200  py-0 sm:inline-block">
+                <input type="text" name="email" placeholder="Email address" class="focus:outline-none bg-white mt-1 mx-1 mb-2 text-black text-sm py-3 pl-4 w-64 font-normal">
+                <button type="submit" class="bg-yellow-500 focus:outline-none text-gray-900 hover:text-white p-2 px-3 m-1 lg:rounded-lg rounded-2xl  ">
+                       <span class="hidden lg:inline">Sign up today</span>
+                       <svg xmlns="http://www.w3.org/2000/svg" class="lg:hidden h-4 w-4 my-0 " viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                      </svg>
+                </button>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Main modal -->
+  <div id="defaultModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center">
+    <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow ">
+            <!-- Modal header -->
+            <div class="flex justify-between items-start p-4 rounded-t border-b">
+                <h3 class="text-xl font-semibold text-gray-900">
+                    LEAVE A COMMENT
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-toggle="defaultModal">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+          <form action="/home/book_show" method="post">
+              <!-- Modal body -->
+              <div class="px-6 p-2">
+                <div>
+                    <textarea  name="comment" id="comment" placeholder="COMMENT" class="border border-slate-300 w-full rounded pl-3 py-3   shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" required></textarea>
+                </div>
+
+                  <div>
+                      <div class="lg:flex">
+                            <div class=" mt-2 w-full lg:pr-4 pr-3">
+                                <p class="mx-2">Username</p>
+                                <input class="border border-slate-300 w-full rounded py-3 pl-3  shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="text" id="lastname" name="lastname" placeholder="Lastname" required>
+                            </div>
+                            <div class=" mt-2 w-full lg:pr-4 pr-3">
+                                <p class="mx-2">Email</p>
+                                <input class="border border-slate-300 w-full rounded py-3 pl-3   shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="email" id="Email" name="email" placeholder="Email" required>
+                            </div>
+                      </div>
+                  </div>
+                  
+              </div>
+              <!-- Modal footer -->
+              <div class="pb-3">
+                      <div class="text-center space-x-2 ">
+                          <button id="proceedbtn" disabled  type="submit" class="text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-yellow-500 hover:bg-yellow-600 ">Comment</button>
+                          <button data-modal-toggle="defaultModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">Cancel</button>
+                      </div>
+                     
+              </div>
+          </form>
+        </div>
+    </div>
+</div>
+
+
+    <footer class="border py-8">
+        <div class="w-11/12 m-auto">
+            <div class="grid lg:grid-cols-2 gap-7">
+                <div class="col-span-1">
+                    <div class="space-y-1">
+                        <p class="text-3xl font-bold">CONNECT HERE</p>
+                        <p>Looking to engage with JAPA.<span class="text-gray-400"><span class="text-gray-400">RUN</span></span>. Connect with us on social media! You will find relevant content, important JAPA.<span class="text-gray-400">RUN</span> updates, networking opportunities and more.</p>
+                        <p>Be sure to send us a message or tag us in JAPA.<span class="text-gray-400">RUN</span>-related posts so we can reply or repost.</p>
+                    </div>
+                    <div class="border-b border-white pb-2 lg:flex lg:flex-wrap lg:justify-between">
+                        <div class="font-normal space-x-2 pt-2 lg:text-center">
+                            <span class=" hover:text-yellow-500 text-gray-500 duration-200 "> <a href="https://www.facebook.com/profile.php?id=100081954385314" target="_blank"><i class="fa fa-facebook text-2xl" aria-hidden="true"></i></a></span>
+                            <span class=" hover:text-yellow-500 text-gray-500 duration-200 "> <a href="https://www.instagram.com/invites/contact/?i=1pzu6flwp9076&amp;utm_content=oq59psb" target="_blank"><i class="fa fa-instagram text-2xl" aria-hidden="true"></i></a></span>
+                            <span class=" hover:text-yellow-500 text-gray-500 duration-200 "> <a href="https://twitter.com/Doomur_app?t=DjRIPLRAUDqVKv0XMANwwA&amp;s=09" target="_blank"><i class="fa fa-twitter text-2xl" aria-hidden="true"></i></a></span>
+                            <span class=" hover:text-yellow-500 text-gray-500 duration-200 "><i class="fa fa-youtube text-2xl" aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-1 pl-5 hidden lg:block">
+                    <a href="/">
+                        <img class="h-12 object-fill w-46 p-2 mt-2" src="/public/images/japa.png" alt="">
+                    </a>
+                    <ul style="list-style-type:disc" class="space-y-1 ml-5">
+                        <li><a href="#" class="hover:border-b hover:border-yellow-500 hover:font-bold hover:text-lg duration-100">About</a></li>
+                        <li><a href="#" class="hover:border-b hover:border-yellow-500 hover:font-bold hover:text-lg duration-100">Contact us</a></li>
+                        <li><a href="#" class="hover:border-b hover:border-yellow-500 hover:font-bold hover:text-lg duration-100">Chat Groups</a></li>
+                        <li><a href="#" class="hover:border-b hover:border-yellow-500 hover:font-bold hover:text-lg duration-100">Resource Center</a></li>
+                        <li><a href="#" class="hover:border-b hover:border-yellow-500 hover:font-bold hover:text-lg duration-100">FAQs</a></li>
+                        <li><a href="#" class="hover:border-b hover:border-yellow-500 hover:font-bold hover:text-lg duration-100">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:border-b hover:border-yellow-500 hover:font-bold hover:text-lg duration-100">Terms of Use</a></li>
+                        <li><a href="#" class="hover:border-b hover:border-yellow-500 hover:font-bold hover:text-lg duration-100">Community Guidelines</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-10">
+                <p class="text-gray-900 text-center mt-6 p-2 duration-100">Copyright © 2023 Japa.<span class="text-gray-400">RUN</span> - Join the conversation...</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/public/js/index.min.js"></script>
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+    <script>
+        let profilebtn = document.querySelector('#profilebtn');
+        let menulist = document.querySelector('#menulist')
+
+        menulist.style.display = 'none'
+        profilebtn.addEventListener('click', ()=>{
+            // console.log('profilebtn')
+            if(menulist.style.display === 'none'){
+                menulist.style.display = 'inline'
+                // console.log('show')
+            }else{
+                menulist.style.display = 'none'
+                // console.log('hide')
+            }
+        })
+        
+        // CLOSES MENULIST WHEN YOU CLICK ANYWHERE OUTSIDE
+        window.onclick = (e)=>{
+            // console.log('id',e.target.id,e.target)
+            if(e.target.id !== 'profileimg'){
+                menulist.style.display = 'none'
+            }
+        }
+    </script>
+
+</body>
+</html>

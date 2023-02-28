@@ -11,6 +11,10 @@ router.get('/chats', (req,res)=>{
     res.render('main/chat_group')
 })
 
+router.get('/preview_chat/:id', (req,res)=>{
+    res.render('main/preview_chat')
+})
+
 // chats - my groups
 router.get('/my_groups', (req,res)=>{
     res.render('main/chat_group')
