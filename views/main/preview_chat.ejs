@@ -74,21 +74,20 @@
            <div class="lg:w-4/6 m-auto">
             <div class="flex justify-center">
                 <div class="rounded-lg shadow-lg bg-white w-full border">
-                   <a href="/home/preview/14">
+                   <a href="/home/preview/<%= group.id %>">
                         <img class="rounded-t-lg object-cover  h-80 w-full" src="/public/images/video.jpeg" alt="">
                     </a>
                     <div class="p-2 px-3 text-sm font-normal lg:space-y-5">
                         <h5 class="text-gray-900 text-xl font-medium mt-5">
-                            <a href="/home/preview/14" class="hover:text-yellow-500">Identifying Opportunities on Path to US Citizenship</a>
+                            <a href="/home/preview/14" class="hover:text-yellow-500"><%= group.groupName %></a>
                         </h5>
                         <p class="text-yellow-500">
-                            Public Group / 1,288 member
+                            <%= group.type === 'PUBLIC' ? 'Public': 'Private' %> Group / <%= group._count.members %> members
                         </p>
                         <div class="space-y-3 text-gray-700">
                             
-                            <p class="">Looking to further your education at a college/university?
-                                A personal statement is often an important part of the university application</p>
-                            <p>
+                            <p class="text-ellipses"><%= group.description %></p>
+                            <!-- <p>
                                 To have thrived for centuries and decades means that successful brands and market 
                                 leaders have seen enough to know what works for the markets. Yet they stay as 
                                 committed to continually improving upon their value proposition as though they 
@@ -104,73 +103,26 @@
                                 striving to “DO IT RIGHT THE FIRST TIME”. They understand the degree of damage
                                  the brand can be met with and are constantly striving to avoid that.  
                                  They also understand the magic in doing it right and are doubling down that path.
-                            </p>
+                            </p> -->
 
                             <!-- USER COMMENTS -->
                            <div class="py-5 space-y-3">
-                                <p class="font-bold text-lg">5 COMMENT</p>
+                                <p class="font-bold text-lg"><%= group._count.comments %> COMMENTS</p>
                                 <!-- COMMENT ITEM -->
-                               <div class="border rounded p-1 space-y-1">
-                                    <div class="flex space-x-1">
-                                        <div class="flex-none w-12 h-12  border border-yellow-500  rounded">
-                                            <img class=" rounded" src="/public/images/person.jpeg" alt="">
-                                        </div>
-                                        <div class="w-full">
-                                            <p>
-                                                <span class="font-extrabold text-base text-yellow-500">Annie</span> on March 18, 2022 at 9:54 am  
-                                                <a href="#"  class="inline-block pt-1 text-gray-500 hover:text-gray-900 duration-200"  data-modal-toggle="defaultModal">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                                                        <path fill-rule="evenodd" d="M2 10c0-3.967 3.69-7 8-7 4.31 0 8 3.033 8 7s-3.69 7-8 7a9.165 9.165 0 01-1.504-.123 5.976 5.976 0 01-3.935 1.107.75.75 0 01-.584-1.143 3.478 3.478 0 00.522-1.756C2.979 13.825 2 12.025 2 10z" clip-rule="evenodd" />
-                                                    </svg>
-                                                </a> 
-                                            </p>
-                                            <p>  
-                                                <a href="#"  class="inline-block pt-1 text-green-400 hover:text-green-600 duration-200">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                                                    <path d="M1 8.25a1.25 1.25 0 112.5 0v7.5a1.25 1.25 0 11-2.5 0v-7.5zM11 3V1.7c0-.268.14-.526.395-.607A2 2 0 0114 3c0 .995-.182 1.948-.514 2.826-.204.54.166 1.174.744 1.174h2.52c1.243 0 2.261 1.01 2.146 2.247a23.864 23.864 0 01-1.341 5.974C17.153 16.323 16.072 17 14.9 17h-3.192a3 3 0 01-1.341-.317l-2.734-1.366A3 3 0 006.292 15H5V8h.963c.685 0 1.258-.483 1.612-1.068a4.011 4.011 0 012.166-1.73c.432-.143.853-.386 1.011-.814.16-.432.248-.9.248-1.388z" />
-                                                  </svg>
-                                                </a>
-                                                 
-                                                <a href="#" class="inline-block pt-1 text-red-400 hover:text-red-600 duration-200">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                                                        <path d="M18.905 12.75a1.25 1.25 0 01-2.5 0v-7.5a1.25 1.25 0 112.5 0v7.5zM8.905 17v1.3c0 .268-.14.526-.395.607A2 2 0 015.905 17c0-.995.182-1.948.514-2.826.204-.54-.166-1.174-.744-1.174h-2.52c-1.242 0-2.26-1.01-2.146-2.247.193-2.08.652-4.082 1.341-5.974C2.752 3.678 3.833 3 5.005 3h3.192a3 3 0 011.342.317l2.733 1.366A3 3 0 0013.613 5h1.292v7h-.963c-.684 0-1.258.482-1.612 1.068a4.012 4.012 0 01-2.165 1.73c-.433.143-.854.386-1.012.814-.16.432-.248.9-.248 1.388z" />
-                                                    </svg>
-                                                </a>
-                                            </p>
-                                            <p> 
-                                                Like we have seen in the past, most of these successful brands are constantly
-                                                Like we have seen in the past, most of these successful brands are constantly
-                                                Like we have seen in the past, most of these successful brands are constantly
-
-                                            </p>
-                                            <!-- ADD NEW COMMENT -->
-                                            <div class="lg:flex">
-                                                <div class="flex-initial lg:w-5/12 mt-2 lg:pr-4 pr-3">
-                                                    <input class="border border-slate-300 w-full rounded py-3 pl-3   shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="email" id="Email" name="email" placeholder="Email" required>
-                                                </div>
-                                                <div class=" mt-2 w-full lg:pr-4 pr-3">
-                                                    <textarea class="border  h-12 border-slate-300 w-full rounded py-3 pl-3  shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="text"  name="Comment" placeholder="Comment" required></textarea>
-                                                </div>
-                                                <div class="flex-initial lg:w-32 mt-2 lg:pr-4 pr-3">
-                                                    <button type="submit" class="font-bold p-3 rounded bg-yellow-500 hover:bg-black hover:text-white duration-200">Comment</button>
-                                                </div>
-                                          </div>
-
-                                        </div>
-                                    </div>
-                                    <!--1st CHILD-COMMENT ITEM -->
-                                    <div class="border-t pt-1" style="margin-left:5%">
+                                <% comments.forEach(element => { %>
+                                    <div class="border rounded p-1 space-y-1">
                                         <div class="flex space-x-1">
-                                            <div class="flex-none w-12 h-12 border border-yellow-500 rounded">
-                                                <img class="rounded" src="/public/images/person.jpeg" alt="">
+                                            <div class="flex-none w-12 h-12  border border-yellow-500  rounded">
+                                                <img class=" rounded" src="/public/images/person.jpeg" alt="">
                                             </div>
                                             <div class="w-full">
-                                                <p><span class="font-extrabold text-base text-yellow-500">Johnny</span> on March 18, 2022 at 10:04 am 
-                                                    <a href="#"  class="inline-block pt-1 text-gray-500 hover:text-gray-900 duration-200">
+                                                <p>
+                                                    <span class="font-extrabold text-base text-yellow-500"><%= element.author.username %></span> on <%= moment(element.createdAt).format('MMMM D, YYYY [at] h:mm a')%>  
+                                                    <a href="#"  class="inline-block pt-1 text-gray-500 hover:text-gray-900 duration-200"  data-modal-toggle="defaultModal">
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                                                             <path fill-rule="evenodd" d="M2 10c0-3.967 3.69-7 8-7 4.31 0 8 3.033 8 7s-3.69 7-8 7a9.165 9.165 0 01-1.504-.123 5.976 5.976 0 01-3.935 1.107.75.75 0 01-.584-1.143 3.478 3.478 0 00.522-1.756C2.979 13.825 2 12.025 2 10z" clip-rule="evenodd" />
                                                         </svg>
-                                                    </a>
+                                                    </a> 
                                                 </p>
                                                 <p>  
                                                     <a href="#"  class="inline-block pt-1 text-green-400 hover:text-green-600 duration-200">
@@ -186,10 +138,9 @@
                                                     </a>
                                                 </p>
                                                 <p> 
-                                                    At the very basic level, their association and accreditations with some
-                                                    statutory organizations give a strong indication of their goodwill.
+                                                    <%= element.body %>
                                                 </p>
-                                                 <!-- ADD NEW COMMENT -->
+                                                <!-- ADD NEW COMMENT -->
                                                 <div class="lg:flex">
                                                     <div class="flex-initial lg:w-5/12 mt-2 lg:pr-4 pr-3">
                                                         <input class="border border-slate-300 w-full rounded py-3 pl-3   shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="email" id="Email" name="email" placeholder="Email" required>
@@ -200,62 +151,110 @@
                                                     <div class="flex-initial lg:w-32 mt-2 lg:pr-4 pr-3">
                                                         <button type="submit" class="font-bold p-3 rounded bg-yellow-500 hover:bg-black hover:text-white duration-200">Comment</button>
                                                     </div>
-                                            </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                     <!--2nd CHILD-COMMENT ITEM -->
-                                     <div class="border-t pt-1" style="margin-left:10%">
-                                        <div class="flex space-x-1">
-                                            <div class="flex-none w-12 h-12 border border-yellow-500 rounded">
-                                                <img class="rounded" src="/public/images/person.jpeg" alt="">
-                                            </div>
-                                            <div class="w-full">
-                                                <p><span class="font-extrabold text-base text-yellow-500">Annie</span> on March 18, 2022 at 11:23 am
-                                                    <a href="#"  class="inline-block pt-1 text-gray-500 hover:text-gray-900 duration-200">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                                                            <path fill-rule="evenodd" d="M2 10c0-3.967 3.69-7 8-7 4.31 0 8 3.033 8 7s-3.69 7-8 7a9.165 9.165 0 01-1.504-.123 5.976 5.976 0 01-3.935 1.107.75.75 0 01-.584-1.143 3.478 3.478 0 00.522-1.756C2.979 13.825 2 12.025 2 10z" clip-rule="evenodd" />
-                                                        </svg>
-                                                    </a>
-                                                </p>
-                                                <p>  
-                                                    <a href="#"  class="inline-block pt-1 text-green-400 hover:text-green-600 duration-200">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                                                        <path d="M1 8.25a1.25 1.25 0 112.5 0v7.5a1.25 1.25 0 11-2.5 0v-7.5zM11 3V1.7c0-.268.14-.526.395-.607A2 2 0 0114 3c0 .995-.182 1.948-.514 2.826-.204.54.166 1.174.744 1.174h2.52c1.243 0 2.261 1.01 2.146 2.247a23.864 23.864 0 01-1.341 5.974C17.153 16.323 16.072 17 14.9 17h-3.192a3 3 0 01-1.341-.317l-2.734-1.366A3 3 0 006.292 15H5V8h.963c.685 0 1.258-.483 1.612-1.068a4.011 4.011 0 012.166-1.73c.432-.143.853-.386 1.011-.814.16-.432.248-.9.248-1.388z" />
-                                                      </svg>
-                                                    </a>
-                                                     
-                                                    <a href="#" class="inline-block pt-1 text-red-400 hover:text-red-600 duration-200">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                                                            <path d="M18.905 12.75a1.25 1.25 0 01-2.5 0v-7.5a1.25 1.25 0 112.5 0v7.5zM8.905 17v1.3c0 .268-.14.526-.395.607A2 2 0 015.905 17c0-.995.182-1.948.514-2.826.204-.54-.166-1.174-.744-1.174h-2.52c-1.242 0-2.26-1.01-2.146-2.247.193-2.08.652-4.082 1.341-5.974C2.752 3.678 3.833 3 5.005 3h3.192a3 3 0 011.342.317l2.733 1.366A3 3 0 0013.613 5h1.292v7h-.963c-.684 0-1.258.482-1.612 1.068a4.012 4.012 0 01-2.165 1.73c-.433.143-.854.386-1.012.814-.16.432-.248.9-.248 1.388z" />
-                                                        </svg>
-                                                    </a>
-                                                </p>
-                                                <p> 
-                                                    It is organizations give a strong indication 
-                                                </p>
-                                                 <!-- ADD NEW COMMENT -->
-                                                <div class="lg:flex w-full">
-                                                    <div class="flex-initial lg:w-5/12 mt-2 lg:pr-4 pr-3">
-                                                        <input class="border border-slate-300 w-full rounded py-3 pl-3   shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="email" id="Email" name="email" placeholder="Email" required>
-                                                    </div>
-                                                    <div class=" mt-2 w-full lg:pr-4 pr-3">
-                                                        <textarea class="border  h-12 border-slate-300 w-full rounded py-3 pl-3  shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="text"  name="Comment" placeholder="Comment" required></textarea>
-                                                    </div>
-                                                    <div class="flex-initial lg:w-32 mt-2 lg:pr-4 pr-3">
-                                                        <button type="submit" class="font-bold p-3 rounded bg-yellow-500 hover:bg-black hover:text-white duration-200">Comment</button>
-                                                    </div>
-                                            </div>
+                                              </div>
+    
                                             </div>
                                         </div>
-                                    </div>
-
-                               </div>
-                              
+                                        <!--1st CHILD-COMMENT ITEM -->
+                                        <% element.childComments.forEach(element => { %>
+                                            <div class="border-t pt-1" style="margin-left:5%">
+                                                <div class="flex space-x-1">
+                                                    <div class="flex-none w-12 h-12 border border-yellow-500 rounded">
+                                                        <img class="rounded" src="/public/images/person.jpeg" alt="">
+                                                    </div>
+                                                    <div class="w-full">
+                                                        <p><span class="font-extrabold text-base text-yellow-500"><%= element.author.username %></span> on <%= moment(element.createdAt).format('MMMM D, YYYY [at] h:mm a') %> 
+                                                            <a href="#"  class="inline-block pt-1 text-gray-500 hover:text-gray-900 duration-200">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                                                    <path fill-rule="evenodd" d="M2 10c0-3.967 3.69-7 8-7 4.31 0 8 3.033 8 7s-3.69 7-8 7a9.165 9.165 0 01-1.504-.123 5.976 5.976 0 01-3.935 1.107.75.75 0 01-.584-1.143 3.478 3.478 0 00.522-1.756C2.979 13.825 2 12.025 2 10z" clip-rule="evenodd" />
+                                                                </svg>
+                                                            </a>
+                                                        </p>
+                                                        <p>  
+                                                            <a href="#"  class="inline-block pt-1 text-green-400 hover:text-green-600 duration-200">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                                                <path d="M1 8.25a1.25 1.25 0 112.5 0v7.5a1.25 1.25 0 11-2.5 0v-7.5zM11 3V1.7c0-.268.14-.526.395-.607A2 2 0 0114 3c0 .995-.182 1.948-.514 2.826-.204.54.166 1.174.744 1.174h2.52c1.243 0 2.261 1.01 2.146 2.247a23.864 23.864 0 01-1.341 5.974C17.153 16.323 16.072 17 14.9 17h-3.192a3 3 0 01-1.341-.317l-2.734-1.366A3 3 0 006.292 15H5V8h.963c.685 0 1.258-.483 1.612-1.068a4.011 4.011 0 012.166-1.73c.432-.143.853-.386 1.011-.814.16-.432.248-.9.248-1.388z" />
+                                                            </svg>
+                                                            </a>
+                                                            
+                                                            <a href="#" class="inline-block pt-1 text-red-400 hover:text-red-600 duration-200">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                                                    <path d="M18.905 12.75a1.25 1.25 0 01-2.5 0v-7.5a1.25 1.25 0 112.5 0v7.5zM8.905 17v1.3c0 .268-.14.526-.395.607A2 2 0 015.905 17c0-.995.182-1.948.514-2.826.204-.54-.166-1.174-.744-1.174h-2.52c-1.242 0-2.26-1.01-2.146-2.247.193-2.08.652-4.082 1.341-5.974C2.752 3.678 3.833 3 5.005 3h3.192a3 3 0 011.342.317l2.733 1.366A3 3 0 0013.613 5h1.292v7h-.963c-.684 0-1.258.482-1.612 1.068a4.012 4.012 0 01-2.165 1.73c-.433.143-.854.386-1.012.814-.16.432-.248.9-.248 1.388z" />
+                                                                </svg>
+                                                            </a>
+                                                        </p>
+                                                        <p> 
+                                                            <%= element.body %>
+                                                        </p>
+                                                        <!-- ADD NEW COMMENT -->
+                                                        <div class="lg:flex">
+                                                            <div class="flex-initial lg:w-5/12 mt-2 lg:pr-4 pr-3">
+                                                                <input class="border border-slate-300 w-full rounded py-3 pl-3   shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="email" id="Email" name="email" placeholder="Email" required>
+                                                            </div>
+                                                            <div class=" mt-2 w-full lg:pr-4 pr-3">
+                                                                <textarea class="border  h-12 border-slate-300 w-full rounded py-3 pl-3  shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="text"  name="Comment" placeholder="Comment" required></textarea>
+                                                            </div>
+                                                            <div class="flex-initial lg:w-32 mt-2 lg:pr-4 pr-3">
+                                                                <button type="submit" class="font-bold p-3 rounded bg-yellow-500 hover:bg-black hover:text-white duration-200">Comment</button>
+                                                            </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <% element.childComments.forEach(element => { %>
+                                                    <!--2nd CHILD-COMMENT ITEM -->
+                                                    <div class="border-t pt-1" style="margin-left:10%">
+                                                        <div class="flex space-x-1">
+                                                            <div class="flex-none w-12 h-12 border border-yellow-500 rounded">
+                                                                <img class="rounded" src="/public/images/person.jpeg" alt="">
+                                                            </div>
+                                                            <div class="w-full">
+                                                                <p><span class="font-extrabold text-base text-yellow-500"><%= element.author.username %></span> on <%= moment(element.createdAt).format('MMMM D, YYYY [at] h:mm a') %>
+                                                                    <a href="#"  class="inline-block pt-1 text-gray-500 hover:text-gray-900 duration-200">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                                                            <path fill-rule="evenodd" d="M2 10c0-3.967 3.69-7 8-7 4.31 0 8 3.033 8 7s-3.69 7-8 7a9.165 9.165 0 01-1.504-.123 5.976 5.976 0 01-3.935 1.107.75.75 0 01-.584-1.143 3.478 3.478 0 00.522-1.756C2.979 13.825 2 12.025 2 10z" clip-rule="evenodd" />
+                                                                        </svg>
+                                                                    </a>
+                                                                </p>
+                                                                <p>  
+                                                                    <a href="#"  class="inline-block pt-1 text-green-400 hover:text-green-600 duration-200">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                                                        <path d="M1 8.25a1.25 1.25 0 112.5 0v7.5a1.25 1.25 0 11-2.5 0v-7.5zM11 3V1.7c0-.268.14-.526.395-.607A2 2 0 0114 3c0 .995-.182 1.948-.514 2.826-.204.54.166 1.174.744 1.174h2.52c1.243 0 2.261 1.01 2.146 2.247a23.864 23.864 0 01-1.341 5.974C17.153 16.323 16.072 17 14.9 17h-3.192a3 3 0 01-1.341-.317l-2.734-1.366A3 3 0 006.292 15H5V8h.963c.685 0 1.258-.483 1.612-1.068a4.011 4.011 0 012.166-1.73c.432-.143.853-.386 1.011-.814.16-.432.248-.9.248-1.388z" />
+                                                                    </svg>
+                                                                    </a>
+                                                                    
+                                                                    <a href="#" class="inline-block pt-1 text-red-400 hover:text-red-600 duration-200">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                                                            <path d="M18.905 12.75a1.25 1.25 0 01-2.5 0v-7.5a1.25 1.25 0 112.5 0v7.5zM8.905 17v1.3c0 .268-.14.526-.395.607A2 2 0 015.905 17c0-.995.182-1.948.514-2.826.204-.54-.166-1.174-.744-1.174h-2.52c-1.242 0-2.26-1.01-2.146-2.247.193-2.08.652-4.082 1.341-5.974C2.752 3.678 3.833 3 5.005 3h3.192a3 3 0 011.342.317l2.733 1.366A3 3 0 0013.613 5h1.292v7h-.963c-.684 0-1.258.482-1.612 1.068a4.012 4.012 0 01-2.165 1.73c-.433.143-.854.386-1.012.814-.16.432-.248.9-.248 1.388z" />
+                                                                        </svg>
+                                                                    </a>
+                                                                </p>
+                                                                <p> 
+                                                                    <%= element.body %> 
+                                                                </p>
+                                                                <!-- ADD NEW COMMENT -->
+                                                                <div class="lg:flex w-full">
+                                                                    <div class="flex-initial lg:w-5/12 mt-2 lg:pr-4 pr-3">
+                                                                        <input class="border border-slate-300 w-full rounded py-3 pl-3   shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="email" id="Email" name="email" placeholder="Email" required>
+                                                                    </div>
+                                                                    <div class=" mt-2 w-full lg:pr-4 pr-3">
+                                                                        <textarea class="border  h-12 border-slate-300 w-full rounded py-3 pl-3  shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="text"  name="Comment" placeholder="Comment" required></textarea>
+                                                                    </div>
+                                                                    <div class="flex-initial lg:w-32 mt-2 lg:pr-4 pr-3">
+                                                                        <button type="submit" class="font-bold p-3 rounded bg-yellow-500 hover:bg-black hover:text-white duration-200">Comment</button>
+                                                                    </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% }) %>
+                                            </div>
+                                        <% }) %>
+                                </div>
+                                <% }) %>
+                            
 
                                 <!-- COMMENT ITEM -->
-                                <div class="border rounded p-1 space-y-1">
+                                <!-- <div class="border rounded p-1 space-y-1">
                                     <div class="flex space-x-1">
                                         <div class="flex-none w-12 h-12 border border-yellow-500 rounded">
                                             <img class="rounded" src="/public/images/person.jpeg" alt="">
@@ -287,10 +286,10 @@
                                             </p>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
 
                                  <!-- COMMENT ITEM -->
-                                 <div class="border rounded p-1 space-y-1">
+                                 <!-- <div class="border rounded p-1 space-y-1">
                                     <div class="flex space-x-1">
                                         <div class="flex-none w-12 h-12 border border-yellow-500 rounded">
                                             <img class="rounded" src="/public/images/person.jpeg" alt="">
@@ -321,15 +320,15 @@
                                             </p>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                            </div>
 
 
                             <!-- POST COMMENT -->
-                            <form action="/comment" method="post" class="space-y-1 font-bold pt-10">
+                            <form action="/add-comment/<%= group.id %>" method="post" class="space-y-1 font-bold pt-10">
                                 <div class="pt-4">
                                     <label  for="login_name" class="font-extrabold text-lg">LEAVE A COMMENT</label>
-                                    <textarea class="border border-slate-300 w-full rounded py-3 pl-3  shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="text"  name="Comment" placeholder="Comment" required></textarea>
+                                    <textarea class="border border-slate-300 w-full rounded py-3 pl-3  shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="text"  name="comment" id="comment" placeholder="Comment" required></textarea>
                                 </div>
                                 <p class="text-center p-2">
                                     <button type="submit" class="font-bold p-3 rounded bg-yellow-500 hover:bg-black hover:text-white duration-200">Comment</button>
