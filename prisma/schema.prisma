@@ -15,6 +15,7 @@ model Admin {
   email String @unique
   password String
 }
+
 model User {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   email String @unique
@@ -40,6 +41,7 @@ model Group {
   status Status @default(ACTIVE)
   createdAt DateTime @default(now())
   members Member[]
+  comments Comment[]
 }
 
 model Post {
@@ -48,7 +50,6 @@ model Post {
   title String
   body String
   createdAt DateTime @default(now())
-  comments Comment[]
 }
 
 model Video {
@@ -81,13 +82,14 @@ model Comment {
   body String
   author User @relation(fields: [authorId], references: [id])
   authorId  String @db.ObjectId
-  post Post @relation(fields: [postId], references: [id])
-  postId String @db.ObjectId
+  group Group? @relation(fields: [groupId], references: [id])
+  groupId String? @db.ObjectId
   parent Comment? @relation("ChildComments", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   parentId String? @db.ObjectId
   childComments Comment[] @relation("ChildComments")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  likes Int
 }
 
 model DocumentComment {
@@ -102,6 +104,7 @@ model DocumentComment {
   childComments DocumentComment[] @relation("ChildComments")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  likes Int
 }
 
 model VideoComment {
@@ -116,6 +119,7 @@ model VideoComment {
   childComments VideoComment[] @relation("ChildComments")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  likes Int
 }
 
 model Subscriber {
