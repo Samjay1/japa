@@ -86,9 +86,8 @@
                         </p>
                         <div class="space-y-3 text-gray-700">
                             
-                            <p class="">Looking to further your education at a college/university?
-                                A personal statement is often an important part of the university application</p>
-                            <p>
+                            <p class="text-ellipses"><%= group.description %></p>
+                            <!-- <p>
                                 To have thrived for centuries and decades means that successful brands and market 
                                 leaders have seen enough to know what works for the markets. Yet they stay as 
                                 committed to continually improving upon their value proposition as though they 
@@ -104,7 +103,7 @@
                                 striving to “DO IT RIGHT THE FIRST TIME”. They understand the degree of damage
                                  the brand can be met with and are constantly striving to avoid that.  
                                  They also understand the magic in doing it right and are doubling down that path.
-                            </p>
+                            </p> -->
 
                             <!-- USER COMMENTS -->
                            <div class="py-5 space-y-3">
@@ -326,10 +325,10 @@
 
 
                             <!-- POST COMMENT -->
-                            <form action="/comment" method="post" class="space-y-1 font-bold pt-10">
+                            <form action="/add-comment/<%= group.id %>" method="post" class="space-y-1 font-bold pt-10">
                                 <div class="pt-4">
                                     <label  for="login_name" class="font-extrabold text-lg">LEAVE A COMMENT</label>
-                                    <textarea class="border border-slate-300 w-full rounded py-3 pl-3  shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="text"  name="Comment" placeholder="Comment" required></textarea>
+                                    <textarea class="border border-slate-300 w-full rounded py-3 pl-3  shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="text"  name="comment" id="comment" placeholder="Comment" required></textarea>
                                 </div>
                                 <p class="text-center p-2">
                                     <button type="submit" class="font-bold p-3 rounded bg-yellow-500 hover:bg-black hover:text-white duration-200">Comment</button>

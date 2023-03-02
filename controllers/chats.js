@@ -141,5 +141,29 @@ router.get('/notification', (req,res)=>{
     res.render('main/chat_group')
 })
 
+// add comment
+router.post('/add-comment/:id', async (req,res) => {
+    const id = req.params.id;
+    const body = req.body.comment;
+
+    const comment = await prisma.comment.create({
+        data: {
+            author: {
+                connect: {
+                    id: '63fa4193ffc61692d5b8f15c'
+                }
+            },
+            body,
+            parent: undefined,
+            group: {
+                connect: {
+                    id
+                }
+            }
+        }
+    });
+
+    res.redirect('back');
+})
 
 module.exports = router;

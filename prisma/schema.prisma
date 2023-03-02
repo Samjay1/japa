@@ -89,7 +89,7 @@ model Comment {
   childComments Comment[] @relation("ChildComments")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  likes Int
+  likes Int?
 }
 
 model DocumentComment {
