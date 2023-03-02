@@ -17,9 +17,9 @@ router.get('/resources', async (req,res)=>{
     });
 })
 
-// blog
-router.get('/blogs', async (req,res)=>{
-    res.render('main/blogs')
+// preview blog
+router.get('/preview_blog/:id', async (req,res)=>{
+    res.render('main/preview_blog')
 })
 
 
@@ -32,6 +32,11 @@ router.get('/documents', async (req,res)=>{
     })
 })
 
+// preview document
+router.get('/preview_document/:id', async (req,res)=>{
+    res.render('main/preview_document')
+})
+
 // videos
 router.get('/videos', async (req,res)=>{
     const videos = await prisma.video.findMany();
@@ -41,6 +46,11 @@ router.get('/videos', async (req,res)=>{
     })
 })
 
+
+// preview video
+router.get('/preview_video/:id', async (req,res)=>{
+    res.render('main/preview_video')
+})
 
 
 module.exports = router;

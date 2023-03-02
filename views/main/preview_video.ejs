@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400,700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -30,7 +31,7 @@
                 <a class="lg:block hidden px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/about">About</a>
                 <a class="lg:block hidden px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/chats">Chat Groups</a>
                 <a class="lg:block hidden px-3 py-2  border-b border-gray-100 text-yellow-500 border-yellow-500 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/resources">Resource center</a> 
-                <a class="lg:block hidden px-3 py-2 border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/news">News Feed</a>
+                <a class="lg:block hidden px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/news">News Feed</a>
                 <a class="lg:block hidden px-3 py-2  border-b  border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/faqs"> FAQs</a>
                 <a class="lg:block hidden px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/contact">Contact Us</a>
                 <a class="lg:block hidden px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/register">Sign Up</a>  
@@ -44,7 +45,7 @@
             </div>
         </div>
     </nav>
-    <!-- PROFILE DROPDOWN -->
+     <!-- PROFILE DROPDOWN --> 
     <div class="relative">
         <div id="menulist" class="absolute z-10 hidden block space-y-1 right-0 border w-56 bg-white  mx-1 my-1 rounded-lg animate__animated animate__pulse" style="display: none;">
         <p class="border-b w-full rounded-t-lg hover:bg-yellow-500 hover:text-white"><a class="px-2 pr-6 py-2 block" href="/about"> About</a></p>
@@ -60,126 +61,86 @@
 
 
 
-    <main>
-        <div>
-            <div class="bg-fixed lg:h-[550px] h-[400px] relative" style="background-image: url(/public/images/blog.jpeg); background-repeat: no-repeat; background-size: cover;">
-                <div class="absolute border-red-500 h-full w-full bg-black opacity-70">
-                </div>
-                <div class="text-[70px] opacity-100 absolute font-bold text-center w-full text-white lg:pt-48 pt-24  animate__animated animate__bounceInRight">
-                    <p>Resource Center </p>
-                    <p class="text-3xl">Blogs</p>
-                </div>
-                
-            </div>
-        </div>
-
-        <div class="my-10">
-            <div class="text-center">
-                <p class="lg:text-[50px] text-[40px] font-bold">Ideas, Tools and Thought Leadership​</p>
-                <p>Articles, videos, and documents all aimed at helping you consider new ideas and take your next steps.</p>
-                <hr class="w-1/5 m-auto my-5 borde-1 border-black">
-            </div>
-        </div>
-
-        <div id="nav" class="flex lg:justify-center justify-between mt-20 mx-1 text-center space-x-2">
-            <p>
-                <a href="/resources#nav" class="px-5 p-1 rounded-t-lg bg-black text-white text-2xl duration-200">
-                    Blogs
-                </a>
-            </p>
-            <p>
-                <a href="/documents#nav" class="px-5 p-1 rounded-t-lg hover:bg-black hover:text-white hover:text-2xl duration-200">
-                    Documents
-                 </a>
-            </p>
-           <p>
-            <a href="/videos#nav" class="px-5 p-1 rounded-t-lg hover:bg-black hover:text-white hover:text-2xl duration-200">
-                Videos
-             </a>
-           </p>
-        </div>
-
-        <div class="mx-1 py-20 border-2 border-l-0 border-r-0 border-gray-400 lg:mx-5 duration-200">
-            <p class="lg:text-[50px] text-[40px] font-bold text-center">Blog Posts</p>
-
-            <div class="grid lg:grid-cols-3 gap-4 lg:w-5/6 m-auto">
-                <% posts.forEach(element => { %>
-                    <div class="col-span-1">
-                        <div class="flex justify-center">
-                            <div class="rounded-lg shadow-lg bg-white w-full">
-                                <a href="/preview_blog/14">
-                                    <img class="rounded-t-lg object-cover  h-60 w-full" src="/public/images/headimage.webp" alt="">
-                                </a>
-                                <div class="p-2 px-3 text-sm font-normal lg:space-y-5">
-                                    <h5 class="text-gray-900 text-xl font-medium mt-5">
-                                        <a href="/preview_blog/14" class="hover:text-yellow-500">TIPS TO WRITING A STRONG PERSONAL STATEMENT</a>
-                                    </h5>
-                                    <p class="text-gray-400">Looking to further your education at a college/university?
-                                         A personal statement is often an important part of the university application</p>
-                                    <p class="flex space-x-1 text-yellow-500 hover:text-gray-500">
-                                        <a href="/preview_blog/14" class="text-base">READ MORE</a>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mt-1">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
-                                          </svg>
+    <main class="mx-1 mt-10">
+        <div class="mb-10  animate__animated animate__pulse">
+           <div class="lg:w-5/6 m-auto">
+            <div class="flex justify-center">
+                <div class="rounded-lg shadow-lg bg-white w-full border">
+                    <iframe style="width:100%" width="1345" height="520" src="https://www.youtube.com/embed/OabDMKhdSis" 
+                        title="African Immigrant Stories: The Realities of JAPA - Episode 2" frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+                    <div class="p-2 px-5 text-sm font-normal lg:space-y-5">
+                        <h5 class="text-gray-900 lg:text-2xl text-lg font-medium mt-5">
+                            <p> To have thrived for centuries and decades means that successful brands and market 
+                                leaders have seen enough to know what</p>
+                        </h5>
+                        <div class="space-y-3 text-gray-700 lg:text-base text-md">
+                             
+                            <p>
+                                To have thrived for centuries and decades means that successful brands and market 
+                                leaders have seen enough to know what works for the markets. Yet they stay as 
+                                committed to continually improving upon their value proposition as though they 
+                                were now starting as amateurs.
+                            </p>
+                           
+                            <!-- USER COMMENTS -->
+                           <div class="py-5 space-y-3">
+                                <p class="font-bold text-lg"> COMMENTS</p>
+                                <!-- COMMENT ITEM -->
+                                <div class="border rounded p-1 space-y-1">
+                                    <div class="flex space-x-1">
+                                        <div class="flex-none w-12 h-12 border border-yellow-500 rounded">
+                                            <img class="rounded" src="/public/images/person.jpeg" alt="">
+                                        </div>
+                                        <div class="w-full">
+                                            <p>
+                                                <span class="font-extrabold text-base text-yellow-500">Mikey</span> on March 18, 2022 at 9:54 am 
+                                            </p>
+                                            <p> 
+                                                Like we have seen in the past, most of these successful brands are constantly
+                                            
+                                            </p>
+                                            <p>  
+                                                <a href="#"  class="inline-block pt-1 text-green-400 hover:text-green-600 duration-200">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                                    <path d="M1 8.25a1.25 1.25 0 112.5 0v7.5a1.25 1.25 0 11-2.5 0v-7.5zM11 3V1.7c0-.268.14-.526.395-.607A2 2 0 0114 3c0 .995-.182 1.948-.514 2.826-.204.54.166 1.174.744 1.174h2.52c1.243 0 2.261 1.01 2.146 2.247a23.864 23.864 0 01-1.341 5.974C17.153 16.323 16.072 17 14.9 17h-3.192a3 3 0 01-1.341-.317l-2.734-1.366A3 3 0 006.292 15H5V8h.963c.685 0 1.258-.483 1.612-1.068a4.011 4.011 0 012.166-1.73c.432-.143.853-.386 1.011-.814.16-.432.248-.9.248-1.388z" />
+                                                  </svg>
+                                                </a>
+                                                 
+                                                <a href="#" class="inline-block pt-1 text-red-400 hover:text-red-600 duration-200">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                                        <path d="M18.905 12.75a1.25 1.25 0 01-2.5 0v-7.5a1.25 1.25 0 112.5 0v7.5zM8.905 17v1.3c0 .268-.14.526-.395.607A2 2 0 015.905 17c0-.995.182-1.948.514-2.826.204-.54-.166-1.174-.744-1.174h-2.52c-1.242 0-2.26-1.01-2.146-2.247.193-2.08.652-4.082 1.341-5.974C2.752 3.678 3.833 3 5.005 3h3.192a3 3 0 011.342.317l2.733 1.366A3 3 0 0013.613 5h1.292v7h-.963c-.684 0-1.258.482-1.612 1.068a4.012 4.012 0 01-2.165 1.73c-.433.143-.854.386-1.012.814-.16.432-.248.9-.248 1.388z" />
+                                                    </svg>
+                                                </a>
+                                            </p>
                                           
-                                    </p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                <% }) %>
-                <!-- <div class="col-span-1">
-                    <div class="flex justify-center">
-                        <div class="rounded-lg shadow-lg bg-white w-full">
-                            <a href="/home/preview/14">
-                                <img class="rounded-t-lg object-cover  h-60 w-full" src="/public/images/contact.webp" alt="">
-                            </a>
-                            <div class="p-2 px-3 text-sm font-normal lg:space-y-5">
-                                <h5 class="text-gray-900 text-xl font-medium mt-5">
-                                    <a href="/home/preview/14" class="hover:text-yellow-500">TIPS TO WRITING A STRONG PERSONAL STATEMENT</a>
-                                </h5>
-                                <p class="text-gray-400">Looking to further your education at a college/university?
-                                    A personal statement is often an important part of the university application</p>
-                                <p class="flex space-x-1 text-yellow-500 hover:text-gray-500">
-                                    <a href="#" class="text-base">READ MORE</a>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mt-1">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
-                                    </svg>
+
+                           </div>
+
+
+                             <!-- POST COMMENT -->
+                             <form action="/add-comment/" method="post" class="space-y-1 font-bold pt-10">
+                                <div class="pt-4 space-y-2">
+                                    <label  for="login_name" class="font-extrabold text-lg">LEAVE A COMMENT</label>
+                                    <input class="border border-slate-300 w-full rounded py-3 pl-3   shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="email" id="Email" name="email" placeholder="Email" required>
+                                    <textarea class="border border-slate-300 w-full rounded py-3 pl-3  shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="text"  name="comment" id="comment" placeholder="Comment" required></textarea>
+                                </div>
+                                <p class="text-center p-2">
+                                    <button type="submit" class="font-bold p-3 rounded bg-yellow-500 hover:bg-black hover:text-white duration-200">Comment</button>
                                 </p>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-                <div class="col-span-1">
-                    <div class="flex justify-center">
-                        <div class="rounded-lg shadow-lg bg-white w-full">
-                            <a href="/home/preview/14">
-                                <img class="rounded-t-lg object-cover  h-60 w-full" src="/public/images/about.jpeg" alt="">
-                            </a>
-                            <div class="p-2 px-3 text-sm font-normal lg:space-y-5">
-                                <h5 class="text-gray-900 text-xl font-medium mt-5">
-                                    <a href="/home/preview/14" class="hover:text-yellow-500">TIPS TO WRITING A STRONG PERSONAL STATEMENT</a>
-                                </h5>
-                                <p class="text-gray-400">Looking to further your education at a college/university?
-                                     A personal statement is often an important part of the university application</p>
-                                <p class="flex space-x-1 text-yellow-500 hover:text-gray-500">
-                                    <a href="#" class="text-base">READ MORE</a>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mt-1">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
-                                      </svg>
-                                      
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
             </div>
+        </div>
 
-            <div class="my-10">
-                <p class="text-center">
-                    <a href="#" class="p-2 px-4 bg-yellow-500 rounded hover:bg-gray-800 hover:text-white duration-100">View More</a>
-                </p>
-            </div>
+           
         </div>
     </main>
 
@@ -204,13 +165,63 @@
         </div>
     </div>
 
+    <!-- Main modal -->
+  <div id="defaultModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center">
+    <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow ">
+            <!-- Modal header -->
+            <div class="flex justify-between items-start p-4 rounded-t border-b">
+                <h3 class="text-xl font-semibold text-gray-900">
+                    LEAVE A COMMENT
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-toggle="defaultModal">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+          <form action="/home/book_show" method="post">
+              <!-- Modal body -->
+              <div class="px-6 p-2">
+                <div>
+                    <textarea  name="comment" id="comment" placeholder="COMMENT" class="border border-slate-300 w-full rounded pl-3 py-3   shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" required></textarea>
+                </div>
+
+                  <div>
+                      <div class="lg:flex">
+                            <div class=" mt-2 w-full lg:pr-4 pr-3">
+                                <p class="mx-2">Username</p>
+                                <input class="border border-slate-300 w-full rounded py-3 pl-3  shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="text" id="lastname" name="lastname" placeholder="Lastname" required>
+                            </div>
+                            <div class=" mt-2 w-full lg:pr-4 pr-3">
+                                <p class="mx-2">Email</p>
+                                <input class="border border-slate-300 w-full rounded py-3 pl-3   shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="email" id="Email" name="email" placeholder="Email" required>
+                            </div>
+                      </div>
+                  </div>
+                  
+              </div>
+              <!-- Modal footer -->
+              <div class="pb-3">
+                      <div class="text-center space-x-2 ">
+                          <button id="proceedbtn" disabled  type="submit" class="text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-yellow-500 hover:bg-yellow-600 ">Comment</button>
+                          <button data-modal-toggle="defaultModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">Cancel</button>
+                      </div>
+                     
+              </div>
+          </form>
+        </div>
+    </div>
+</div>
+
+
     <footer class="border py-8">
         <div class="w-11/12 m-auto">
             <div class="grid lg:grid-cols-2 gap-7">
                 <div class="col-span-1">
                     <div class="space-y-1">
                         <p class="text-3xl font-bold">CONNECT HERE</p>
-                        <p>Looking to engage with JAPA.<span class="text-gray-400">RUN</span>. Connect with us on social media! You will find relevant content, important JAPA.<span class="text-gray-400">RUN</span> updates, networking opportunities and more.</p>
+                        <p>Looking to engage with JAPA.<span class="text-gray-400"><span class="text-gray-400">RUN</span></span>. Connect with us on social media! You will find relevant content, important JAPA.<span class="text-gray-400">RUN</span> updates, networking opportunities and more.</p>
                         <p>Be sure to send us a message or tag us in JAPA.<span class="text-gray-400">RUN</span>-related posts so we can reply or repost.</p>
                     </div>
                     <div class="border-b border-white pb-2 lg:flex lg:flex-wrap lg:justify-between">
@@ -244,6 +255,7 @@
         </div>
     </footer>
     <script src="/public/js/index.min.js"></script>
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
     <script>
         let profilebtn = document.querySelector('#profilebtn');
         let menulist = document.querySelector('#menulist')

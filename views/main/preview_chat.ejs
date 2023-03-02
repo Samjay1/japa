@@ -71,39 +71,23 @@
 
         <div class="mb-10  animate__animated animate__pulse">
           
-           <div class="lg:w-4/6 m-auto">
+           <div class="lg:w-5/6 m-auto">
             <div class="flex justify-center">
                 <div class="rounded-lg shadow-lg bg-white w-full border">
-                   <a href="/home/preview/<%= group.id %>">
+                   
                         <img class="rounded-t-lg object-cover  h-80 w-full" src="/public/images/video.jpeg" alt="">
-                    </a>
+                     
                     <div class="p-2 px-3 text-sm font-normal lg:space-y-5">
-                        <h5 class="text-gray-900 text-xl font-medium mt-5">
-                            <a href="/home/preview/14" class="hover:text-yellow-500"><%= group.groupName %></a>
+                        <h5 class="text-gray-900 lg:text-2xl text-lg font-medium mt-5">
+                            <%= group.groupName %>
                         </h5>
                         <p class="text-yellow-500">
                             <%= group.type === 'PUBLIC' ? 'Public': 'Private' %> Group / <%= group._count.members %> members
                         </p>
-                        <div class="space-y-3 text-gray-700">
+                        <div class="space-y-3 text-gray-700  lg:text-base text-md">
                             
                             <p class="text-ellipses"><%= group.description %></p>
-                            <!-- <p>
-                                To have thrived for centuries and decades means that successful brands and market 
-                                leaders have seen enough to know what works for the markets. Yet they stay as 
-                                committed to continually improving upon their value proposition as though they 
-                                were now starting as amateurs.
-                            </p>
-                            <p>
-                                It is easy to downplay the degree of deliberate commitment exhibited by such brands.
-                                 At the very basic level, their association and accreditations with some
-                                 statutory organizations give a strong indication of their goodwill.
-                            </p>
-                            <p>
-                                Like we have seen in the past, most of these successful brands are constantly 
-                                striving to “DO IT RIGHT THE FIRST TIME”. They understand the degree of damage
-                                 the brand can be met with and are constantly striving to avoid that.  
-                                 They also understand the magic in doing it right and are doubling down that path.
-                            </p> -->
+                         
 
                             <!-- USER COMMENTS -->
                            <div class="py-5 space-y-3">
@@ -124,6 +108,10 @@
                                                         </svg>
                                                     </a> 
                                                 </p>
+                                                <p> 
+                                                    <%= element.body %> 
+                                                </p>
+                                                
                                                 <p>  
                                                     <a href="#"  class="inline-block pt-1 text-green-400 hover:text-green-600 duration-200">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
@@ -137,9 +125,8 @@
                                                         </svg>
                                                     </a>
                                                 </p>
-                                                <p> 
-                                                    <%= element.body %>
-                                                </p>
+                                               
+                                                
                                                 <!-- ADD NEW COMMENT -->
                                                 <div class="lg:flex">
                                                     <div class="flex-initial lg:w-5/12 mt-2 lg:pr-4 pr-3">
@@ -170,6 +157,10 @@
                                                                 </svg>
                                                             </a>
                                                         </p>
+                                                        <p> 
+                                                            <%= element.body %> 
+                                                        </p>
+                                                        
                                                         <p>  
                                                             <a href="#"  class="inline-block pt-1 text-green-400 hover:text-green-600 duration-200">
                                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
@@ -183,9 +174,7 @@
                                                                 </svg>
                                                             </a>
                                                         </p>
-                                                        <p> 
-                                                            <%= element.body %>
-                                                        </p>
+                                                        
                                                         <!-- ADD NEW COMMENT -->
                                                         <div class="lg:flex">
                                                             <div class="flex-initial lg:w-5/12 mt-2 lg:pr-4 pr-3">
@@ -215,6 +204,10 @@
                                                                         </svg>
                                                                     </a>
                                                                 </p>
+                                                                <p> 
+                                                                    <%= element.body %> 
+                                                                </p>
+                                                                
                                                                 <p>  
                                                                     <a href="#"  class="inline-block pt-1 text-green-400 hover:text-green-600 duration-200">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
@@ -228,9 +221,7 @@
                                                                         </svg>
                                                                     </a>
                                                                 </p>
-                                                                <p> 
-                                                                    <%= element.body %> 
-                                                                </p>
+                                                               
                                                                 <!-- ADD NEW COMMENT -->
                                                                 <div class="lg:flex w-full">
                                                                     <div class="flex-initial lg:w-5/12 mt-2 lg:pr-4 pr-3">
@@ -326,8 +317,9 @@
 
                             <!-- POST COMMENT -->
                             <form action="/add-comment/<%= group.id %>" method="post" class="space-y-1 font-bold pt-10">
-                                <div class="pt-4">
+                                <div class="pt-4 space-y-2">
                                     <label  for="login_name" class="font-extrabold text-lg">LEAVE A COMMENT</label>
+                                    <input class="border border-slate-300 w-full rounded py-3 pl-3   shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="email" id="Email" name="email" placeholder="Email" required>
                                     <textarea class="border border-slate-300 w-full rounded py-3 pl-3  shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="text"  name="comment" id="comment" placeholder="Comment" required></textarea>
                                 </div>
                                 <p class="text-center p-2">
