@@ -53,8 +53,11 @@
         <p class="border-b w-full hover:bg-yellow-500 hover:text-white"><a class="px-2 pr-6 py-2 block" href="/news"> News Feed</a></p>
         <p class="border-b w-full rounded-b-lg hover:bg-yellow-500 hover:text-white"><a class="px-2 pr-6 py-2 block" href="/faqs"> FAQs</a></p>
         <p class="border-b w-full hover:bg-yellow-500 hover:text-white"><a class="px-2 pr-6 py-2 block" href="/contact"> Contact Us</a></p>
-        <p class="border-b w-full hover:bg-yellow-500 hover:text-white"><a class="px-2 pr-6 py-2 block" href="/register"> Sign up</a></p>
-        
+       <%if(email==null){%>
+            <p class="border-b w-full hover:bg-yellow-500 hover:text-white"><a class="px-2 pr-6 py-2 block" href="/register"> Sign up</a></p>
+        <%}else{%>
+            <p class="border-b w-full hover:bg-yellow-500 hover:text-white"><a class="px-2 pr-6 py-2 block" href="/login"> My Profile</a></p>
+        <%}%>
         </div>
     </div>
 

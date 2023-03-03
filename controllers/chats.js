@@ -19,7 +19,8 @@ router.get('/', async (req,res)=>{
         }
     });
     res.render('main/chat_group', {
-        groups
+        groups,
+        email:req.session.email || null
     })
 })
 
@@ -36,13 +37,15 @@ router.get('/chats', async (req,res)=>{
     });
 
     res.render('main/chat_group', {
-        groups
+        groups,
+        email:req.session.email || null
     });
 })
 
 router.get('/preview_chat/:id', async (req,res)=>{
     const id = req.params.id;
-
+    console.log('2 chats req.session.email :>> ', req.session.email);
+    
     const group = await prisma.group.findFirst({
         where: {
             id
@@ -133,22 +136,29 @@ router.get('/my_groups', async (req,res)=>{
     })
 
     res.render('main/chat_group', {
-        groups
+        groups,
+        email:req.session.email || null
     })
 })
 
 // chats - create group
 router.get('/create_group', (req,res)=>{
-    res.render('main/chat_group')
+    res.render('main/chat_group',{
+        email:req.session.email || null
+    })
 })
 
 // settings
 router.get('/settings', (req,res)=>{
-    res.render('main/chat_group')
+    res.render('main/chat_group',{
+        email:req.session.email || null
+    })
 })
 // notification
 router.get('/notification', (req,res)=>{
-    res.render('main/chat_group')
+    res.render('main/chat_group',{
+        email:req.session.email || null
+    })
 })
 
 // add comment

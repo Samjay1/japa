@@ -16,23 +16,41 @@ const resources = require('./controllers/resources');
 
 const app = express();
 
-// Sessions Config
+const IN_PROD = 'production'
+const TWO_HOURS = 1000 * 60 * 60 * 2
+
+
 app.use(session({
-  name:'Japa.run',
+  name: 'japa.sid',
   secret: process.env.SECRET_KEY,
-  store: MongoStore.create({
-      mongoUrl: process.env.DATABASE_URL,
-      ttl: 2 * 24 * 60 * 60,
-      autoRemove: 'native',
-      touchAfter: 24 * 3600,
-  }),
-  cookie: {
-    maxAge:  2 * 24 * 60 * 60,
-    sameSite: true,
-  },
+  httpOnly: true,
+  secure: true,
+  maxAge: 1000 * 60 * 60 * 7,
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: true,
+  store: MongoStore.create({
+      mongoUrl: process.env.DATABASE_URL
+  })
 }));
+
+// Sessions Config
+// app.use(session({
+//   name:'Japa.run',
+//   secret: process.env.SECRET_KEY,
+//   store: MongoStore.create({
+//       mongoUrl: process.env.DATABASE_URL,
+//       // ttl: 2 * 24 * 60 * 60,
+//       // autoRemove: 'native',
+//       // touchAfter: 24 * 3600,
+//   }),
+//   cookie: {
+//     maxAge: TWO_HOURS,
+//     sameSite: true,
+//     secure: IN_PROD
+//   },
+//   resave: false,
+//   saveUninitialized: true
+// }));
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');

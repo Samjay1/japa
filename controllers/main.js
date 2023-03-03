@@ -43,6 +43,7 @@ router.get('/home', async (req,res)=>{
     //   })
 
     res.render('main/index', {
+        email:req.session.email || null,
         groups,
         post:posts[0],
         // document,
@@ -52,22 +53,27 @@ router.get('/home', async (req,res)=>{
 
 // about
 router.get('/about', (req,res)=>{
-    res.render('main/about');
+    res.render('main/about',
+    {email:req.session.email || null});
 });
 
 // news feed
 router.get('/news', (req,res)=>{
-    res.render('main/news_feed');
+    res.render('main/news_feed',
+    {email:req.session.email || null});
 });
 
 // faqs
 router.get('/faqs', (req,res)=>{
-    res.render('main/faqs');
+    res.render('main/faqs',
+    {email:req.session.email || null});
 });
 
 // contact us
 router.get('/contact', (req,res)=>{
-    res.render('main/contact');
+    res.render('main/contact',{
+        email:req.session.email || null
+    });
 });
 
 // sign up
@@ -90,7 +96,8 @@ router.all('/register', async (req,res)=>{
             console.log(error);
         }
     }
-    res.render('main/register');
+    res.render('main/register',
+    { email:req.session.email || null});
 });
 
 // sign in
@@ -124,6 +131,7 @@ router.all('/login', async (req,res)=>{
         }
     }
     res.render('main/login', {
+        email:req.session.email || null,
         error: req.flash('error'),
         success: req.flash('success')
     });
