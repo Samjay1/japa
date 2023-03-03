@@ -102,6 +102,7 @@ router.all('/register', async (req,res)=>{
 
 // sign in
 router.all('/login', async (req,res)=>{
+    req.session.destroy()
     if (req.method === 'POST') {
         const { email, password } = req.body;
 
@@ -136,8 +137,6 @@ router.all('/login', async (req,res)=>{
         success: req.flash('success')
     });
 });
-
-
 
 
 module.exports = router;

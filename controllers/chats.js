@@ -89,6 +89,15 @@ router.get('/preview_chat/:id', async (req,res)=>{
                                 select: {
                                     username: true
                                 }
+                            },
+                            childComments: {
+                                include: {
+                                    author: {
+                                        select: {
+                                            username: true
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -122,7 +131,7 @@ router.get('/preview_chat/:id', async (req,res)=>{
 router.get('/my_groups', async (req,res)=>{
     const user = prisma.user.findUnique({
         where: {
-            email: req.session.user
+            email: req.session.email
         }, 
         include: {
             groups: true
@@ -161,12 +170,12 @@ router.post('/add-comment/:id', async (req,res) => {
     const id = req.params.id;
     const {email, comment} = req.body;
 
-    if (req.session.user) {
-        const comment = await prisma.comment.create({
+    if (req.session.email) {
+        const userComment = await prisma.comment.create({
             data: {
                 author: {
                     connect: {
-                        email: req.session.user
+                        email: req.session.email
                     }
                 },
                 body: comment,
@@ -178,7 +187,7 @@ router.post('/add-comment/:id', async (req,res) => {
                 }
             }
         });
-        return res.redirect('back');
+        return res.redirect(`${req.headers.referer}#${userComment.id}`);
     } else {
         const user = await prisma.user.create({
             data: {
@@ -204,8 +213,22 @@ router.post('/add-comment/:id', async (req,res) => {
             }
         })
 
+        const newComment = await prisma.comment.findMany({
+            where: {
+                author: {
+                    email: user.email
+                }
+            },
+            orderBy: {
+                createdAt: 'desc'
+            },
+            take: 1
+        })
+
+        console.log(newComment);
+
         req.session.email = user.email;
-        return res.redirect('back');
+        return res.redirect(`${req.headers.referer}#${newComment[0].id}`);
     }
 
 })
@@ -214,7 +237,7 @@ router.post('/add-subcomment/:id/:groupId', async (req,res) => {
     const {id, groupId} = req.params
     const {email, comment} = req.body;
 
-    if(req.session.user) {
+    if(req.session.email) {
         const subcomment = await prisma.comment.create({
             data: {
                 author: {
@@ -230,6 +253,7 @@ router.post('/add-subcomment/:id/:groupId', async (req,res) => {
                 body: comment
             }
         })
+        return res.redirect(`${req.headers.referer}#${subcomment.id}`);
     } else {
 
         const user = await prisma.user.create({
@@ -261,9 +285,21 @@ router.post('/add-subcomment/:id/:groupId', async (req,res) => {
             }
         });
 
-        req.session.user = user.email;
+        const newComment = await prisma.comment.findMany({
+            where: {
+                author: {
+                    email: user.email
+                }
+            },
+            orderBy: {
+                createdAt: 'desc'
+            },
+            take: 1
+        })
 
-        return res.redirect('back');
+        req.session.email = user.email;
+
+        return res.redirect(`${req.headers.referer}#${newComment[0].id}`);
     }
 
 });
