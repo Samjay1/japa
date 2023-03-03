@@ -68,7 +68,7 @@ model Document {
   title String 
   description String
   comments DocumentComment[]
-  createdAt DateTime
+  createdAt DateTime @default(now())
 }
 
 model Member {

@@ -29,25 +29,25 @@ router.get('/home', async (req,res)=>{
         take: 1,
       });
       console.log('POSTS :>> ', posts);
-    // const document = await prisma.document.findMany({
-    //      orderBy: {
-    //     createdAt: 'desc',
-    // },
-    // take: 1,
-    //   });
-    // const video = await prisma.video.findMany({
-    //     orderBy: {
-    //         createdAt: 'desc',
-    //     },
-    //     take: 1,
-    //   })
+    const documents = await prisma.document.findMany({
+         orderBy: {
+        createdAt: 'desc',
+        },
+        take: 1,
+      });
+    const videos = await prisma.video.findMany({
+        orderBy: {
+            createdAt: 'desc',
+        },
+        take: 1,
+      })
 
     res.render('main/index', {
         email:req.session.email || null,
         groups,
         post:posts[0],
-        // document,
-        // video
+        document:documents[0],
+        video:videos[0]
     });
 });
 

@@ -113,7 +113,7 @@ router.get('/preview_chat/:id', async (req,res)=>{
         group,
         comments,
         moment,
-        user: req.session.email
+        email: req.session.email
     })
 })
 
