@@ -32,8 +32,13 @@ router.get('/home', async (req,res)=>{
     const documents = await prisma.document.findMany({
          orderBy: {
         createdAt: 'desc',
+<<<<<<< HEAD
     },
     take: 1,
+=======
+        },
+        take: 1,
+>>>>>>> samjay
       });
     const videos = await prisma.video.findMany({
         orderBy: {
@@ -41,7 +46,10 @@ router.get('/home', async (req,res)=>{
         },
         take: 1,
       })
+<<<<<<< HEAD
 
+=======
+>>>>>>> samjay
 
     res.render('main/index', {
         email:req.session.email || null,

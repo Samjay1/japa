@@ -188,13 +188,13 @@
                                                         <!-- ADD NEW COMMENT -->
                                                         <form action="/add-subcomment/<%= element.id %>/<%= group.id %>" method="post">
                                                             <div class="lg:flex">
-                                                                <% if(!email) { %>
+                                                                <% if (user === 'undefined') { %>
                                                                     <div class="flex-initial lg:w-5/12 mt-2 lg:pr-4 pr-3">
                                                                         <input class="border border-slate-300 w-full rounded py-3 pl-3   shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="email" id="Email" name="email" placeholder="Email" required>
                                                                     </div>
-                                                                <% } %>
+                                                                <%} %>
                                                                 <div class=" mt-2 w-full lg:pr-4 pr-3">
-                                                                    <textarea class="border  h-12 border-slate-300 w-full rounded py-3 pl-3  shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="text"  name="comment" id="comment" placeholder="Comment" required></textarea>
+                                                                    <textarea class="border h-12 border-slate-300 w-full rounded py-3 pl-3  shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 sm:text-sm" type="text"  name="comment" id="comment" placeholder="Comment" required></textarea>
                                                                 </div>
                                                                 <div class="flex-initial lg:w-32 mt-2 lg:pr-4 pr-3">
                                                                     <button type="submit" class="font-bold p-3 rounded bg-yellow-500 hover:bg-black hover:text-white duration-200">Comment</button>
