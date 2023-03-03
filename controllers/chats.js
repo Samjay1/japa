@@ -8,8 +8,19 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 // chats - all groups
-router.get('/', (req,res)=>{
-    res.render('main/chat_group')
+router.get('/', async (req,res)=>{
+    const groups =  await prisma.group.findMany({
+        include: {
+            _count: {
+                select: {
+                    members: true
+                }
+            }
+        }
+    });
+    res.render('main/chat_group', {
+        groups
+    })
 })
 
 router.get('/chats', async (req,res)=>{
