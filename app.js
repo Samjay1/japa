@@ -29,8 +29,17 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   store: MongoStore.create({
-      mongoUrl: process.env.DATABASE_URL
-  })
+      mongoUrl: process.env.DATABASE_URL,
+      ttl: 2 * 24 * 60 * 60,
+      autoRemove: 'native',
+      touchAfter: 24 * 3600,
+  }),
+  cookie: {
+    maxAge:  2 * 24 * 60 * 60,
+    sameSite: true,
+  },
+  resave: false,
+  saveUninitialized: false
 }));
 
 // Sessions Config

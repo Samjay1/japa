@@ -122,22 +122,14 @@ router.get('/my_groups', async (req,res)=>{
     const user = prisma.user.findUnique({
         where: {
             email: req.session.user
+        }, 
+        include: {
+            groups: true
         }
     });
 
-    const groups = prisma.group.findMany({
-        where: {
-            members: {
-                some: {
-                    id: user.id
-                }
-            }
-        }
-    })
-
     res.render('main/chat_group', {
-        groups,
-        email:req.session.email || null
+        groups
     })
 })
 
