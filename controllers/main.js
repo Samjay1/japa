@@ -22,11 +22,31 @@ router.get('/home', async (req,res)=>{
             }
         }
     });
-    const posts = await prisma.post.findMany();
+    const posts = await prisma.post.findMany({
+        orderBy: {
+            createdAt: 'desc',
+        },
+        take: 1,
+      });
+      console.log('POSTS :>> ', posts);
+    // const document = await prisma.document.findMany({
+    //      orderBy: {
+    //     createdAt: 'desc',
+    // },
+    // take: 1,
+    //   });
+    // const video = await prisma.video.findMany({
+    //     orderBy: {
+    //         createdAt: 'desc',
+    //     },
+    //     take: 1,
+    //   })
 
     res.render('main/index', {
         groups,
-        posts
+        post:posts[0],
+        // document,
+        // video
     });
 });
 
@@ -95,7 +115,8 @@ router.all('/login', async (req,res)=>{
                 return res.redirect('/login#error');
             } else{
                 req.session.email = user.email;
-                return res.redirect('/');
+                console.log('req.session.email :>> ', req.session.email);
+                return res.redirect('/chats');
             }
 
         } catch (error) {

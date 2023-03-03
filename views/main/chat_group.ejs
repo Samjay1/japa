@@ -78,11 +78,11 @@
                             <div class="rounded-lg shadow-lg bg-white w-full border border-black">
                             
                                 <div class="p-2 px-3 text-sm font-normal lg:space-y-5">
-                                    <h5 class="text-gray-900 text-xl font-medium mt-5">
+                                    <h5 class="text-gray-900 text-xl font-medium mt-5 lg:h-7 overflow-y-auto">
                                         <a href="/preview_chat/<%= element.id %>" class="hover:text-yellow-500"><%= element.groupName %></a>
                                     </h5>
                                     <div>
-                                        <p class="text-gray-400"><%= element.description %></p>
+                                        <p class="text-gray-400 h-24 overflow-y-auto"><%= element.description %></p>
                                     <p class="text-yellow-500">
                                         <%= element.type === 'PUBLIC' ? 'Public' : 'Private' %>  Group / <%= element._count.members %> members
                                     </p>

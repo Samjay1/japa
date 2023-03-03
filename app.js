@@ -18,6 +18,7 @@ const app = express();
 
 // Sessions Config
 app.use(session({
+  name:'Japa.run',
   secret: process.env.SECRET_KEY,
   store: MongoStore.create({
       mongoUrl: process.env.DATABASE_URL,
@@ -27,6 +28,7 @@ app.use(session({
   }),
   cookie: {
     maxAge:  2 * 24 * 60 * 60,
+    sameSite: true,
   },
   resave: false,
   saveUninitialized: false
