@@ -24,6 +24,7 @@ router.get('/', async (req,res)=>{
 })
 
 router.get('/chats', async (req,res)=>{
+    console.log('chats req.session.email :>> ', req.session.email);
     const groups =  await prisma.group.findMany({
         include: {
             _count: {
