@@ -1,5 +1,6 @@
 const express = require('express');
 const moment = require('moment');
+const bcrypt = require('bcrypt');
 
 const router = express.Router();
 
@@ -21,8 +22,6 @@ router.get('/chats', async (req,res)=>{
             }
         }
     });
-
-    console.log(groups);
 
     res.render('main/chat_group', {
         groups
@@ -93,9 +92,6 @@ router.get('/preview_chat/:id', async (req,res)=>{
         }
     })
 
-    // console.log(group);
-    console.log(comments);
-
     res.render('main/preview_chat', {
         group,
         comments,
@@ -121,7 +117,6 @@ router.get('/my_groups', async (req,res)=>{
         }
     })
 
-    console.log()
     res.render('main/chat_group', {
         groups
     })
@@ -166,4 +161,61 @@ router.post('/add-comment/:id', async (req,res) => {
     res.redirect('back');
 })
 
+router.post('/add-subcomment/:id/:groupId', async (req,res) => {
+    const {id, groupId} = req.params
+    const {email, comment} = req.body;
+
+    console.log(email.split('@')[0]);
+
+    if(req.session.user) {
+        const subcomment = await prisma.comment.create({
+            data: {
+                author: {
+                    connect: {
+                        email: req.session.user
+                    }
+                },
+                parent: {
+                    connect: {
+                        id
+                    }
+                },
+                body: comment
+            }
+        })
+    } else {
+
+        const user = await prisma.user.create({
+            data: {
+                username: email.split('@')[0],
+                email,
+                password: await bcrypt.hash(email.split('@')[0], 12),
+                comments: {
+                    create: {
+                        parent: {
+                            connect: {
+                                id,
+                            }
+                        },
+                        body: comment,
+                        group: {
+                            connect: {
+                                id: groupId
+                            }
+                        }
+                    }
+                },
+                groups: {
+                    connect: {
+                        id: groupId
+                    }
+                }
+
+            }
+        })
+
+        return res.redirect('back');
+    }
+
+});
 module.exports = router;
