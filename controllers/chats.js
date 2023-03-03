@@ -92,10 +92,13 @@ router.get('/preview_chat/:id', async (req,res)=>{
         }
     })
 
+    console.log(req.session.email);
+
     res.render('main/preview_chat', {
         group,
         comments,
-        moment
+        moment,
+        user: req.session.email
     })
 })
 
@@ -139,40 +142,67 @@ router.get('/notification', (req,res)=>{
 // add comment
 router.post('/add-comment/:id', async (req,res) => {
     const id = req.params.id;
-    const body = req.body.comment;
+    const {email, comment} = req.body;
 
-    const comment = await prisma.comment.create({
-        data: {
-            author: {
-                connect: {
-                    id: '63fa4193ffc61692d5b8f15c'
-                }
-            },
-            body,
-            parent: undefined,
-            group: {
-                connect: {
-                    id
+    if (req.session.user) {
+        const comment = await prisma.comment.create({
+            data: {
+                author: {
+                    connect: {
+                        email: req.session.user
+                    }
+                },
+                body: comment,
+                parent: undefined,
+                group: {
+                    connect: {
+                        id
+                    }
                 }
             }
-        }
-    });
+        });
+        return res.redirect('back');
+    } else {
+        const user = await prisma.user.create({
+            data: {
+                username: email.split('@')[0],
+                email,
+                password: await bcrypt.hash(email.split('@')[0], 12),
+                comments: {
+                    create: {
+                        body: comment,
+                        parent: undefined,
+                        group: {
+                            connect: {
+                                id
+                            }
+                        },
+                    }
+                },
+                groups: {
+                    connect: {
+                        id
+                    }
+                }
+            }
+        })
 
-    res.redirect('back');
+        req.session.email = user.email;
+        return res.redirect('back');
+    }
+
 })
 
 router.post('/add-subcomment/:id/:groupId', async (req,res) => {
     const {id, groupId} = req.params
     const {email, comment} = req.body;
 
-    console.log(email.split('@')[0]);
-
     if(req.session.user) {
         const subcomment = await prisma.comment.create({
             data: {
                 author: {
                     connect: {
-                        email: req.session.user
+                        email: req.session.email
                     }
                 },
                 parent: {
@@ -212,7 +242,9 @@ router.post('/add-subcomment/:id/:groupId', async (req,res) => {
                 }
 
             }
-        })
+        });
+
+        req.session.user = user.email;
 
         return res.redirect('back');
     }

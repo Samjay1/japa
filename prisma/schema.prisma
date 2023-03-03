@@ -20,7 +20,7 @@ model User {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   email String @unique
   password String
-  username String @unique
+  username String
   status Status @default(ACTIVE)
   createdAt DateTime @default(now())
   groups Group[]
@@ -59,6 +59,7 @@ model Video {
   description String
   url String
   comments VideoComment[]
+  createdAt DateTime @default(now())
 }
 
 model Document {
@@ -67,6 +68,7 @@ model Document {
   title String 
   description String
   comments DocumentComment[]
+  createdAt DateTime
 }
 
 model Member {

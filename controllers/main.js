@@ -95,7 +95,7 @@ router.all('/login', async (req,res)=>{
                 return res.redirect('/login#error');
             } else{
                 req.session.email = user.email;
-                return res.redirect('/');
+                return res.redirect('/chats');
             }
 
         } catch (error) {
