@@ -113,7 +113,7 @@ router.get('/preview_chat/:id', async (req,res)=>{
         group,
         comments,
         moment,
-        user: req.session.email
+        email: req.session.email || null
     })
 })
 
@@ -129,7 +129,9 @@ router.get('/my_groups', async (req,res)=>{
     });
 
     res.render('main/chat_group', {
-        groups
+        groups,
+        email:req.session.email || null
+
     })
 })
 
