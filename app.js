@@ -23,7 +23,7 @@ app.use(session({
   store: MongoStore.create({
       mongoUrl: process.env.DATABASE_URL,
       ttl: 2 * 24 * 60 * 60,
-      autoRemove: 'native',
+      // autoRemove: 'native',
       touchAfter: 24 * 3600,
   }),
   cookie: {
