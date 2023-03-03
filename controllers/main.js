@@ -115,10 +115,7 @@ router.all('/login', async (req,res)=>{
                 return res.redirect('/login#error');
             } else{
                 req.session.email = user.email;
-<<<<<<< HEAD
-=======
                 console.log('req.session.email :>> ', req.session.email);
->>>>>>> samjay
                 return res.redirect('/chats');
             }
 
