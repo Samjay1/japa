@@ -102,7 +102,6 @@ router.all('/register', async (req,res)=>{
 
 // sign in
 router.all('/login', async (req,res)=>{
-    req.session.destroy()
     if (req.method === 'POST') {
         const { email, password } = req.body;
 
@@ -131,6 +130,7 @@ router.all('/login', async (req,res)=>{
             console.log(error);
         }
     }
+    // req.session.destroy()
     res.render('main/login', {
         email:req.session.email || null,
         error: req.flash('error'),

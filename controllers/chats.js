@@ -184,9 +184,25 @@ router.post('/add-comment/:id', async (req,res) => {
                     connect: {
                         id
                     }
-                }
+                },
             }
         });
+
+        const membership = await prisma.member.create({
+            data: {
+                group: {
+                    connect: {
+                        id
+                    }
+                },
+                user: {
+                    connect: {
+                        email: req.session.email
+                    }
+                }
+            }
+        })
+
         return res.redirect(`${req.headers.referer}#${userComment.id}`);
     } else {
         const user = await prisma.user.create({
@@ -209,6 +225,20 @@ router.post('/add-comment/:id', async (req,res) => {
                     connect: {
                         id
                     }
+                },
+                memberships: {
+                    connectOrCreate: {
+                        create: {
+                            group: {
+                                connect: {
+                                    id
+                                }
+                            }
+                        },
+                        where: {
+                            id
+                        }
+                    }
                 }
             }
         })
@@ -224,8 +254,6 @@ router.post('/add-comment/:id', async (req,res) => {
             },
             take: 1
         })
-
-        console.log(newComment);
 
         req.session.email = user.email;
         return res.redirect(`${req.headers.referer}#${newComment[0].id}`);
@@ -251,6 +279,21 @@ router.post('/add-subcomment/:id/:groupId', async (req,res) => {
                     }
                 },
                 body: comment
+            }
+        })
+
+        const membership = await prisma.member.create({
+            data: {
+                group: {
+                    connect: {
+                        id
+                    }
+                },
+                user: {
+                    connect: {
+                        email: req.session.email
+                    }
+                }
             }
         })
         return res.redirect(`${req.headers.referer}#${subcomment.id}`);
@@ -279,6 +322,20 @@ router.post('/add-subcomment/:id/:groupId', async (req,res) => {
                 groups: {
                     connect: {
                         id: groupId
+                    }
+                },
+                memberships: {
+                    connectOrCreate: {
+                        create: {
+                            group: {
+                                connect: {
+                                    id: groupId
+                                }
+                            }
+                        },
+                        where: {
+                            id: groupId
+                        }
                     }
                 }
 
