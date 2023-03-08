@@ -114,25 +114,24 @@
         <div class="my-20 mx-1">
             <p class="lg:text-[50px] text-[40px] font-bold text-center">Trending Posts</p>
 
-            <div class="grid lg:grid-cols-3 gap-4 lg:w-5/6 m-auto">
+            <div class="grid lg:grid-cols-3 gap-4 lg:w-5/6 lg:m-auto  w-full mx-2">
+                
                 <div class="col-span-1">
                     <div class="flex justify-center">
                         <div class="rounded-lg shadow-lg bg-white w-full">
-                            <a href="/home/preview/14">
+                            <a href="/preview_blog/<%=post.id%>">
                                 <img class="rounded-t-lg object-cover  h-60 w-full" src="/public/images/headimage.webp" alt="">
                             </a>
                             <div class="p-2 px-3 text-sm font-normal lg:space-y-5">
                                 <h5 class="text-gray-900 text-xl font-medium mt-5">
-                                    <a href="/home/preview/14" class="hover:text-yellow-500">TIPS TO WRITING A STRONG PERSONAL STATEMENT</a>
+                                    <a href="/preview_blog/<%=post.id%>" class="hover:text-yellow-500"><%= post.title %></a>
                                 </h5>
-                                <p class="text-gray-400">Looking to further your education at a college/university?
-                                     A personal statement is often an important part of the university application</p>
+                                <p class="text-gray-400"><%= post.body %></p>
                                 <p class="flex space-x-1 text-yellow-500 hover:text-gray-500">
-                                    <a href="#" class="text-base">READ MORE</a>
+                                    <a href="/preview_blog/<%=post.id%>" class="text-base">READ MORE</a>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mt-1">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
-                                      </svg>
-                                      
+                                    </svg>
                                 </p>
                             </div>
                         </div>
@@ -141,55 +140,50 @@
                 <div class="col-span-1">
                     <div class="flex justify-center">
                         <div class="rounded-lg shadow-lg bg-white w-full">
-                            <a href="/home/preview/14">
-                                <img class="rounded-t-lg object-cover  h-60 w-full" src="/public/images/contact.webp" alt="">
+                            <a href="/preview_document/<%=document.id%>">
+                                <img class="rounded-t-lg object-cover  h-60 w-full" src="/public/images/headimage.webp" alt="">
                             </a>
                             <div class="p-2 px-3 text-sm font-normal lg:space-y-5">
                                 <h5 class="text-gray-900 text-xl font-medium mt-5">
-                                    <a href="/home/preview/14" class="hover:text-yellow-500">TIPS TO WRITING A STRONG PERSONAL STATEMENT</a>
+                                    <a href="/preview_document/<%=document.id%>" class="hover:text-yellow-500"><%= document.title %></a>
                                 </h5>
-                                <p class="text-gray-400">Looking to further your education at a college/university?
-                                     A personal statement is often an important part of the university application</p>
+                                <p class="text-gray-400"><%= document.body %></p>
                                 <p class="flex space-x-1 text-yellow-500 hover:text-gray-500">
-                                    <a href="#" class="text-base">READ MORE</a>
+                                    <a href="/preview_document/<%=document.id%>" class="text-base">READ MORE</a>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mt-1">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
-                                      </svg>
-                                      
+                                    </svg>
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="col-span-1">
                     <div class="flex justify-center">
                         <div class="rounded-lg shadow-lg bg-white w-full">
-                            <a href="/home/preview/14">
-                                <img class="rounded-t-lg object-cover  h-60 w-full" src="/public/images/about.jpeg" alt="">
+                            <a href="/preview_video/<%=video.id%>">
+                                <img class="rounded-t-lg object-cover  h-60 w-full" src="/public/images/headimage.webp" alt="">
                             </a>
                             <div class="p-2 px-3 text-sm font-normal lg:space-y-5">
                                 <h5 class="text-gray-900 text-xl font-medium mt-5">
-                                    <a href="/home/preview/14" class="hover:text-yellow-500">TIPS TO WRITING A STRONG PERSONAL STATEMENT</a>
+                                    <a href="/preview_video/<%=video.id%>" class="hover:text-yellow-500"><%= video.title %></a>
                                 </h5>
-                                <p class="text-gray-400">Looking to further your education at a college/university?
-                                     A personal statement is often an important part of the university application</p>
+                                <p class="text-gray-400"><%= video.body %></p>
                                 <p class="flex space-x-1 text-yellow-500 hover:text-gray-500">
-                                    <a href="#" class="text-base">READ MORE</a>
+                                    <a href="/preview_video/<%=video.id%>" class="text-base">READ MORE</a>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mt-1">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
-                                      </svg>
-                                      
+                                    </svg>
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+           </div>
 
             <div class="my-10">
                 <p class="text-center">
-                    <a href="#" class="p-2 px-4 bg-yellow-500 rounded hover:bg-gray-800 hover:text-white duration-100">View More</a>
+                    <a href="/resources" class="p-2 px-4 bg-yellow-500 rounded hover:bg-gray-800 hover:text-white duration-100">View More</a>
                 </p>
             </div>
         </div>
