@@ -188,7 +188,15 @@ router.all('/forgotpassword',async(req,res)=>{
                 email
             }
         });
-        console.log('user :>> ', user);
+        // console.log('user :>> ', user);
+        if(user === null){
+            return res.render('main/forgotpassword',
+            {
+                email:req.session.email || null,
+                error: 'Email not registered with Japa.run',
+                success: req.flash('success')
+            })
+        }
 
         let mailOptions = {
             from: 'no-reply@japa.run',
@@ -203,7 +211,7 @@ router.all('/forgotpassword',async(req,res)=>{
             <p>You requested a password reset on your Japa.run Account</p>
             <p>Please click the LINK below to set a new password on your account</p>
 
-            <p> <a href="https://japa.run/reset/${user.id}">https://japa.run/reset/${user.id}</a></p>
+            <p> <a href="localhost:8040/reset/${user.id}">https://japa.run/reset/${user.id}</a></p>
 
             <p>If you did not initiate this request, please ignore this email and contact our Support Team immediately.</p>
            
@@ -227,15 +235,24 @@ router.all('/forgotpassword',async(req,res)=>{
           };
           transporter.sendMail(mailOptions, function(error, info){
               if(error){
-                res.send('error sending email')
-                return;
+                return res.render('main/forgotpassword',
+                {
+                    email:req.session.email || null,
+                    error: 'Failed to send Password Reset Link',
+                    success: req.flash('success')
+                })
               }
               else{
-                res.send('email sent')
+                return res.render('main/forgotpassword',
+                    {
+                        email:req.session.email || null,
+                        error: req.flash('error'),
+                        success: 'Password Reset Link sent to your email.'
+                    })
               }
           })
     }else{
-        res.render('main/forgotpassword',
+        return res.render('main/forgotpassword',
         {
             email:req.session.email || null,
             error: req.flash('error'),
@@ -244,5 +261,71 @@ router.all('/forgotpassword',async(req,res)=>{
     }
 })
 
+// Reset password
+router.get('/reset/:id',(req,res)=>{
+   let user_id = req.params.id;
+   console.log('user_id :>> ', user_id);
+    return res.render('main/resetpassword',
+    {
+        email:req.session.email || null,
+        user_id,
+        error: req.flash('error'),
+        success: req.flash('success')
+    })
+ 
+})
+// Reset password
+router.post('/resetpassword',async(req,res)=>{
+    let user_id = req.body.user_id;
+    let password = req.body.password;
+    let repeat_password = req.body.repeatpassword;
+    console.log(user_id, password,repeat_password);
+    if(password.length <= 5){
+        console.log('Passwords must be more than 6 characters (include symbols !@#$ etc.)')
+        return res.render('main/resetpassword',
+        {
+            email:req.session.email || null,
+            user_id,
+            error: "Passwords must be more than 6 characters (include symbols !@#$ etc.)",
+            success: req.flash('success')
+        })
+    }
+    if(password!==repeat_password){
+        return res.render('main/resetpassword',
+        {
+            email:req.session.email || null,
+            user_id,
+            error: "Passwords must be the same",
+            success: req.flash('success')
+        })
+    }
+    else{
+        console.log('works')
+        const user = await prisma.user.update({
+            where:{
+                id: user_id,
+            },
+            data: {
+                password: await bcrypt.hash(password, 12),
+            }
+        });
+        if(user.id === user_id){
+            return res.render('main/forgotpassword',
+        {
+            email:req.session.email || null,
+            user_id,
+            error: req.flash('error'),
+            success: 'Password Reset successful'
+        })
+        }
 
+        console.log('user :>> ', user);
+    }
+    
+})
+
+
+router.get('*',(req,res)=>{
+    res.send('route does not exits')
+})
 module.exports = router;
