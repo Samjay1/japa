@@ -28,16 +28,12 @@
             </div>
             <div class="mt-2 py-3 h-16 flex space-x-8">
                 <a class="lg:block hidden px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/about">About</a>
-                <a class="lg:block hidden px-3 py-2  border-b border-gray-100 text-yellow-500 border-yellow-500 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/chats">Chat Groups</a>
+                <a class="lg:block hidden px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/chats">Chat Groups</a>
                 <a class="lg:block hidden px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/resources">Resource center</a> 
-                <a class="lg:block hidden px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/news">News Feed</a>
+                <a class="lg:block hidden px-3 py-2 border-b border-gray-100  hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/news">News Feed</a>
                 <a class="lg:block hidden px-3 py-2  border-b  border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/faqs"> FAQs</a>
                 <a class="lg:block hidden px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/contact">Contact Us</a>
-                <%if(email==null){%>
-                    <a class="lg:block hidden px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/register">Sign Up</a>  
-                <%}else{%>
-                    <a class="lg:block hidden px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/login">My Profile </a>  
-                <%}%>
+                <a class="lg:block hidden px-3 py-2  border-b border-gray-100 text-yellow-500 border-yellow-500 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/register">Sign Up</a>  
                 
                 <!-- <a id="profilebtn" class="bg-gray-300 rounded-3xl shadow-lg  block" href="#"><img id="profileimg" class="h-9 w-9 object-cover object-top rounded-3xl" src="/public/images/d1.jpeg" alt=""></a> -->
                 <a id="profilebtn" class="text-yellow-500 block lg:hidden mt-3" href="#">
@@ -67,45 +63,41 @@
 
 
 
-    <main class="mx-1">
+    <main>
+       
 
-        <div class="lg:w-5/6 m-auto mt-10  py-3 h-16 flex space-x-8">
-            <a class="lg:block  px-3 py-2  border-b border-gray-100 text-yellow-500 border-yellow-500 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/chats">Chat Groups</a>
-            <a class="lg:block  px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/my_groups">My Groups</a>
-            <a class="lg:block px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/profile">My Profile</a>
-        </div>
-
-        <div class="mb-10  animate__animated animate__pulse">
-            <!-- <p class="text-[50px] font-bold text-center">All Groups</p> -->
-
-            <div class="grid lg:grid-cols-2 gap-4 lg:w-5/6 m-auto">
-                <% groups.forEach(element => { %>
-                    <div class="col-span-1">
-                        <div class="flex justify-center">
-                            <div class="rounded-lg shadow-lg bg-white w-full border border-black">
-                            
-                                <div class="p-2 px-3 text-sm font-normal lg:space-y-5">
-                                    <h5 class="text-gray-900 text-xl font-medium mt-5 lg:h-7 overflow-y-auto">
-                                        <a href="/preview_chat/<%= element.id %>" class="hover:text-yellow-500"><%= element.groupName %></a>
-                                    </h5>
-                                    <div>
-                                        <p class="text-gray-400 h-24 overflow-y-auto"><%= element.description %></p>
-                                    <p class="text-yellow-500">
-                                        <%= element.type === 'PUBLIC' ? 'Public' : 'Private' %>  Group / <%= element._count.members %> members
-                                    </p>
-                                    </div>
-                                    <p class="py-2">
-                                        <a  href="/preview_chat/<%= element.id %>" class="p-2 px-4 bg-yellow-500 rounded hover:bg-gray-800 hover:text-white duration-100">Add Comment</a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <% }) %>
+    <div class="m-auto my-5">
+        <% if (error.length > 0) { %>
+            <div class="font-normal lg:w-5/12 lg:w-10/12 mx-2 lg:m-auto mb-10 mt-10 shadow-xl">
+                <div class=" bg-gray-200 text-black text-center h-1/2 mt-10 p-10 space-y-2 border border-red-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 inline text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <%if(error!=null){%>
+                        <p class="text-2xl text-gray-600"><%=error%></p>
+                    <%}%>
+                    <p class="pt-5"> <a href="/home" class="bg-yellow-500 p-2 hover:bg-yellow-400">Home page</a></p>
+                </div>
             </div>
+        <% } %>
+        <% if (success.length > 0) { %>
+            <div class="font-normal lg:w-5/12 lg:w-10/12 mx-2 lg:m-auto mb-10 mt-10 shadow-xl">
+                <div class=" bg-gray-200 text-black text-center h-1/2 mt-10 p-10 space-y-2 border border-green-500">
+                    <svg xmlns="http:/www.w3.org/2000/svg" class="h-16 w-16 inline text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <%if(success!=null){%>
+                        <p class="text-2xl text-gray-600"><%=success%></p>
+                    <%}%>
+                    <p class="pt-5"> <a href="/home" class="bg-yellow-500 p-2 hover:bg-yellow-400">Home page</a></p>
+                </div>
+            </div>
+        <% } %>
+    </div>
 
-           
-        </div>
+     
+
+       
     </main>
 
 
@@ -135,7 +127,7 @@
                 <div class="col-span-1">
                     <div class="space-y-1">
                         <p class="text-3xl font-bold">CONNECT HERE</p>
-                        <p>Looking to engage with JAPA.<span class="text-gray-400"><span class="text-gray-400">RUN</span></span>. Connect with us on social media! You will find relevant content, important JAPA.<span class="text-gray-400">RUN</span> updates, networking opportunities and more.</p>
+                        <p>Looking to engage with JAPA.<span class="text-gray-400">RUN</span>. Connect with us on social media! You will find relevant content, important JAPA.<span class="text-gray-400">RUN</span> updates, networking opportunities and more.</p>
                         <p>Be sure to send us a message or tag us in JAPA.<span class="text-gray-400">RUN</span>-related posts so we can reply or repost.</p>
                     </div>
                     <div class="border-b border-white pb-2 lg:flex lg:flex-wrap lg:justify-between">

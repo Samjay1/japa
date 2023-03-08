@@ -11,6 +11,18 @@ const router = express.Router();
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
+let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    host: 'smtp.gmail.com',
+    authMethod:"PLAIN",
+    auth: {
+        // type: 'OAuth2',
+        // user: process.env.GMAIL, // generated ethereal user
+        // pass: process.env.PASS,
+        user: 'japa.run.official@gmail.com',
+        pass: 'pkeooiqhrddzmgez'
+    },            
+})
 
 // home
 router.get('/home', async (req,res)=>{
@@ -165,18 +177,6 @@ router.all('/login', async (req,res)=>{
 });
 
 
-let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    host: 'smtp.gmail.com',
-    authMethod:"PLAIN",
-    auth: {
-        // type: 'OAuth2',
-        // user: process.env.GMAIL, // generated ethereal user
-        // pass: process.env.PASS,
-        user: 'japa.run.official@gmail.com',
-        pass: 'pkeooiqhrddzmgez'
-    },            
-})
 
 // forgot password
 router.all('/forgotpassword',async(req,res)=>{
@@ -324,8 +324,39 @@ router.post('/resetpassword',async(req,res)=>{
     
 })
 
+// subscribers
+router.post('/subscriber',async(req,res)=>{
+    let email = req.body.email;
+    if(email.length <= 0){
+        return res.render('main/message',
+        {
+            email:req.session.email || null,
+            error: "Please enter a valid email",
+            success: req.flash('success')
+        })
+    }
+    try {
+        await prisma.subscriber.create({
+            data: {
+              email: email,
+            },
+          })
 
-router.get('*',(req,res)=>{
-    res.send('route does not exits')
+            return res.render('main/message',
+            {
+                email:req.session.email || null,
+                error: req.flash('error'),
+                success: 'Welcome to the Japa.run Community, Subscription Successful.'
+            })
+    } catch (error) {
+        return res.render('main/message',
+            {
+                email:req.session.email || null,
+                error: "Welcome to Japa.run Community",
+                success: req.flash('success')
+            })
+    }
 })
+
+
 module.exports = router;
