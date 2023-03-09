@@ -129,16 +129,22 @@ router.get('/preview_chat/:id', async (req,res)=>{
 
 // chats - my groups
 router.get('/my_groups', async (req,res)=>{
-    const user = prisma.user.findUnique({
+    let user_id = req.session.user_id;
+    console.log('user_id :>> ', user_id);
+    const groups =  await prisma.group.findMany({
         where: {
-            email: req.session.email
-        }, 
+            adminId: user_id,
+        },
         include: {
-            groups: true
+            _count: {
+                select: {
+                    members: true
+                }
+            }
         }
     });
 
-    res.render('main/chat_group', {
+    res.render('main/my_groups', {
         groups,
         email:req.session.email || null
 
@@ -147,14 +153,21 @@ router.get('/my_groups', async (req,res)=>{
 
 // chats - create group
 router.get('/create_group', (req,res)=>{
-    res.render('main/chat_group',{
+    res.render('main/add_chat',{
+        email:req.session.email || null
+    })
+})
+
+// chats - update group
+router.get('/update_group/:id', (req,res)=>{
+    res.render('main/update_group',{
         email:req.session.email || null
     })
 })
 
 // settings
-router.get('/settings', (req,res)=>{
-    res.render('main/chat_group',{
+router.get('/profile', (req,res)=>{
+    res.render('main/profile',{
         email:req.session.email || null
     })
 })
@@ -261,6 +274,7 @@ router.post('/add-comment/:id', async (req,res) => {
 
 })
 
+// add sub comment
 router.post('/add-subcomment/:id/:groupId', async (req,res) => {
     const {id, groupId} = req.params
     const {email, comment} = req.body;
@@ -360,4 +374,11 @@ router.post('/add-subcomment/:id/:groupId', async (req,res) => {
     }
 
 });
+
+
+
+
+
+
+
 module.exports = router;

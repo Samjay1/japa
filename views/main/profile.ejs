@@ -72,41 +72,71 @@
         <div class="lg:w-5/6 m-auto mt-10  py-3 h-16 flex space-x-8">
             <a class="lg:block  px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/chats">Chat Groups</a>
             <%if(email!==null){%>
-            <a class="lg:block  px-3 py-2  border-b border-gray-100 text-yellow-500 border-yellow-500 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/my_groups">My Groups</a>
+            <a class="lg:block  px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/my_groups">My Groups</a>
             <a class="lg:block  px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/create_group">Create Group</a>
-            <a class="lg:block px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/profile">My Profile</a>
+            <a class="lg:block  px-3 py-2  border-b border-gray-100 text-yellow-500 border-yellow-500 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/profile">My Profile</a>
             <%}%>
         </div>
 
-        <div class="mb-10  animate__animated animate__pulse">
-            <!-- <p class="text-[50px] font-bold text-center">All Groups</p> -->
+        <div class="mb-10 lg:w-5/6 m-auto  animate__animated animate__pulse">
+            <p class="text-[50px] font-bold text-center">Profile Page</p>
+           <div class="grid grid-cols-2 gap-2">
+             <!-- update profile image -->
+             <form action="/update_profile" enctype="multipart/form-data" method="post" class="space-y-1 font-bold pt-10">
+                <div class="my-2">
+                    <img id="preview_image" class="rounded-t-lg object-cover  h-44 w-34"  src="/public/images/placeholder.png" alt="">
+                </div>
+                <div class="my-1">
+                    <p class="text-base">Update profile image <span class="text-red-500">*</span></p>
+                    <label class="block mt-2 font-normal">
+                        <span class="sr-only">Choose profile photo</span>
+                        <input id="upload" accept="image/*" type="file" name="upload" class="text-sm text-slate-500
+                            file:mr-4 file:py-2 file:px-4
+                            file:rounded-full file:border
+                            file:text-sm file:font-semibold
+                            file:bg-blue-50 file:border-blue-900
+                            file:text-blue-900
+                            hover:file:bg-blue-100
+                            text-blue-900
+                        " required/>
+                        </label> 
+                </div>
 
-            <div class="grid lg:grid-cols-2 gap-4 lg:w-5/6 m-auto">
-                <% groups.forEach(element => { %>
-                    <div class="col-span-1">
-                        <div class="flex justify-center">
-                            <div class="rounded-lg shadow-lg bg-white w-full border border-black">
-                            
-                                <div class="p-2 px-3 text-sm font-normal lg:space-y-5">
-                                    <h5 class="text-gray-900 text-xl font-medium mt-5 lg:h-7 overflow-y-auto">
-                                        <a href="/preview_chat/<%= element.id %>" class="hover:text-yellow-500"><%= element.groupName %></a>
-                                    </h5>
-                                    <div>
-                                        <p class="text-gray-400 h-24 overflow-y-auto"><%= element.description %></p>
-                                    <p class="text-yellow-500">
-                                        <%= element.type === 'PUBLIC' ? 'Public' : 'Private' %>  Group / <%= element._count.members %> members
-                                    </p>
-                                    </div>
-                                    <p class="py-2">
-                                        <a  href="/update_group/<%= element.id %>" class="p-2 px-4 bg-yellow-500 rounded hover:bg-gray-800 hover:text-white duration-100">Update</a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <% }) %>
-            </div>
+                <div class="grid grid-cols-1 space-y-2 py-5">
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" value="" class="sr-only peer">
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                        <span class="ml-3 text-sm font-medium text-gray-900">Email notification - Group Chats</span>
+                    </label>
 
+                    
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" value="" class="sr-only peer">
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                        <span class="ml-3 text-sm font-medium text-gray-900">Subscription Notification</span>
+                    </label>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="bg-yellow-500 hover:bg-yellow-400 p-1 px-4  rounded-md font-normal text-base">Update</button>
+                </div>
+            </form>
+
+            <!-- update password -->
+            <form action="/update_password" method="post" class="inline-block border-l p-2 border-yellow-500 space-y-1 font-bold pt-10" >
+                <p class="text-lg">Password Reset</p>
+                <div>
+                    <input class="w-full border border-slate-300 flex-1 rounded-md py-2 pl-3 mt-2  shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-yellow-500 focus:ring-1 text-sm" type="password" name="new_password" placeholder="New Password" required>
+                    <input class="w-full border border-slate-300 flex-1 rounded-md py-2 pl-3 mt-2  shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-yellow-500 focus:ring-1 text-sm" type="password" name="repeat_password" placeholder="Repeat Password" required>
+                
+                </div>
+                <div class="mt-4">
+                    <button type="submit" class="bg-yellow-500 hover:bg-yellow-400 p-1 px-4  rounded-md font-normal text-base">Change Password</button>
+                </div>
+            </form>
+
+           </div>
+         
            
         </div>
     </main>
@@ -193,6 +223,18 @@
             // console.log('id',e.target.id,e.target)
             if(e.target.id !== 'profileimg'){
                 menulist.style.display = 'none'
+            }
+        }
+
+
+        // Live preview of uploaded images
+        let upload = document.getElementById('upload');
+        let preview_image = document.getElementById('preview_image');
+        upload.onchange = evt => {
+        const [file] = upload.files
+            console.log('upload change')
+            if (file) {
+                preview_image.src = URL.createObjectURL(file)
             }
         }
     </script>

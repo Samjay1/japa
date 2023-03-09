@@ -160,7 +160,8 @@ router.all('/login', async (req,res)=>{
                 return res.redirect('/login#error');
             } else{
                 req.session.email = user.email;
-                console.log('req.session.email :>> ', req.session.email);
+                req.session.user_id = user.id;
+                console.log('req.session.email :>> ',user.id, req.session.email);
                 return res.redirect('/chats');
             }
 
