@@ -25,6 +25,7 @@ model User {
   createdAt DateTime @default(now())
   groups Group[]
   comments Comment[]
+  postComments PostComment[]
   documentComments DocumentComment[]
   videoComments VideoComment[]
   memberships Member[]
@@ -50,6 +51,7 @@ model Post {
   title String
   body String
   createdAt DateTime @default(now())
+  comments PostComment[]
 }
 
 model Video {
@@ -94,19 +96,34 @@ model Comment {
   likes Int?
 }
 
+model PostComment {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  body String
+  author User @relation(fields: [authorId], references: [id])
+  authorId  String @db.ObjectId
+  post Post? @relation(fields: [postId], references: [id])
+  postId String? @db.ObjectId
+  parent PostComment? @relation("ChildComments", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  parentId String? @db.ObjectId
+  childComments PostComment[] @relation("ChildComments")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  likes Int?
+}
+
 model DocumentComment {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   body String
   author User @relation(fields: [authorId], references: [id])
   authorId  String @db.ObjectId
-  post Document @relation(fields: [postId], references: [id])
-  postId String @db.ObjectId
+  document Document @relation(fields: [documentId], references: [id])
+  documentId String @db.ObjectId
   parent DocumentComment? @relation("ChildComments", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   parentId String? @db.ObjectId
   childComments DocumentComment[] @relation("ChildComments")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  likes Int
+  likes Int?
 }
 
 model VideoComment {
@@ -121,7 +138,7 @@ model VideoComment {
   childComments VideoComment[] @relation("ChildComments")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  likes Int
+  likes Int?
 }
 
 model Subscriber {

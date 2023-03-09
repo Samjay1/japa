@@ -113,12 +113,12 @@
                     <div class="col-span-1">
                         <div class="flex justify-center">
                             <div class="rounded-lg shadow-lg bg-white w-full">
-                                <a href="/preview_document/14">
+                                <a href="/preview_document/<%= element.id %>">
                                     <img class="rounded-t-lg object-cover  h-60 w-full" src="/public/images/image1.webp" alt="">
                                 </a>
                                 <div class="p-2 px-3 text-sm font-normal lg:space-y-5">
                                     <h5 class="text-gray-900 text-xl font-medium mt-5">
-                                        <a href="/preview_document/14" class="hover:text-yellow-500"><%= element.title %></a>
+                                        <a href="/preview_document/<%= element.id %>" class="hover:text-yellow-500"><%= element.title %></a>
                                     </h5>
                                     <p class="text-gray-400"><%= element.description %></p>
                                     <p class="flex space-x-1 text-yellow-500 hover:text-gray-500">
