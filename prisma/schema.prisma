@@ -23,6 +23,7 @@ model User {
   username String
   status Status @default(ACTIVE)
   createdAt DateTime @default(now())
+  notificationStatus NoteStat @default(ON)
   groups Group[]
   comments Comment[]
   postComments PostComment[]
@@ -146,6 +147,16 @@ model Subscriber {
   email String @unique
 }
 
+model Contacts {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  firstName String
+  lastName String
+  email String @unique
+  contact String
+  message String
+  createdAt DateTime @default(now())
+}
+
 enum Status {
   ACTIVE
   INACTIVE
@@ -155,3 +166,9 @@ enum GroupType {
   PUBLIC
   PRIVATE
 }
+
+enum NoteStat {
+  ON
+  OFF
+}
+
