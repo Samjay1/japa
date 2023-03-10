@@ -226,6 +226,66 @@ router.get('/update_group/:id', async (req,res)=>{
     })
 })
 
+router.post('/update_group', multer({storage: storage}).single('upload'), async(req,res)=>{
+    let {group_id, title, description} = req.body;
+    let old_image = req.body.old_image || 'none';
+   
+
+    console.log(group_id, title, description);
+    try {
+        if(req.file !== undefined){ //Checks for new image to upload.
+             
+            if(old_image !== 'none' ){ //Checks if an old image exist
+                fs.unlink(old_image, async (err)=>{   //removes old image from local storage
+                      //just post image
+                      await prisma.group.update({
+                        where:{
+                            id: group_id,
+                        },
+                        data: {
+                            groupName:title,
+                            description,
+                            image:req.file.path || undefined,
+                        }
+                    });
+                    })
+                    console.log('posting 1')
+
+                    return res.redirect('my_groups/?status=true')
+            }else{// when there's no previous image
+                    //just post image
+                    console.log('posting 2')
+                    await prisma.group.update({
+                        where:{
+                            id: group_id,
+                        },
+                        data: {
+                            groupName:title,
+                            description,
+                            image:req.file.path || undefined,
+                        }
+                    });
+
+                    return res.redirect('my_groups/?status=true')
+            }
+        }else{
+            console.log('posting 3')
+            await prisma.group.update({
+                where:{
+                    id: group_id,
+                },
+                data: {
+                    groupName:title,
+                    description,
+                }
+            });
+            return res.redirect('my_groups/?status=true')
+        }
+    } catch (error) {
+        return res.redirect('my_groups/?status=false')
+    }
+})
+
 // settings
 router.get('/profile', async (req,res)=>{
 
