@@ -36,7 +36,7 @@
                 <%if(email==null){%>
                     <a class="lg:block hidden px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/register">Sign Up</a>  
                 <%}else{%>
-                    <a class="lg:block hidden px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/login">My Profile </a>  
+                    <a class="lg:block hidden px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/login">Logout </a>  
                 <%}%>
                 
                 <!-- <a id="profilebtn" class="bg-gray-300 rounded-3xl shadow-lg  block" href="#"><img id="profileimg" class="h-9 w-9 object-cover object-top rounded-3xl" src="/public/images/d1.jpeg" alt=""></a> -->
@@ -60,7 +60,7 @@
        <%if(email==null){%>
             <p class="border-b w-full hover:bg-yellow-500 hover:text-white"><a class="px-2 pr-6 py-2 block" href="/register"> Sign up</a></p>
         <%}else{%>
-            <p class="border-b w-full hover:bg-yellow-500 hover:text-white"><a class="px-2 pr-6 py-2 block" href="/login"> My Profile</a></p>
+            <p class="border-b w-full hover:bg-yellow-500 hover:text-white"><a class="px-2 pr-6 py-2 block" href="/login">Logout</a></p>
         <%}%>
         </div>
     </div>
@@ -80,6 +80,21 @@
 
         <div class="mb-10  animate__animated animate__pulse">
             <!-- <p class="text-[50px] font-bold text-center">All Groups</p> -->
+
+            <div class="lg:w-5/6 m-auto my-2">
+                <% if (error.length > 0) { %>
+                    <div  id="error" class="bg-red-100 border border-red-400 text-red-700 px-4 mt-5 py-3 rounded relative" role="alert">
+                        <span class="block sm:inline"><%= error %></span>
+                      </div>
+                <% } %>
+                <% if (success.length > 0) { %>
+                    <div  id="success" class="bg-green-100 border border-green-400 text-green-700 px-4 mt-5 py-3 rounded relative" role="alert">
+                        <span class="block sm:inline"><%= success %></span>
+                      </div>
+                <% } %>
+            </div>
+           
+
 
             <div class="grid lg:grid-cols-2 gap-4 lg:w-5/6 m-auto">
                 <% groups.forEach(element => { %>

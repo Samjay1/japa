@@ -36,7 +36,7 @@
                 <%if(email==null){%>
                     <a class="lg:block hidden px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/register">Sign Up</a>  
                 <%}else{%>
-                    <a class="lg:block hidden px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/login">My Profile </a>  
+                    <a class="lg:block hidden px-3 py-2  border-b border-gray-100 hover:border-yellow-500 hover:text-yellow-500 transition duration-300 text-sm" href="/login">Logout </a>  
                 <%}%>
                 
                 <!-- <a id="profilebtn" class="bg-gray-300 rounded-3xl shadow-lg  block" href="#"><img id="profileimg" class="h-9 w-9 object-cover object-top rounded-3xl" src="/public/images/d1.jpeg" alt=""></a> -->
@@ -60,7 +60,7 @@
        <%if(email==null){%>
             <p class="border-b w-full hover:bg-yellow-500 hover:text-white"><a class="px-2 pr-6 py-2 block" href="/register"> Sign up</a></p>
         <%}else{%>
-            <p class="border-b w-full hover:bg-yellow-500 hover:text-white"><a class="px-2 pr-6 py-2 block" href="/login"> My Profile</a></p>
+            <p class="border-b w-full hover:bg-yellow-500 hover:text-white"><a class="px-2 pr-6 py-2 block" href="/login">Logout</a></p>
         <%}%>
         </div>
     </div>
@@ -82,9 +82,14 @@
             <p class="text-[50px] font-bold text-center">Update Group</p>
 
 
-            <form action="/create_group" method="post" class="space-y-1 font-bold pt-10">
+            <form action="/update_group" enctype="multipart/form-data" method="post" class="space-y-1 font-bold pt-10">
                 <div class="my-2">
-                    <img id="preview_image" class="rounded-t-lg object-cover  h-64 lg:h-80 w-full"  src="/public/images/placeholder.png" alt="">
+                    <%if(group.image!==null){%>
+                        <img id="preview_image" class="rounded-t-lg object-cover  h-64 lg:h-80 w-full"  src="/<%=group.image%>" alt="">
+                    <%}else{%>
+                        <img id="preview_image" class="rounded-t-lg object-cover  h-64 lg:h-80 w-full"  src="/public/images/placeholder.png" alt=""> 
+                    <%}%>
+                    
                 </div>
                 <div class="pt-4 space-y-2">
                     <div class="my-1">
@@ -99,16 +104,18 @@
                                 file:text-blue-900
                                 hover:file:bg-blue-100
                                 text-blue-900
-                            " required/>
+                            "/>
                             </label> 
+                            <input name="old_image" value="<%=group.image%>" hidden />
+                            <input name="group_id" value="<%=group.id%>" hiddenl />
                     </div>
                     <label  for="login_name" class="font-extrabold text-lg">Group Title</label>
-                    <input class="border border-slate-300 w-full rounded py-3 pl-3   shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 text-sm" type="text" id="title" name="title" placeholder="Title" required>
+                    <input class="border border-slate-300 w-full rounded py-3 pl-3   shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 text-sm" type="text" id="title" name="title" placeholder="Title" value="<%=group.groupName%>" required>
                     <label  for="login_name" class="font-extrabold text-lg">Group Description</label>
-                    <textarea class="border border-slate-300 w-full h-24 rounded py-3 pl-3  shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 text-sm" type="text"  name="description" id="description" placeholder="Description" required></textarea>
+                    <textarea class="border border-slate-300 w-full h-24 rounded py-3 pl-3  shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 text-sm" type="text"  name="description" id="description" placeholder="Description" required><%=group.description%></textarea>
                 </div>
             <p class="text-center p-2">
-                <button type="submit" class="font-bold p-3 rounded bg-yellow-500 hover:bg-black hover:text-white duration-200">Create group</button>
+                <button type="submit" class="font-bold p-3 rounded bg-yellow-500 hover:bg-black hover:text-white duration-200">Update group</button>
             </p>
         </form>
 

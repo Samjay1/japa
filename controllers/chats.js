@@ -2,11 +2,13 @@ const express = require('express');
 const moment = require('moment');
 const bcrypt = require('bcrypt');
 const multer = require('multer');
-const path = require('path')
+const path = require('path');
+const fs = require('fs');
 
 const router = express.Router();
 
 const { PrismaClient } = require('@prisma/client');
+const { url } = require('inspector');
 const prisma = new PrismaClient();
 
 // chats - all groups
@@ -145,11 +147,19 @@ router.get('/my_groups', async (req,res)=>{
             }
         }
     });
+    // gets error or success state from redirects from update_group page
+    console.log('req.query.status :>> ', req.query.status);
+    if(req.query.status == 'true'){ 
+        req.flash('success', 'Group has been updated successful');
+    }else if(req.query.status == 'false'){ 
+        req.flash('error', 'Something went wrong, Try again');
+    }
 
     res.render('main/my_groups', {
         groups,
-        email:req.session.email || null
-
+        email:req.session.email || null,
+        error: req.flash('error'),
+        success: req.flash('success'),
     })
 })
 
@@ -170,12 +180,13 @@ router.all('/create_group', multer({storage: storage}).single('upload'), async (
     const {upload, title, description} = req.body;
 
     if (req.method === 'POST') {
-        const user = await prisma.user.findUnique({
-            where: {
-                email: req.session.email
-            }
-        })
+        // const user = await prisma.user.findUnique({
+        //     where: {
+        //         email: req.session.email
+        //     }
+        // })
 
+        console.log('req.session.email :>> ', req.session.email);
         const group = await prisma.group.create({
             data: {
                 groupName: title,
@@ -198,10 +209,81 @@ router.all('/create_group', multer({storage: storage}).single('upload'), async (
 })
 
 // chats - update group
-router.get('/update_group/:id', (req,res)=>{
-    res.render('main/update_group',{
-        email:req.session.email || null
+router.get('/update_group/:id', async (req,res)=>{
+
+    let group_id = req.params.id;
+    let group = await prisma.group.findUnique({
+        where: {
+            id:group_id,
+        },
     })
+
+    console.log('group :>> ', group);
+
+    res.render('main/update_group',{
+        email:req.session.email || null,
+        group
+    })
+})
+
+router.post('/update_group', multer({storage: storage}).single('upload'), async(req,res)=>{
+    let {group_id, title, description} = req.body;
+    let old_image = req.body.old_image || 'none';
+   
+
+    console.log(group_id, title, description);
+    try {
+        if(req.file !== undefined){ //Checks for new image to upload.
+             
+            if(old_image !== 'none' ){ //Checks if an old image exist
+                fs.unlink(old_image, async (err)=>{   //removes old image from local storage
+                      //just post image
+                      await prisma.group.update({
+                        where:{
+                            id: group_id,
+                        },
+                        data: {
+                            groupName:title,
+                            description,
+                            image:req.file.path || undefined,
+                        }
+                    });
+                    })
+                    console.log('posting 1')
+
+                    return res.redirect('my_groups/?status=true')
+            }else{// when there's no previous image
+                    //just post image
+                    console.log('posting 2')
+                    await prisma.group.update({
+                        where:{
+                            id: group_id,
+                        },
+                        data: {
+                            groupName:title,
+                            description,
+                            image:req.file.path || undefined,
+                        }
+                    });
+
+                    return res.redirect('my_groups/?status=true')
+            }
+        }else{
+            console.log('posting 3')
+            await prisma.group.update({
+                where:{
+                    id: group_id,
+                },
+                data: {
+                    groupName:title,
+                    description,
+                }
+            });
+            return res.redirect('my_groups/?status=true')
+        }
+    } catch (error) {
+        return res.redirect('my_groups/?status=false')
+    }
 })
 
 // settings
