@@ -24,6 +24,7 @@ model User {
   status Status @default(ACTIVE)
   createdAt DateTime @default(now())
   notificationStatus NoteStat @default(ON)
+  image String?
   groups Group[]
   comments Comment[]
   postComments PostComment[]
@@ -39,7 +40,7 @@ model Group {
   description String
   admin User @relation(fields: [adminId], references: [id])
   adminId String @db.ObjectId
-  type GroupType
+  type GroupType @default(PUBLIC)
   status Status @default(ACTIVE)
   createdAt DateTime @default(now())
   members Member[]

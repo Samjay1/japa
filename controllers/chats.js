@@ -1,6 +1,8 @@
 const express = require('express');
 const moment = require('moment');
 const bcrypt = require('bcrypt');
+const multer = require('multer');
+const path = require('path')
 
 const router = express.Router();
 
@@ -151,8 +153,45 @@ router.get('/my_groups', async (req,res)=>{
     })
 })
 
+
+const storage = multer.diskStorage({
+    destination: (req, file, callback) => {
+      callback(null, path.join('public', 'images', 'uploads', 'groups'))
+    },
+    filename: (req, file, callback) => {
+      const suffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+      callback(null, file.fieldname + '-' + suffix + path.extname(file.originalname))
+    }
+})
+
+
 // chats - create group
-router.get('/create_group', (req,res)=>{
+router.all('/create_group', multer({storage: storage}).single('upload'), async (req,res)=>{
+    const {upload, title, description} = req.body;
+
+    if (req.method === 'POST') {
+        const user = await prisma.user.findUnique({
+            where: {
+                email: req.session.email
+            }
+        })
+
+        const group = await prisma.group.create({
+            data: {
+                groupName: title,
+                description,
+                image: req.file.path || undefined,
+                admin: {
+                    connect: {
+                        email: req.session.email
+                    }
+                },
+                type: 'PUBLIC',
+            }
+        });
+        res.redirect(`/preview_chat/${group.id}`)
+    }
+
     res.render('main/add_chat',{
         email:req.session.email || null
     })

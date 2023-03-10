@@ -82,9 +82,9 @@
             <p class="text-[50px] font-bold text-center">Add New Group</p>
 
 
-            <form action="/create_group" method="post" class="space-y-1 font-bold pt-10">
+            <form action="/create_group" method="post" enctype="multipart/form-data" class="space-y-1 font-bold pt-10">
                 <div class="my-2">
-                    <img id="preview_image" class="rounded-t-lg object-cover  h-64 lg:h-80 w-full"  src="/public/images/placeholder.png" alt="">
+                    <img id="preview_image" name="preview_image" class="rounded-t-lg object-cover  h-64 lg:h-80 w-full"  src="/public/images/placeholder.png" alt="">
                 </div>
                 <div class="pt-4 space-y-2">
                     <div class="my-1">
