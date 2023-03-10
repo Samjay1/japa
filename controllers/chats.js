@@ -204,12 +204,118 @@ router.get('/update_group/:id', (req,res)=>{
     })
 })
 
+
+const profile = multer.diskStorage({
+    destination: (req, file, callback) => {
+      callback(null, path.join('public', 'images', 'uploads', 'profiles'))
+    },
+    filename: (req, file, callback) => {
+      const suffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+      callback(null, file.fieldname + '-' + suffix + path.extname(file.originalname))
+    }
+})
+
+
 // settings
-router.get('/profile', (req,res)=>{
+router.get('/profile', async (req,res)=>{
+
+    const user = await prisma.user.findUnique({
+        where: {
+            email: req.session.email
+        }
+    });
+
     res.render('main/profile',{
-        email:req.session.email || null
+        email:req.session.email || null,
+        user
     })
 })
+
+// toggle email notifications
+router.get('/toggle-email-notifications', async (req, res) => {
+    const user = await prisma.user.findUnique({
+        where: {
+            email: req.session.email
+        }
+    })
+
+    if(user.emailNotificationStatus === 'ON') {
+        const off = await prisma.user.update({
+            where: {
+                email: req.session.email
+            },
+            data: {
+                emailNotificationStatus: 'OFF'
+            }
+        })
+        return res.redirect('back')
+    } 
+    else if (user.emailNotificationStatus === 'OFF') {
+        const on = await prisma.user.update({
+            where: {
+                email: req.session.email
+            },
+            data: {
+                emailNotificationStatus: 'ON'
+            }
+        })
+        return res.redirect('back')
+    }
+})
+
+// toggle group chat notifications
+router.get('/toggle-group-notifications', async (req, res) => {
+    const user = await prisma.user.findUnique({
+        where: {
+            email: req.session.email
+        }
+    })
+
+    if(user.groupNotificationStatus === 'ON') {
+        const off = await prisma.user.update({
+            where: {
+                email: req.session.email
+            },
+            data: {
+                groupNotificationStatus: 'OFF'
+            }
+        })
+        return res.redirect('back')
+    } 
+    else if (user.groupNotificationStatus === 'OFF')  {
+        const on = await prisma.user.update({
+            where: {
+                email: req.session.email
+            },
+            data: {
+                groupNotificationStatus: 'ON'
+            }
+        })
+        return res.redirect('back')
+    }
+})
+
+// update password
+router.post('/update_password', async (req, res) => {
+    const {new_password, repeat_password} = req.body;
+
+    if(new_password !== repeat_password) {
+        req.flash('error', 'Passwords do not match')
+        return res.redirect('back');
+    } else {
+        const user = await prisma.user.update({
+            where: {
+                email: req.session.email
+            },
+            data: {
+                password: await bcrypt.hash(new_password, 12)
+            }
+        })
+        req.flash('success', 'Password reset successfully. Proceed to log in.');
+        return res.redirect('/login');
+    }
+})
+
 // notification
 router.get('/notification', (req,res)=>{
     res.render('main/chat_group',{

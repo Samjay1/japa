@@ -23,7 +23,8 @@ model User {
   username String
   status Status @default(ACTIVE)
   createdAt DateTime @default(now())
-  notificationStatus NoteStat @default(ON)
+  groupNotificationStatus NoteStat @default(OFF)
+  emailNotificationStatus NoteStat @default(OFF)
   image String?
   groups Group[]
   comments Comment[]
