@@ -84,7 +84,11 @@
              <!-- update profile image -->
              <form action="/update_profile" enctype="multipart/form-data" method="post" class="space-y-1 font-bold pt-10">
                 <div class="my-2">
-                    <img id="preview_image" class="rounded-t-lg object-cover  h-44 w-34"  src="/public/images/placeholder.png" alt="">
+                    <% if (user.image === null) { %>
+                        <img id="preview_image" class="rounded-t-lg object-cover  h-44 w-34"  src="/public/images/placeholder.png" alt="">
+                    <% } else {%>
+                        <img id="preview_image" class="rounded-t-lg object-cover  h-44 w-34"  src="<%= user.image %>" alt="">
+                    <% } %>
                 </div>
                 <div class="my-1">
                     <p class="text-base">Update profile image <span class="text-red-500">*</span></p>

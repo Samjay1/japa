@@ -155,16 +155,12 @@ router.get('/my_groups', async (req,res)=>{
         req.flash('error', 'Something went wrong, Try again');
     }
 
-    if(!req.session.email){
-        res.redirect('/chats');
-    }else{
-        res.render('main/my_groups', {
-            groups,
-            email:req.session.email || null,
-            error: req.flash('error'),
-            success: req.flash('success'),
-        })
-    }
+    res.render('main/my_groups', {
+        groups,
+        email:req.session.email || null,
+        error: req.flash('error'),
+        success: req.flash('success'),
+    })
 })
 
 
@@ -181,6 +177,7 @@ const storage = multer.diskStorage({
 
 // chats - create group
 router.all('/create_group', multer({storage: storage}).single('upload'), async (req,res)=>{
+    res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
     const {upload, title, description} = req.body;
 
     if (req.method === 'POST') {
@@ -206,13 +203,10 @@ router.all('/create_group', multer({storage: storage}).single('upload'), async (
         });
         res.redirect(`/preview_chat/${group.id}`)
     }
-    if(!req.session.email){
-        res.redirect('/chats');
-    }else{
-        res.render('main/add_chat',{
-            email:req.session.email || null
-        })
-    }
+
+    res.render('main/add_chat',{
+        email:req.session.email || null
+    })
 })
 
 // chats - update group
@@ -299,21 +293,18 @@ router.post('/update_group', multer({storage: storage}).single('upload'), async(
 // settings
 router.get('/profile', async (req,res)=>{
 
-    if(!req.session.email){
-        res.redirect('/chats');
-    }else{
-        const user = await prisma.user.findUnique({
+    const user = await prisma.user.findUnique({
         where: {
             email: req.session.email
         }
-    }); 
-        res.render('main/profile',{
-            email:req.session.email || null,
-            user
-        })
-    }
-   
+    });
+
+    res.render('main/profile',{
+        email:req.session.email || null,
+        user
+    })
 })
+
 
 // toggle email notifications
 router.get('/toggle-email-notifications', async (req, res) => {
@@ -447,58 +438,85 @@ router.post('/add-comment/:id', async (req,res) => {
 
         return res.redirect(`${req.headers.referer}#${userComment.id}`);
     } else {
-        const user = await prisma.user.create({
-            data: {
-                username: email.split('@')[0],
-                email,
-                password: await bcrypt.hash(email.split('@')[0], 12),
-                comments: {
-                    create: {
-                        body: comment,
-                        parent: undefined,
-                        group: {
-                            connect: {
-                                id
-                            }
-                        },
-                    }
-                },
-                groups: {
-                    connect: {
-                        id
-                    }
-                },
-                memberships: {
-                    connectOrCreate: {
+        const userExists = await prisma.user.findUnique({
+            where: {
+                email
+            }
+        })
+
+        if (userExists.length == 0) {
+            const user = await prisma.user.create({
+                data: {
+                    username: email.split('@')[0],
+                    email,
+                    password: await bcrypt.hash(email.split('@')[0], 12),
+                    comments: {
                         create: {
+                            body: comment,
+                            parent: undefined,
                             group: {
                                 connect: {
                                     id
                                 }
+                            },
+                        }
+                    },
+                    groups: {
+                        connect: {
+                            id
+                        }
+                    },
+                    memberships: {
+                        connectOrCreate: {
+                            create: {
+                                group: {
+                                    connect: {
+                                        id
+                                    }
+                                }
+                            },
+                            where: {
+                                id
                             }
-                        },
-                        where: {
+                        }
+                    }
+                }
+            })
+
+            const newComment = await prisma.comment.findMany({
+                where: {
+                    author: {
+                        email: user.email
+                    }
+                },
+                orderBy: {
+                    createdAt: 'desc'
+                },
+                take: 1
+            })
+
+            req.session.email = user.email;
+            return res.redirect(`${req.headers.referer}#${newComment[0].id}`);
+    
+        } else {
+            const existingUserComment = await prisma.comment.create({
+                data: {
+                    body: comment,
+                    author: {
+                        connect: {
+                            email
+                        }
+                    },
+                    group: {
+                        connect: {
                             id
                         }
                     }
                 }
-            }
-        })
+            })
+        }
 
-        const newComment = await prisma.comment.findMany({
-            where: {
-                author: {
-                    email: user.email
-                }
-            },
-            orderBy: {
-                createdAt: 'desc'
-            },
-            take: 1
-        })
-
-        req.session.email = user.email;
-        return res.redirect(`${req.headers.referer}#${newComment[0].id}`);
+        return res.redirect(`${req.headers.referer}#${existingUserComment.id}`);
     }
 
 })
