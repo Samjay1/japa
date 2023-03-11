@@ -16,9 +16,6 @@ let transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     authMethod:"PLAIN",
     auth: {
-        // type: 'OAuth2',
-        // user: process.env.GMAIL, // generated ethereal user
-        // pass: process.env.PASS,
         user: 'japa.run.official@gmail.com',
         pass: 'pkeooiqhrddzmgez'
     },            
@@ -127,15 +124,70 @@ router.all('/register', async (req,res)=>{
                     password: await bcrypt.hash(password, 12),
                 }
             });
+            console.log('user :>> ', user);
+            let mailOptions = {
+                from: 'no-reply@japa.run',
+                to: email,
+                subject: 'Welcome to Japa.run',
+                html: `<div style="width: 80%; margin: auto;">
 
-            req.flash('success', 'Account successfully created. Proceed to log in.');
-            return res.redirect('/login#success');
+                <img class="size-medium wp-image-4144 aligncenter" src="https://japa.run/wp-content/uploads/2022/11/japalogo-300x44.webp" alt="" width="300" height="44" />
+                
+                <hr style="border: 1px solid orange;" />
+                
+                <h5>Welcome ${username},</h5>
+                <pre><strong>Thank you for registering on "Japa.Run - Join the conversation..."!.</strong> </pre>  
+                
+                Please click <a style="color: orange;" href="https://japa.run/login/">login</a> to open your account.
+                </strong>At <a style="color: orange;" href="https://japa.run/"><strong>JAPA.RUN</strong></a>, we believe there is no limit to the potential of young Africans. <a style="color: orange;" href="https://japa.run/"><strong>JAPA.RUN</strong></a> is a platform for young Africans to learn, share and grow together. It is a resource for those looking to take the next step by pursuing education or seeking opportunities abroad. We believe there is a more valuable way forward where young Africans utilize technology to breakdown barriers. Rather than forging ahead alone, <a style="color: orange;" href="https://japa.run/"><strong>JAPA.RUN</strong></a> enables young Africans to leverage the knowledge of and create community with those who have come before them and those on similar paths. We are passionate about the potential of young Africans, and our mission is to actualize it.</pre>
+                <strong>If you have any questions you check out our <a style="color: orange;" href="https://japa.run/faqs/">FAQs</a> page.</strong>
+                
+                <hr style="border: 1px solid orange;" />
+                
+                <div style="background-color: gray; padding: 10px 5px; margin-top: 5px; color: white;">
+                <div style="text-align: center; color: white;">
+                
+                Do not hesitate to reach out.
+                Message Us at <a style="color: orange;" href="mailto:support@japa.com">support@japa.com</a>
+                
+                © 2023 Japa.Run - Join the conversation!
+                <a style="color: orange;" href="https://japa.run">www.japa.run</a>
+                
+                </div>
+                </div>
+                </div>`
+              };
+              transporter.sendMail(mailOptions, function(error, info){
+                  if(error){
+                    console.log('error email',error)
+                    return res.render('main/login', {
+                        email: null,
+                        error: 'Failed to login. Please try again',
+                        success: req.flash('success')
+                    });
+                  }
+                  else{
+                    console.log('success email')
+                    return res.render('main/login', {
+                        email: null,
+                        error: req.flash('error'),
+                        success: 'Account successfully created. Proceed to log in.'
+                    });
+                  }
+              })
         } catch (error) {
-            console.log(error);
+            console.log('catch error',error);
+            return  res.render('main/login', {
+                email: null,
+                error: 'Email already in use. Try login',
+                success: req.flash('success')
+            });
         }
+    }else{
+         res.render('main/register',
+            { email:req.session.email || null});
     }
-    res.render('main/register',
-    { email:req.session.email || null});
+   
 });
 
 // sign in
