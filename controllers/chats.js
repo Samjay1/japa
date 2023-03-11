@@ -155,12 +155,16 @@ router.get('/my_groups', async (req,res)=>{
         req.flash('error', 'Something went wrong, Try again');
     }
 
-    res.render('main/my_groups', {
-        groups,
-        email:req.session.email || null,
-        error: req.flash('error'),
-        success: req.flash('success'),
-    })
+    if(!req.session.email){
+        res.redirect('/chats');
+    }else{
+        res.render('main/my_groups', {
+            groups,
+            email:req.session.email || null,
+            error: req.flash('error'),
+            success: req.flash('success'),
+        })
+    }
 })
 
 
@@ -202,10 +206,13 @@ router.all('/create_group', multer({storage: storage}).single('upload'), async (
         });
         res.redirect(`/preview_chat/${group.id}`)
     }
-
-    res.render('main/add_chat',{
-        email:req.session.email || null
-    })
+    if(!req.session.email){
+        res.redirect('/chats');
+    }else{
+        res.render('main/add_chat',{
+            email:req.session.email || null
+        })
+    }
 })
 
 // chats - update group
@@ -219,11 +226,14 @@ router.get('/update_group/:id', async (req,res)=>{
     })
 
     console.log('group :>> ', group);
-
-    res.render('main/update_group',{
-        email:req.session.email || null,
-        group
-    })
+    if(!req.session.email){
+        res.redirect('/chats');
+    }else{
+        res.render('main/update_group',{
+            email:req.session.email || null,
+            group
+        })
+    }
 })
 
 router.post('/update_group', multer({storage: storage}).single('upload'), async(req,res)=>{
@@ -289,16 +299,20 @@ router.post('/update_group', multer({storage: storage}).single('upload'), async(
 // settings
 router.get('/profile', async (req,res)=>{
 
-    const user = await prisma.user.findUnique({
+    if(!req.session.email){
+        res.redirect('/chats');
+    }else{
+        const user = await prisma.user.findUnique({
         where: {
             email: req.session.email
         }
-    });
-
-    res.render('main/profile',{
-        email:req.session.email || null,
-        user
-    })
+    }); 
+        res.render('main/profile',{
+            email:req.session.email || null,
+            user
+        })
+    }
+   
 })
 
 // toggle email notifications
