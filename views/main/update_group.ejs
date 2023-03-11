@@ -107,7 +107,7 @@
                             "/>
                             </label> 
                             <input name="old_image" value="<%=group.image%>" hidden />
-                            <input name="group_id" value="<%=group.id%>" hiddenl />
+                            <input name="group_id" value="<%=group.id%>" hidden />
                     </div>
                     <label  for="login_name" class="font-extrabold text-lg">Group Title</label>
                     <input class="border border-slate-300 w-full rounded py-3 pl-3   shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 text-sm" type="text" id="title" name="title" placeholder="Title" value="<%=group.groupName%>" required>
@@ -119,7 +119,10 @@
             </p>
         </form>
 
-        <form action="#" class="mt-10">
+        <form action="/invite" method="post" class="mt-10">
+            <input name="group_id" value="<%=group.id%>" hidden required/>
+            <input name="groupName" value="<%=group.groupName%>" hidden required/>
+            <input name="username" value="<%=username%>" hidden required/>
             <p class="text-[50px] font-bold text-center">Send An Invite</p>
             <label  for="login_name" class="font-extrabold text-lg">Enter email to invite</label>
             <input class="border border-slate-300 w-full rounded py-3 pl-3   shadow-sm focus:outline-none focus:border-yellow-500 focus:ring-red-500 focus:ring-1 text-sm" type="email" name="email" placeholder="Enter email" required>

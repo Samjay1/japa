@@ -139,7 +139,18 @@ router.all('/register', async (req,res)=>{
                 <pre><strong>Thank you for registering on "Japa.Run - Join the conversation..."!.</strong> </pre>  
                 
                 Please click <a style="color: orange;" href="https://japa.run/login/">login</a> to open your account.
-                </strong>At <a style="color: orange;" href="https://japa.run/"><strong>JAPA.RUN</strong></a>, we believe there is no limit to the potential of young Africans. <a style="color: orange;" href="https://japa.run/"><strong>JAPA.RUN</strong></a> is a platform for young Africans to learn, share and grow together. It is a resource for those looking to take the next step by pursuing education or seeking opportunities abroad. We believe there is a more valuable way forward where young Africans utilize technology to breakdown barriers. Rather than forging ahead alone, <a style="color: orange;" href="https://japa.run/"><strong>JAPA.RUN</strong></a> enables young Africans to leverage the knowledge of and create community with those who have come before them and those on similar paths. We are passionate about the potential of young Africans, and our mission is to actualize it.</pre>
+                
+                At <a style="color: orange;" href="https://japa.run/"><strong>JAPA.RUN</strong></a>
+                , we believe there is no limit to the potential of young Africans. 
+                <a style="color: orange;" href="https://japa.run/"><strong>JAPA.RUN</strong></a>
+                 is a platform for young Africans to learn, share and grow together. It is a resource for those looking to take the
+                  next step by pursuing education or seeking opportunities abroad. We believe there is a more valuable way forward 
+                  where young Africans utilize technology to breakdown barriers. Rather than forging ahead alone, 
+                  
+                  <a style="color: orange;" href="https://japa.run/"><strong>JAPA.RUN</strong></a>
+                enables young Africans to leverage the knowledge of and create community with those who have come before them and 
+                those on similar paths. We are passionate about the potential of young Africans, and our mission is to actualize it.
+                
                 <strong>If you have any questions you check out our <a style="color: orange;" href="https://japa.run/faqs/">FAQs</a> page.</strong>
                 
                 <hr style="border: 1px solid orange;" />
@@ -213,6 +224,7 @@ router.all('/login', async (req,res)=>{
             } else{
                 req.session.email = user.email;
                 req.session.user_id = user.id;
+                req.session.username = user.username;
                 console.log('req.session.email :>> ',user.id, req.session.email);
                 return res.redirect('/chats');
             }
@@ -260,7 +272,7 @@ router.all('/forgotpassword',async(req,res)=>{
             <img class="size-medium wp-image-4144 aligncenter" src="https://japa.run/wp-content/uploads/2022/11/japalogo-300x44.webp" alt="" width="300" height="44" />
             
             <hr style="border: 1px solid orange;" />
-            <p>Hello ${user.username}</p>
+            <p>Hello ${user.username},</p>
             <p>You requested a password reset on your Japa.run Account</p>
             <p>Please click the LINK below to set a new password on your account</p>
 
@@ -268,8 +280,8 @@ router.all('/forgotpassword',async(req,res)=>{
 
             <p>If you did not initiate this request, please ignore this email and contact our Support Team immediately.</p>
            
-            <p>Best Regards,</p>
-            <p>Japa.Run Team!</p>
+            Best Regards, <br>
+            Japa.Run Team!
 
             <hr style="border: 1px solid orange;" />
             

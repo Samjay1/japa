@@ -82,52 +82,54 @@
             <p class="text-[50px] font-bold text-center">Profile Page</p>
            <div class="grid grid-cols-2 gap-2">
              <!-- update profile image -->
-             <form action="/update_profile" enctype="multipart/form-data" method="post" class="space-y-1 font-bold pt-10">
-                <p class="text-base font-normal">Username - <span class="font-bold uppercase"><%=user.username%></span></p>
-                <p class="pb-2 text-base font-normal">Email - <span class="font-bold"><%=user.email%></span></p>
-                <div class="my-2">
-                    <% if (user.image === null) { %>
-                        <img id="preview_image" class="rounded-t-lg object-cover  h-44 w-34"  src="/public/images/placeholder.png" alt="">
-                    <% } else {%>
-                        <img id="preview_image" class="rounded-t-lg object-cover  h-44 w-34"  src="<%= user.image %>" alt="">
-                    <% } %>
-                </div>
-                <div class="my-1">
-                    <p class="text-base">Update profile image <span class="text-red-500">*</span></p>
-                    <label class="block mt-2 font-normal">
-                        <span class="sr-only">Choose profile photo</span>
-                        <input id="upload" accept="image/*" type="file" name="upload" class="text-sm text-slate-500
-                            file:mr-4 file:py-2 file:px-4
-                            file:rounded-full file:border
-                            file:text-sm file:font-semibold
-                            file:bg-blue-50 file:border-blue-900
-                            file:text-blue-900
-                            hover:file:bg-blue-100
-                            text-blue-900
-                        " required/>
-                        </label> 
-                </div>
+            <div>
+                <form action="/update_profile" enctype="multipart/form-data" method="post" class="space-y-1 font-bold pt-10">
+                    <p class="text-base font-normal">Username - <span class="font-bold uppercase"><%=user.username%></span></p>
+                    <p class="pb-2 text-base font-normal">Email - <span class="font-bold"><%=user.email%></span></p>
+                    <div class="my-2">
+                        <% if (user.image === null) { %>
+                            <img id="preview_image" class="rounded-t-lg object-cover  h-44 w-34"  src="/public/images/placeholder.png" alt="">
+                        <% } else {%>
+                            <img id="preview_image" class="rounded-t-lg object-cover  h-44 w-34"  src="<%= user.image %>" alt="">
+                        <% } %>
+                    </div>
+                    <div class="my-1">
+                        <p class="text-base">Update profile image <span class="text-red-500">*</span></p>
+                        <label class="block mt-2 font-normal">
+                            <span class="sr-only">Choose profile photo</span>
+                            <input id="upload" accept="image/*" type="file" name="upload" class="text-sm text-slate-500
+                                file:mr-4 file:py-2 file:px-4
+                                file:rounded-full file:border
+                                file:text-sm file:font-semibold
+                                file:bg-blue-50 file:border-blue-900
+                                file:text-blue-900
+                                hover:file:bg-blue-100
+                                text-blue-900
+                            " required/>
+                            </label> 
+                    </div>
+                    <div class="pt-2">
+                        <button type="submit" class="bg-yellow-500 hover:bg-yellow-400 p-1 px-4  rounded-md font-normal text-base">Update</button>
+                    </div>
+                </form>
 
                 <div class="grid grid-cols-1 space-y-2 py-5">
-                    <a href="/toggle-group-notifications">
+                    <!-- <a href="/toggle-group-notifications"> -->
                         <label class="relative inline-flex items-center cursor-pointer">
-                                <input type="checkbox"  name="email" value="" <%= user.groupNotificationStatus === 'ON' ? 'checked': '' %> class="sr-only peer">
+                                <input type="checkbox"  id="group" name="email" value="" <%= user.notificationStatus === 'ON' ? 'checked': '' %> class="sr-only peer">
                             <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                             <span class="ml-3 text-sm font-medium text-gray-900">Email notification - Group Chats</span>
                         </label>
-                    </a>
+                    <!-- </a> -->
 
                         <label class="relative inline-flex items-center cursor-pointer">
-                                <input type="checkbox" value="" name="subscribe" <%= user.emailNotificationStatus === 'ON' ? 'checked': '' %> class="sr-only peer">
+                                <input type="checkbox" id="email" value="" name="subscribe" <%= user.emailNotificationStatus === 'ON' ? 'checked': '' %> class="sr-only peer">
                             <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                             <span class="ml-3 text-sm font-medium text-gray-900">Subscription Notification</span>
                         </label>
                 </div>
-
-                <div class="mt-4">
-                    <button type="submit" class="bg-yellow-500 hover:bg-yellow-400 p-1 px-4  rounded-md font-normal text-base">Update</button>
-                </div>
-            </form>
+             </div>
+              
 
             <!-- update password -->
             <form action="/update_password" method="post" class="inline-block border-l p-2 border-yellow-500 space-y-1 font-bold pt-10" >
@@ -252,6 +254,7 @@
         })
 
         toggleGroup.addEventListener('click', () => {
+            console.log('group notification')
             window.location = '/toggle-group-notifications';
         })
     </script>

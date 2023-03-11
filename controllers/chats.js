@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-
+const nodemailer = require('nodemailer');
 const router = express.Router();
 
 const { PrismaClient } = require('@prisma/client');
@@ -41,7 +41,6 @@ router.get('/chats', async (req,res)=>{
         }
     });
 
-    console.log('chats req.session :>> ', req.session);
     res.render('main/chat_group', {
         groups,
         email:req.session.email || null
@@ -234,6 +233,7 @@ router.get('/update_group/:id', async (req,res)=>{
 
     res.render('main/update_group',{
         email:req.session.email || null,
+        username:req.session.username || null,
         group
     })
 })
@@ -379,6 +379,7 @@ router.get('/toggle-email-notifications', async (req, res) => {
         }
     })
 
+    console.log('toggle email');
     if(user.emailNotificationStatus === 'ON') {
         const off = await prisma.user.update({
             where: {
@@ -405,33 +406,37 @@ router.get('/toggle-email-notifications', async (req, res) => {
 
 // toggle group chat notifications
 router.get('/toggle-group-notifications', async (req, res) => {
+    console.log('hello')
     const user = await prisma.user.findUnique({
         where: {
             email: req.session.email
         }
     })
+    console.log('toggle group',user)
 
-    if(user.groupNotificationStatus === 'ON') {
+    if(user.notificationStatus === 'ON') {
         const off = await prisma.user.update({
             where: {
                 email: req.session.email
             },
             data: {
-                groupNotificationStatus: 'OFF'
+                notificationStatus: 'OFF'
             }
         })
-        return res.redirect('back')
+        console.log('off :>> ', off);
+        return res.redirect('/profile')
     } 
-    else if (user.groupNotificationStatus === 'OFF')  {
+    else if (user.notificationStatus === 'OFF'){
         const on = await prisma.user.update({
             where: {
                 email: req.session.email
             },
             data: {
-                groupNotificationStatus: 'ON'
+                notificationStatus: 'ON'
             }
         })
-        return res.redirect('back')
+        console.log('on :>> ', on);
+        return res.redirect('/profile')
     }
 })
 
@@ -688,6 +693,87 @@ router.post('/add-subcomment/:id/:groupId', async (req,res) => {
 });
 
 
+let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    host: 'smtp.gmail.com',
+    authMethod:"PLAIN",
+    auth: {
+        user: 'japa.run.official@gmail.com',
+        pass: 'pkeooiqhrddzmgez'
+    },            
+})
+
+
+// send email invite
+router.post('/invite',(req,res)=>{
+    let email = req.body.email;
+    let groupName = req.body.groupName;
+    let group_id = req.body.group_id;
+    let username = req.body.username;
+
+
+    console.log('email,groupName,group_id,username :>> ', email,groupName,group_id,username);
+    let mailOptions = {
+        from: 'no-reply@japa.run',
+        to: email,
+        subject: 'Invitation - Japa.run',
+        html: `<div style="width: 80%; margin: auto;">
+
+        <img class="size-medium wp-image-4144 aligncenter" src="https://japa.run/wp-content/uploads/2022/11/japalogo-300x44.webp" alt="" width="300" height="44" />
+        
+        <hr style="border: 1px solid orange;" />
+        <p style="padding-bottom:10px;">Hello <strong>${email}</strong>,</p>
+        <p>You have been invited to join <strong> ${groupName} </strong> chat group on <a style="color: orange;" href="https://japa.run/"><strong>JAPA.RUN</strong></a> by  <strong> ${username}. </strong></p>
+        <p>Please click the <a style="color: orange;" href="https://localhost:8040/preview_chat/${group_id}">LINK</a> below to it checkout.</p>
+        <p> <a style="color: orange;" href="https://localhost:8040/preview_chat/${group_id}">https://japa.run/preview_chat/${group_id}</a></p>
+
+        <p style="padding-bottom:10px;">
+        At <a style="color: orange;" href="https://japa.run/"><strong>JAPA.RUN</strong></a>
+        , we believe there is no limit to the potential of young Africans. 
+        <a style="color: orange;" href="https://japa.run/"><strong>JAPA.RUN</strong></a>
+         is a platform for young Africans to learn, share and grow together. It is a resource for those looking to take the
+          next step by pursuing education or seeking opportunities abroad. We believe there is a more valuable way forward 
+          where young Africans utilize technology to breakdown barriers. Rather than forging ahead alone, 
+        </p>
+          
+         
+        Best Regards, <br>
+        Japa.Run Team!
+
+        <hr style="border: 1px solid orange;" />
+        
+        <div style="background-color: gray; padding: 10px 5px; margin-top: 5px; color: white;">
+        <div style="text-align: center; color: white;">
+        
+        Do not hesitate to reach out.
+        Message Us at <a style="color: orange;" href="mailto:support@japa.com">support@japa.com</a>
+        
+        © 2023 Japa.Run - Join the conversation!
+        <a style="color: orange;" href="https://japa.run">www.japa.run</a>
+        
+        </div>
+        </div>
+        </div>`
+      };
+      transporter.sendMail(mailOptions, function(error, info){
+          if(!error){
+            return res.render('main/message',
+            {
+                email:req.session.email || null,
+                error: req.flash('error'),
+                success: `Invitation sent to ${email}`
+            })
+          }
+          else{
+            return res.render('main/message',
+            {
+                email:req.session.email || null,
+                error: "Please enter a valid email",
+                success: req.flash('success')
+            })
+          }
+      })
+})
 
 
 
