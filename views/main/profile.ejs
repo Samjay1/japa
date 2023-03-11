@@ -83,6 +83,8 @@
            <div class="grid grid-cols-2 gap-2">
              <!-- update profile image -->
              <form action="/update_profile" enctype="multipart/form-data" method="post" class="space-y-1 font-bold pt-10">
+                <p class="text-base font-normal">Username - <span class="font-bold uppercase"><%=user.username%></span></p>
+                <p class="pb-2 text-base font-normal">Email - <span class="font-bold"><%=user.email%></span></p>
                 <div class="my-2">
                     <img id="preview_image" class="rounded-t-lg object-cover  h-44 w-34"  src="/public/images/placeholder.png" alt="">
                 </div>
@@ -105,14 +107,14 @@
                 <div class="grid grid-cols-1 space-y-2 py-5">
                     <a href="/toggle-group-notifications">
                         <label class="relative inline-flex items-center cursor-pointer">
-                                <input type="checkbox" id="group" name="email" value="" <%= user.groupNotificationStatus === 'ON' ? 'checked': '' %> class="sr-only peer">
+                                <input type="checkbox"  name="email" value="" <%= user.groupNotificationStatus === 'ON' ? 'checked': '' %> class="sr-only peer">
                             <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                             <span class="ml-3 text-sm font-medium text-gray-900">Email notification - Group Chats</span>
                         </label>
                     </a>
 
                         <label class="relative inline-flex items-center cursor-pointer">
-                                <input type="checkbox" value="" id="email" name="subscribe" <%= user.emailNotificationStatus === 'ON' ? 'checked': '' %> class="sr-only peer">
+                                <input type="checkbox" value="" name="subscribe" <%= user.emailNotificationStatus === 'ON' ? 'checked': '' %> class="sr-only peer">
                             <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                             <span class="ml-3 text-sm font-medium text-gray-900">Subscription Notification</span>
                         </label>

@@ -95,6 +95,11 @@
             </div>
            
 
+            <%if(groups.length==0){%>
+                <div class="my-10">
+                    <p class="lg:text-3xl text-base text-center">No Groups Created</p>
+                </div>
+            <%}%>
 
             <div class="grid lg:grid-cols-2 gap-4 lg:w-5/6 m-auto">
                 <% groups.forEach(element => { %>
