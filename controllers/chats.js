@@ -584,9 +584,9 @@ router.post('/add-comment/:id', async (req,res) => {
                     }
                 }
             })
-        }
 
-        return res.redirect(`${req.headers.referer}#${existingUserComment.id}`);
+            return res.redirect(`${req.headers.referer}#${existingUserComment.id}`);
+        }
     }
 
 })
@@ -630,64 +630,95 @@ router.post('/add-subcomment/:id/:groupId', async (req,res) => {
         return res.redirect(`${req.headers.referer}#${subcomment.id}`);
     } else {
 
-        const user = await prisma.user.create({
-            data: {
-                username: email.split('@')[0],
-                email,
-                password: await bcrypt.hash(email.split('@')[0], 12),
-                comments: {
-                    create: {
-                        parent: {
-                            connect: {
-                                id,
-                            }
-                        },
-                        body: comment,
-                        group: {
-                            connect: {
-                                id: groupId
-                            }
-                        }
-                    }
-                },
-                groups: {
-                    connect: {
-                        id: groupId
-                    }
-                },
-                memberships: {
-                    connectOrCreate: {
+        const userExists = await prisma.user.findUnique({
+            where: {
+                email
+            }
+        })
+
+        if (userExists.length == 0) {
+            const user = await prisma.user.create({
+                data: {
+                    username: email.split('@')[0],
+                    email,
+                    password: await bcrypt.hash(email.split('@')[0], 12),
+                    comments: {
                         create: {
+                            parent: {
+                                connect: {
+                                    id,
+                                }
+                            },
+                            body: comment,
                             group: {
                                 connect: {
                                     id: groupId
                                 }
                             }
-                        },
-                        where: {
+                        }
+                    },
+                    groups: {
+                        connect: {
                             id: groupId
+                        }
+                    },
+                    memberships: {
+                        connectOrCreate: {
+                            create: {
+                                group: {
+                                    connect: {
+                                        id: groupId
+                                    }
+                                }
+                            },
+                            where: {
+                                id: groupId
+                            }
+                        }
+                    }
+    
+                }
+            });
+    
+            const newComment = await prisma.comment.findMany({
+                where: {
+                    author: {
+                        email: user.email
+                    }
+                },
+                orderBy: {
+                    createdAt: 'desc'
+                },
+                take: 1
+            })
+    
+            req.session.email = user.email;
+    
+            return res.redirect(`${req.headers.referer}#${newComment[0].id}`);
+        } else {
+            const existingUserComment = await prisma.comment.create({
+                data: {
+                    body: comment,
+                    author: {
+                        connect: {
+                            email
+                        }
+                    },
+                    group: {
+                        connect: {
+                            id: groupId
+                        }
+                    },
+                    parent: {
+                        connect: {
+                            id
                         }
                     }
                 }
+            })
 
-            }
-        });
-
-        const newComment = await prisma.comment.findMany({
-            where: {
-                author: {
-                    email: user.email
-                }
-            },
-            orderBy: {
-                createdAt: 'desc'
-            },
-            take: 1
-        })
-
-        req.session.email = user.email;
-
-        return res.redirect(`${req.headers.referer}#${newComment[0].id}`);
+            return res.redirect(`${req.headers.referer}#${existingUserComment.id}`);
+        }
     }
 
 });
