@@ -4,6 +4,7 @@
   "description": "Looking to engage with JAPA.RUN. Connect with us on social media! You will find relevant content, important JAPA.RUN updates, networking opportunities and more.",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
