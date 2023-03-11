@@ -29,6 +29,7 @@ router.get('/', async (req,res)=>{
 })
 
 router.get('/chats', async (req,res)=>{
+    
     console.log('chats req.session.email :>> ', req.session.email);
     const groups =  await prisma.group.findMany({
         include: {
@@ -40,6 +41,7 @@ router.get('/chats', async (req,res)=>{
         }
     });
 
+    console.log('chats req.session :>> ', req.session);
     res.render('main/chat_group', {
         groups,
         email:req.session.email || null
@@ -133,34 +135,39 @@ router.get('/preview_chat/:id', async (req,res)=>{
 
 // chats - my groups
 router.get('/my_groups', async (req,res)=>{
-    let user_id = req.session.user_id;
-    console.log('user_id :>> ', user_id);
-    const groups =  await prisma.group.findMany({
-        where: {
-            adminId: user_id,
-        },
-        include: {
-            _count: {
-                select: {
-                    members: true
+    res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+    if (req.session.email) {
+        let user_id = req.session.user_id;
+        console.log('user_id :>> ', user_id);
+        const groups =  await prisma.group.findMany({
+            where: {
+                adminId: user_id,
+            },
+            include: {
+                _count: {
+                    select: {
+                        members: true
+                    }
                 }
             }
+        });
+        // gets error or success state from redirects from update_group page
+        console.log('req.query.status :>> ', req.query.status);
+        if(req.query.status == 'true'){ 
+            req.flash('success', 'Group has been updated successful');
+        }else if(req.query.status == 'false'){ 
+            req.flash('error', 'Something went wrong, Try again');
         }
-    });
-    // gets error or success state from redirects from update_group page
-    console.log('req.query.status :>> ', req.query.status);
-    if(req.query.status == 'true'){ 
-        req.flash('success', 'Group has been updated successful');
-    }else if(req.query.status == 'false'){ 
-        req.flash('error', 'Something went wrong, Try again');
+    
+        res.render('main/my_groups', {
+            groups,
+            email:req.session.email || null,
+            error: req.flash('error'),
+            success: req.flash('success'),
+        })
+    } else {
+        return res.redirect('/login');
     }
-
-    res.render('main/my_groups', {
-        groups,
-        email:req.session.email || null,
-        error: req.flash('error'),
-        success: req.flash('success'),
-    })
 })
 
 
@@ -180,33 +187,37 @@ router.all('/create_group', multer({storage: storage}).single('upload'), async (
     res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
     const {upload, title, description} = req.body;
 
-    if (req.method === 'POST') {
-        // const user = await prisma.user.findUnique({
-        //     where: {
-        //         email: req.session.email
-        //     }
-        // })
-
-        console.log('req.session.email :>> ', req.session.email);
-        const group = await prisma.group.create({
-            data: {
-                groupName: title,
-                description,
-                image: req.file.path || undefined,
-                admin: {
-                    connect: {
-                        email: req.session.email
-                    }
-                },
-                type: 'PUBLIC',
-            }
-        });
-        res.redirect(`/preview_chat/${group.id}`)
+    if (req.session.email) {
+        if (req.method === 'POST') {
+            // const user = await prisma.user.findUnique({
+            //     where: {
+            //         email: req.session.email
+            //     }
+            // })
+    
+            console.log('req.session.email :>> ', req.session.email);
+            const group = await prisma.group.create({
+                data: {
+                    groupName: title,
+                    description,
+                    image: req.file.path || undefined,
+                    admin: {
+                        connect: {
+                            email: req.session.email
+                        }
+                    },
+                    type: 'PUBLIC',
+                }
+            });
+            res.redirect(`/preview_chat/${group.id}`)
+        }
+    
+        res.render('main/add_chat',{
+            email:req.session.email || null
+        })
+    } else {
+        return res.redirect('/login')
     }
-
-    res.render('main/add_chat',{
-        email:req.session.email || null
-    })
 })
 
 // chats - update group
@@ -220,14 +231,11 @@ router.get('/update_group/:id', async (req,res)=>{
     })
 
     console.log('group :>> ', group);
-    if(!req.session.email){
-        res.redirect('/chats');
-    }else{
-        res.render('main/update_group',{
-            email:req.session.email || null,
-            group
-        })
-    }
+
+    res.render('main/update_group',{
+        email:req.session.email || null,
+        group
+    })
 })
 
 router.post('/update_group', multer({storage: storage}).single('upload'), async(req,res)=>{
@@ -292,17 +300,74 @@ router.post('/update_group', multer({storage: storage}).single('upload'), async(
 
 // settings
 router.get('/profile', async (req,res)=>{
+    res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+    if (req.session.email) {
+        const user = await prisma.user.findUnique({
+            where: {
+                email: req.session.email
+            }
+        });
+    
+        res.render('main/profile',{
+            email:req.session.email || null,
+            user
+        })
+    } else {
+        return res.redirect('/login')
+    }
+})
 
-    const user = await prisma.user.findUnique({
-        where: {
-            email: req.session.email
+const profile = multer.diskStorage({
+    destination: (req, file, callback) => {
+      callback(null, path.join('public', 'images', 'uploads', 'profiles'))
+    },
+    filename: (req, file, callback) => {
+      const suffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+      callback(null, file.fieldname + '-' + suffix + path.extname(file.originalname))
+    }
+})
+
+// update profile
+router.post('/update_profile', multer({storage: profile}).single('upload'), async (req, res) => {
+    if (req.session.email) {
+        const user = await prisma.user.findUnique({
+            where: {
+                email: req.session.email
+            }
+        })
+
+        if (user.image !== null) {
+            fs.unlink(user.image, (err) => {
+                if (err) {
+                    req.flash('error', 'An error occurred');
+                    console.log(err);
+                    return res.redirect('back');
+                }
+            })
+
+            const profile = await prisma.user.update({
+                where: {
+                    email: req.session.email
+                },
+                data: {
+                    image: req.file.path
+                }
+            });
+            return res.redirect('back');
+        } else {
+            const profile = await prisma.user.update({
+                where: {
+                    email: req.session.email
+                },
+                data: {
+                    image: req.file.path
+                }
+            })
+            return res.redirect('back');
         }
-    });
-
-    res.render('main/profile',{
-        email:req.session.email || null,
-        user
-    })
+    } else {
+        return res.redirect('/login');
+    }
 })
 
 
