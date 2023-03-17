@@ -13,6 +13,7 @@ const cookieParser = require('cookie-parser');
 const main = require('./controllers/main');
 const chats = require('./controllers/chats');
 const resources = require('./controllers/resources');
+const api = require('./controllers/api');
 
 const app = express();
 
@@ -77,6 +78,7 @@ app.use(cookieParser());
 app.use('/', main);
 app.use('/', chats);
 app.use('/', resources);
+app.use('/', api);
 
 
 var PORT = process.env.PORT || 8040;
